@@ -8,5 +8,6 @@ public class Main {
         System.out.println("sinemin comiti ");
         System.out.println("oldu");
         System.out.println("meltem geldi");
+        //deneme
     }
 }
