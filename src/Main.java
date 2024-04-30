@@ -7,5 +7,6 @@ public class Main {
         System.out.println("emiray  yasemin sinem meltem");
         System.out.println("sinemin comiti ");
         System.out.println("oldu");
+        System.out.println("meltem geldi");
     }
 }
