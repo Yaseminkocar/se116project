@@ -10,6 +10,19 @@ public class Station {
     Station multipleTaskSameType=new Station();
     Station multipleTaskDifType=new Station();
 
+    public int getStationSpeed() {
+        return stationSpeed;
+    }
 
+    public void setStationSpeed(int stationSpeed) {
+        this.stationSpeed = stationSpeed;
+    }
 
+    public String getStationID() {
+        return stationID;
+    }
+
+    public void setStationID(String stationID) {
+        this.stationID = stationID;
+    }
 }
