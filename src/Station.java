@@ -1,7 +1,8 @@
 public class Station {
 
-    int stationSpeed;
-    String stationID; //must start with a letter
+    private int stationSpeed;
+    private String stationID; //must start with a letter
+
     Task handleTask= new Task();
 
     //singleTask, multipleTaskSameType, multipleTaskDifType-> bazılarının hızları değişken bazılarınınki sabit
