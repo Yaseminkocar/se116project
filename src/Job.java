@@ -11,6 +11,12 @@ public class Job {
     public void setJobID(String jobID){this.jobID=jobID;}
     public void setJobDuration(int jobDuration){this.jobDuration=jobDuration;}
 
+    public Job(String jobType, String jobID, int jobDuration){
+        this.jobType=jobType;
+        this.jobID=jobID;
+        this.jobDuration=jobDuration;
+    }
+
     public String getJobType(){return jobType;}
     public String getJobID(){return jobID;}
     public int getJobDuration(){return jobDuration;}
