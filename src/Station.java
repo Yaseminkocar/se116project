@@ -1,14 +1,19 @@
+import java.util.ArrayList;
+
 public class Station {
 
     private int stationSpeed;
     private String stationID; //must start with a letter
 
-    Task handleTask= new Task();
+    ArrayList<Task> taskQueue = new ArrayList<>();
 
     //singleTask, multipleTaskSameType, multipleTaskDifType-> bazılarının hızları değişken bazılarınınki sabit
-    Station singleTask=new Station();
-    Station multipleTaskSameType=new Station();
-    Station multipleTaskDifType=new Station();
+
+    ArrayList<Station> singleTask= new ArrayList<>();
+    ArrayList<Station> multipleTaskSameType= new ArrayList<>();
+    ArrayList<Station> multipleTaskDifType= new ArrayList<>();
+
+
 
     public Station() {
         this.stationSpeed = stationSpeed;
