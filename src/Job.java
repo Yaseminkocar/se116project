@@ -30,3 +30,5 @@ public class Job {
     public String getJobID(){return jobID;}
     public int getJobDuration(){return jobDuration;}
 }
+
+
