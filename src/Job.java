@@ -50,11 +50,14 @@ public class Job {
     public String getJobID(){return jobID;}
     public int getJobDuration(){return jobDuration;}
 
-        @Override
-        public String toString() {
-            return "JobID: " + jobID + ", JobType: " + jobType + ", StartTime: " + startTime + ", Duration: " + duration + ", Deadline: " + getDeadline();
-        }
+    public int deadline() {
+        return startTime + duration;
     }
+    @Override
+    public String toString() {
+        return "JobID: " + jobID + ", JobType: " + jobType + ", StartTime: " + startTime + ", Duration: " + duration + ", Deadline: " + deadline();
+    }
+}
 
 
 
