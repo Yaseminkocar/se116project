@@ -11,7 +11,7 @@ public class Job {
     public Job(JobType jobType, String jobID, int jobDuration){
         this.jobType=jobType;
         this.jobID=jobID;
-        this.jobDuration=jobDuration;
+        this.jobDuration=jobDuration; // son süre ve ilk süre yok başlama bitiş gibi
     }
 
     public void setJobType(JobType jobType){this.jobType=jobType;}

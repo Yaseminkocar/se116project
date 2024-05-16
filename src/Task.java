@@ -5,14 +5,29 @@ public class Task {
 
 
     public void setTaskType(String taskType){this.taskType= taskType;}
-    public void setTaskSize(double taskSize){this.taskSize=taskSize;}
+    public void setTaskSize(double taskSize){
+        if(taskSize<0) {
+            this.taskSize= -1*taskSize;
+        }
+        else {
+            this.taskSize=taskSize;
+        }
+
+    } // task size constructor içinde > 0 yap
 
     public String getTaskType(){return taskType;}
     public double getTaskSize(){return taskSize;}
 
     public Task(String taskType, double taskSize){
         this.taskType= taskType;
-        this.taskSize=taskSize;
+        //this.taskSize=taskSize;
+
+        if(taskSize<0) {
+            this.taskSize= -1*taskSize;
+        }
+        else {
+            this.taskSize=taskSize;
+        }
     }
 
     public Task(){}
