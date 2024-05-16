@@ -2,10 +2,6 @@ public class TaskType {
     private double size;
     private String type;
 
-    public String getType() {
-        return type;
-    }
-
     public TaskType(double size, String type) {
         this.size = size;
         this.type=type;
@@ -14,6 +10,12 @@ public class TaskType {
         if(type.equals("T1")){
 
         }
+    }
+    public String getType() {
+        return type;
+    }
+    public void setType(String type){
+        this.type = type;
     }
 
     public double getSize() {

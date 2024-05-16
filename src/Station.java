@@ -15,7 +15,7 @@ public class Station {
 
 
 
-    public Station() {
+    public Station(int stationSpeed, String stationID) {
         this.stationSpeed = stationSpeed;
         this.stationID = stationID;
     }
