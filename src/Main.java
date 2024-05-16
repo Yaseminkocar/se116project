@@ -6,13 +6,14 @@ public class Main {
     public static void main(String[] args) {
         try {
             String input = TaskReading("InputFile.txt");
-            String result = modifyTaskFormat(input);
+            String result = Rename(input);
             System.out.println("Modified task statement: " + result);
         } catch (IOException e) {
             System.out.println("Invalid tasktypeID " + e.getMessage());
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
+
     }
 
      public static String TaskReading(String Inputfile) throws IOException {
@@ -25,6 +26,14 @@ public class Main {
             }
             return stringBuilder.toString();
         }
+
+    public static String Rename(String input) {
+        if (Character.isDigit(input.charAt(0))) {
+            throw new IllegalArgumentException("Task statement can not start with a number !.");
+        }
+
+        return input;
+    }
 
 
 }

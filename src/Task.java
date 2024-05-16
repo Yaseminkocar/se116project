@@ -13,7 +13,7 @@ public class Task {
             this.taskSize=taskSize;
         }
 
-    } // task size constructor içinde > 0 yap
+    }
 
     public String getTaskType(){return taskType;}
     public double getTaskSize(){return taskSize;}
