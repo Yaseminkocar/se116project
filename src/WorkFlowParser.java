@@ -45,6 +45,31 @@ public class WorkFlowParser {
 
                     continue;
                 }
+                if (!jobId.matches("\\d+")) {
+                    System.out.printf("Syntax error on line %d: Job ID '%s' must be a numeric value.%n", lineNumber, jobId);
+                    continue;
+                }
+
+                if (!uniqueIds.add(jobId)) {
+                    System.out.printf("Semantic error on line %d: Job ID '%s' must be unique.%n", lineNumber, jobId);
+                    continue;
+                }
+
+                // İstasyon bilgisi kontrolü
+                String[] stationParts = stationInfo.split(",");
+                if (stationParts.length != 2 || !stationParts[0].matches("\\d+") || !stationParts[1].matches("\\d+")) {
+                    System.out.printf("Syntax error on line %d: Invalid station information '%s'.%n", lineNumber, stationInfo);
+                    continue;
+                }
+
+                int stationNumber = Integer.parseInt(stationParts[0]);
+                int stationRange = Integer.parseInt(stationParts[1]);
+
+                if (stationNumber < 1 || stationRange < 1 || stationRange > 100) {
+                    System.out.printf("Semantic error on line %d: Station range '%d' must be between 1 and 100.%n", lineNumber, stationRange);
+                    continue;
+                }
+
             }
         }
     }
