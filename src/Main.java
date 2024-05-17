@@ -8,8 +8,9 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
+        String input = null;
         try {
-            String input = TaskReading("WrongFile.txt");
+            input = TaskReading("WrongFile.txt");
             String result = Rename(input);
             System.out.println("Modified task statement: " + result);
         } catch (IOException e) {
@@ -41,11 +42,31 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
+        //parantez sayısı karşılaştırma
+        int sumopen = 0;
+        int sumclose = 0;
+        for (int i = 0; i < input.length(); i++) {
+
+            if (input.charAt(i) == '(') {
+                sumopen++;
+            } else if (input.charAt(i) == ')') {
+                sumclose++;
+            }
+
+        }
+        try {
+            if (sumopen < sumclose) {
+                throw new Exception("missing '('");
+
+            } else if (sumclose < sumopen) {
+                throw new Exception("missing ')'");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
 
     }
-
-    //
     public static void parseWorkflowFile(String inputfile) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
             String line;
@@ -120,6 +141,7 @@ public class Main {
         return input;
     }
 }
+
 /* public static String TaskReading(String WrongFile) throws IOException {
 
 
