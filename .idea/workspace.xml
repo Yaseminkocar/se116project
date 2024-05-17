@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="changes">
+    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="senkronize">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_13_51__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_13_51__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_13_54__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_13_54__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WorkFlowParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorkFlowParser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +46,7 @@
 }</component>
   <component name="ProjectId" id="2flxulGE1TD1wiPGhb4j94xWvUK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -67,9 +67,16 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="asdfgh" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WorkFlowParser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="WorkFlowParser" />
       <module name="asdfgh" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -78,6 +85,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.WorkFlowParser" />
       </list>
     </recent_temporary>
   </component>
@@ -148,13 +156,12 @@
       <option name="project" value="LOCAL" />
       <updated>1715937727609</updated>
     </task>
-    <task id="LOCAL-00008" summary="senkronize3">
-      <option name="closed" value="true" />
-      <created>1715943007905</created>
+    <task id="LOCAL-00008" summary="senkronize">
+      <created>1715941589521</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1715943007905</updated>
+      <updated>1715941589521</updated>
     </task>
     <option name="localTasksCounter" value="9" />
     <servers />
@@ -180,7 +187,7 @@
     <MESSAGE value="Classes" />
     <MESSAGE value="some bugs fixed" />
     <MESSAGE value="changes" />
-    <MESSAGE value="senkronize3" />
-    <option name="LAST_COMMIT_MESSAGE" value="senkronize3" />
+    <MESSAGE value="senkronize" />
+    <option name="LAST_COMMIT_MESSAGE" value="senkronize" />
   </component>
 </project>
