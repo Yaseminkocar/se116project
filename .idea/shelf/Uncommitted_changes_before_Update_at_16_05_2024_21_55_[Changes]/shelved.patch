@@ -1,0 +1,89 @@
+Index: src/Task.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class Task {\n\n    private String taskType; //must start with a letter\n    private double taskSize;\n\n\n    public void setTaskType(String taskType){this.taskType= taskType;}\n    public void setTaskSize(double taskSize){\n        if(taskSize<0) {\n            this.taskSize= -1*taskSize;\n        }\n        else {\n            this.taskSize=taskSize;\n        }\n\n    } // task size constructor içinde > 0 yap\n\n    public String getTaskType(){return taskType;}\n    public double getTaskSize(){return taskSize;}\n\n    public Task(String taskType, double taskSize){\n        this.taskType= taskType;\n        //this.taskSize=taskSize;\n\n        if(taskSize<0) {\n            this.taskSize= -1*taskSize;\n        }\n        else {\n            this.taskSize=taskSize;\n        }\n    }\n\n    public Task(){}\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Task.java b/src/Task.java
+--- a/src/Task.java	(revision cec8a1b13c208c3b45056e67937b978ee575556e)
++++ b/src/Task.java	(date 1715885298991)
+@@ -30,5 +30,9 @@
+         }
+     }
+ 
++
++
++
++
+     public Task(){}
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"some bugs fixed\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Main.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2flxulGE1TD1wiPGhb4j94xWvUK\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"flattenPackages\" value=\"true\" />\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n    <option name=\"showMembers\" value=\"true\" />\n    <option name=\"showVisibilityIcons\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"\" />\n      <created>1714389694199</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1714389694199</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"commit\">\n      <created>1714390906500</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1714390906500</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"meltemin commiti\">\n      <created>1714461371483</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1714461371483</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"meltemin commiti 2\">\n      <created>1714461447617</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1714461447617</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Classes\">\n      <created>1714565742088</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1714565742088</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"some bugs fixed\">\n      <created>1715370784472</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1715370784472</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"6\" />\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"commit\" />\n    <MESSAGE value=\"meltemin commiti\" />\n    <MESSAGE value=\"meltemin commiti 2\" />\n    <MESSAGE value=\"Classes\" />\n    <MESSAGE value=\"some bugs fixed\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"some bugs fixed\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision cec8a1b13c208c3b45056e67937b978ee575556e)
++++ b/.idea/workspace.xml	(date 1715885733697)
+@@ -4,9 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="some bugs fixed">
++    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="reading method">
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Task.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -80,12 +81,12 @@
+       <option name="project" value="LOCAL" />
+       <updated>1714565742088</updated>
+     </task>
+-    <task id="LOCAL-00005" summary="some bugs fixed">
+-      <created>1715370784472</created>
++    <task id="LOCAL-00005" summary="reading method">
++      <created>1715885560666</created>
+       <option name="number" value="00005" />
+       <option name="presentableId" value="LOCAL-00005" />
+       <option name="project" value="LOCAL" />
+-      <updated>1715370784472</updated>
++      <updated>1715885560666</updated>
+     </task>
+     <option name="localTasksCounter" value="6" />
+     <servers />
+@@ -106,7 +107,7 @@
+     <MESSAGE value="meltemin commiti" />
+     <MESSAGE value="meltemin commiti 2" />
+     <MESSAGE value="Classes" />
+-    <MESSAGE value="some bugs fixed" />
+-    <option name="LAST_COMMIT_MESSAGE" value="some bugs fixed" />
++    <MESSAGE value="reading method" />
++    <option name="LAST_COMMIT_MESSAGE" value="reading method" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_X\" default=\"true\" project-jdk-name=\"20\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision cec8a1b13c208c3b45056e67937b978ee575556e)
++++ b/.idea/misc.xml	(date 1715885303804)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
