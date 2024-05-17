@@ -64,7 +64,31 @@ public class WorkFlowParser {
                     System.out.printf("Semantic error on line %d: Station range '%d' must be between 1 and 100.%n", lineNumber, stationRange);
                     continue;
                 }
+
+
+                Task task = new Task(taskType ,2);
+                System.out.printf("Successfully parsed line %d: Task Type: %s, Job ID: %s, Station Info: %s%n", lineNumber, taskType, jobId, stationInfo);
             }
         }
     }
-}
+
+    public static String TaskReading(String inputfile) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line).append("\n"); // Her satırı yeni satır karakteriyle ekle
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    public static String Rename(String input) {
+        if (Character.isDigit(input.charAt(0))) {
+            throw new IllegalArgumentException("Task statement cannot start with a number!");
+        }
+        return input;
+
+    }
+        }
+
