@@ -60,7 +60,6 @@ public class WorkFlowParser {
                 }
                 int stationNumber = Integer.parseInt(stationParts[0]);
                 int stationRange = Integer.parseInt(stationParts[1]);
-
                 if (stationNumber < 1 || stationRange < 1 || stationRange > 100) {
                     System.out.printf("Semantic error on line %d: Station range '%d' must be between 1 and 100.%n", lineNumber, stationRange);
                     continue;
