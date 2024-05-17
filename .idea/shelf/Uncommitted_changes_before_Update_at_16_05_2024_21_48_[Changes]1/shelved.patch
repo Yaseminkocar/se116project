@@ -1,0 +1,19 @@
+Index: src/Task.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class Task {\r\n\r\n    private String taskType; //must start with a letter\r\n    private double taskSize;\r\n\r\n\r\n    public void setTaskType(String taskType){this.taskType= taskType;}\r\n    public void setTaskSize(double taskSize){\r\n        if(taskSize<0) {\r\n            this.taskSize= -1*taskSize;\r\n        }\r\n        else {\r\n            this.taskSize=taskSize;\r\n        }\r\n\r\n    } // task size constructor içinde > 0 yap\r\n\r\n    public String getTaskType(){return taskType;}\r\n    public double getTaskSize(){return taskSize;}\r\n\r\n    public Task(String taskType, double taskSize){\r\n        this.taskType= taskType;\r\n        //this.taskSize=taskSize;\r\n\r\n        if(taskSize<0) {\r\n            this.taskSize= -1*taskSize;\r\n        }\r\n        else {\r\n            this.taskSize=taskSize;\r\n        }\r\n    }\r\n\r\n    public Task(){}\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Task.java b/src/Task.java
+--- a/src/Task.java	
++++ b/src/Task.java	
+@@ -13,7 +13,7 @@
+             this.taskSize=taskSize;
+         }
+ 
+-    } // task size constructor içinde > 0 yap
++    }
+ 
+     public String getTaskType(){return taskType;}
+     public double getTaskSize(){return taskSize;}
