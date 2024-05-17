@@ -1,0 +1,87 @@
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.io.BufferedReader;\nimport java.io.FileReader;\nimport java.io.IOException;\n\npublic class Main {\n    public static void main(String[] args) {\n        try {\n            String input = TaskReading(\"InputFile.txt\");\n            String result = Rename(input);\n            System.out.println(\"Modified task statement: \" + result);\n        } catch (IOException e) {\n            System.out.println(\"Invalid tasktypeID \" + e.getMessage());\n        } catch (IllegalArgumentException e) {\n            System.out.println(\"Error: \" + e.getMessage());\n        }\n\n    }\n\n     public static String TaskReading(String Inputfile) throws IOException {\n            StringBuilder stringBuilder = new StringBuilder();\n            try (BufferedReader reader = new BufferedReader(new FileReader(Inputfile))) {\n                String line;\n                while ((line = reader.readLine()) != null) {\n                    stringBuilder.append(line);\n                }\n            }\n            return stringBuilder.toString();\n        }\n\n    public static String Rename(String input) {\n        if (Character.isDigit(input.charAt(0))) {\n            throw new IllegalArgumentException(\"Task statement can not start with a number !.\");\n        }\n\n        return input;\n    }\n\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision 1d3f33931ecedbb41762db55569d35710e828aa2)
++++ b/src/Main.java	(date 1715936522953)
+@@ -19,10 +19,12 @@
+      public static String TaskReading(String Inputfile) throws IOException {
+             StringBuilder stringBuilder = new StringBuilder();
+             try (BufferedReader reader = new BufferedReader(new FileReader(Inputfile))) {
+-                String line;
++               String line;
+                 while ((line = reader.readLine()) != null) {
+                     stringBuilder.append(line);
++
+                 }
++
+             }
+             return stringBuilder.toString();
+         }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"changes\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/InputFile.txt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/InputFile.txt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Main.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Task.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Task.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2flxulGE1TD1wiPGhb4j94xWvUK\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"flattenPackages\" value=\"true\" />\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n    <option name=\"showMembers\" value=\"true\" />\n    <option name=\"showVisibilityIcons\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;\n  }\n}</component>\n  <component name=\"RunManager\">\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\n      <module name=\"asdfgh\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.Main\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"\" />\n      <created>1714389694199</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1714389694199</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"commit\">\n      <created>1714390906500</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1714390906500</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"meltemin commiti\">\n      <created>1714461371483</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1714461371483</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"meltemin commiti 2\">\n      <created>1714461447617</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1714461447617</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Classes\">\n      <created>1714565742088</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1714565742088</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"some bugs fixed\">\n      <created>1715370784472</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1715370784472</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"changes\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1715885718441</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1715885718441</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"7\" />\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"commit\" />\n    <MESSAGE value=\"meltemin commiti\" />\n    <MESSAGE value=\"meltemin commiti 2\" />\n    <MESSAGE value=\"Classes\" />\n    <MESSAGE value=\"some bugs fixed\" />\n    <MESSAGE value=\"changes\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"changes\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 1d3f33931ecedbb41762db55569d35710e828aa2)
++++ b/.idea/workspace.xml	(date 1715936522876)
+@@ -4,12 +4,9 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="changes">
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="txt file">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/InputFile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/InputFile.txt" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Task.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -48,6 +45,12 @@
+     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+   }
+ }</component>
++  <component name="RecentsManager">
++    <key name="MoveFile.RECENT_KEYS">
++      <recent name="$PROJECT_DIR$" />
++      <recent name="$PROJECT_DIR$/.idea" />
++    </key>
++  </component>
+   <component name="RunManager">
+     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="Main" />
+@@ -114,7 +117,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1715885718441</updated>
+     </task>
+-    <option name="localTasksCounter" value="7" />
++    <task id="LOCAL-00007" summary="txt file">
++      <created>1715935905319</created>
++      <option name="number" value="00007" />
++      <option name="presentableId" value="LOCAL-00007" />
++      <option name="project" value="LOCAL" />
++      <updated>1715935905319</updated>
++    </task>
++    <option name="localTasksCounter" value="8" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -135,6 +145,7 @@
+     <MESSAGE value="Classes" />
+     <MESSAGE value="some bugs fixed" />
+     <MESSAGE value="changes" />
+-    <option name="LAST_COMMIT_MESSAGE" value="changes" />
++    <MESSAGE value="txt file" />
++    <option name="LAST_COMMIT_MESSAGE" value="txt file" />
+   </component>
+ </project>
+\ No newline at end of file
