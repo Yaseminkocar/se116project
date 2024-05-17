@@ -2,10 +2,8 @@ import java.io.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.ArrayList;
 import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
         String input = null;
@@ -42,6 +40,8 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
+
+
         //parantez sayısı karşılaştırma
         int sumopen = 0;
         int sumclose = 0;
@@ -64,41 +64,138 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e);
         }
+
+
         //tasklerin stationda var yok kontrolü
         String line2;
-        ArrayList tasksofjob = new ArrayList();
+        HashSet<String> tasksofjobH = new HashSet<>();
+
         int startlinenumber = 0;
         int endlinenumber = 0;
+
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
             while ((line2 = bufferedReader.readLine()) != null) {
+
+
                 String[] words = line2.split("\s+");
+
+               /* for(int y=0;y< words.length;y++){
+                    for(int x=0;x< words.length;x++){
+                        words[x]=words[y].trim();
+                    }
+                }
+
+                */
+
+
+                for(int y=0;y< words.length;y++){
+                    System.out.println(words[y]);
+                }
+
+
+                int i = 0;
+                for (; i < words.length; i++) {
+                    switch (words[i]) {
+                        case "(JOBTYPES":
+                            startlinenumber = i;
+                            System.out.println(startlinenumber);
+                            break;
+                        case "(STATIONS":
+                            endlinenumber = i;
+                            System.out.println(endlinenumber);
+                            break;
+                        //default:
+                         //   System.out.println("Unmatched word: " + words[i]);
+                    }
+                }
+
+
+                //switch-case ile aynı sonucu vermeli if de
+                    /*if(words[i].equals("(JOBTYPES")){
+                        startlinenumber=i;
+                        System.out.println(startlinenumber);
+                    }
+                }
+                for(int j=0;j<words.length;j++){
+                    if(words[j].equals("(STATIONS")){
+                        endlinenumber=j;
+                        System.out.println(endlinenumber);
+                    }
+                }
+                     */
+
+
+                    for (int k = startlinenumber; k <= endlinenumber; k++) {
+                        if (words[k].startsWith("T")) ;
+                        tasksofjobH.add(words[k]);
+                    }
+                    ArrayList taskOfJobA = new ArrayList<>(tasksofjobH);
+                    HashSet taskofstationH = new HashSet();
+                    for (int a = endlinenumber; a < words.length; a++) {
+                        if (words[a].startsWith("T")) ;
+                        taskofstationH.add(words[a]);
+
+                    }
+                    int b = taskofstationH.size();
+                    int c = tasksofjobH.size();
+
+                    boolean check = true;
+                    for (int a = 0; a < b; a++) {
+                        for (int j = 0; j < c; j++) {
+                            if (taskofstationH.contains(taskOfJobA.get(j))) {
+                                check = true;
+                            } else {
+                                throw new Exception(taskOfJobA.get(j) + " is not processed in Stations");
+                            }
+                        }
+                    }
+                }
+
+            }catch(Exception e){
+            System.out.println(e);
+            }
+        }
+
+
+        /*
+        //sadece T4'ün station'da olmadığını söylüyor T21'i de görmesi lazım
+        String line2;
+        HashMap<String, Integer> tasksOfJob = new HashMap<>();
+        int startLineNumber = 0;
+        int endLineNumber = 0;
+
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
+            while ((line2 = bufferedReader.readLine()) != null) {
+                String[] words = line2.split("\\s+"); // Corrected the split pattern
                 for (int i = 0; i < words.length; i++) {
                     if (words[i].equals("(JOBTYPES")) {
-                        startlinenumber = i;
+                        startLineNumber = i;
                     }
                 }
                 for (int j = 0; j < words.length; j++) {
                     if (words[j].equals("(STATIONS")) {
-                        endlinenumber = j;
+                        endLineNumber = j;
                     }
                 }
-                for (int k = startlinenumber; k < endlinenumber; k++) {
-                    if (words[k].startsWith("T")) ;
-                    tasksofjob.add(words[k]);
+                for (int k = startLineNumber; k < endLineNumber; k++) {
+                    if (words[k].startsWith("T")) {
+                        tasksOfJob.put(words[k], tasksOfJob.getOrDefault(words[k], 0) + 1);
+                    }
                 }
-                ArrayList taskofstation = new ArrayList();
-                for (int a = endlinenumber; a < words.length; a++) {
-                    if (words[a].startsWith("T")) ;
-                    taskofstation.add(words[a]);
+                HashMap<String, Integer> tasksOfStation = new HashMap<>();
+                for (int a = endLineNumber; a < words.length; a++) {
+                    if (words[a].startsWith("T")) {
+                        tasksOfStation.put(words[a], tasksOfStation.getOrDefault(words[a], 0) + 1);
+                    }
                 }
-                int b = taskofstation.size();
-                int c = tasksofjob.size();
-                for (int i = 0; i < b; i++) {
-                    for (int j = 0; j < c; j++) {
-                        if (taskofstation.get(i) != tasksofjob.get(j)) {
-                            throw new Exception("task" + i + "is not executed at any station");
-                        }
+                for (Map.Entry<String, Integer> entry : tasksOfStation.entrySet()) {
+                    String task = entry.getKey();
+                    int countInStation = entry.getValue();
+                    int countInJob = tasksOfJob.getOrDefault(task, 0);
+                    if (countInJob != countInStation) {
+                        throw new Exception("Task " + task + " is not executed at any station");
                     }
                 }
             }
@@ -106,88 +203,10 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e);
         }
-        printWorkflowInfo(input);
 
-        // Çalışma akışı dosyasını oku ve işle
-        try {
-            parseWorkflowFile("workflow.txt");
-        } catch (IOException e) {
-            System.err.println("Error reading workflow file: " + e.getMessage());
-        }
-    }
+         */
 
 
-
-    public static void printWorkflowInfo(String content) {
-        String[] sections = content.split("\\(");
-        Map<String, List<String>> taskTypes = new HashMap<>();
-        Map<String, List<String>> jobTypes = new HashMap<>();
-        Map<String, List<String>> stations = new HashMap<>();
-
-        for (String section : sections) {
-            section = section.trim();
-            if (section.startsWith("TASKTYPES")) {
-                parseTaskTypes(section, taskTypes);
-            } else if (section.startsWith("JOBTYPES")) {
-                parseJobTypes(section, jobTypes);
-            } else if (section.startsWith("STATIONS")) {
-                parseStations(section, stations);
-            }
-        }
-
-        System.out.println("Task Types:");
-        taskTypes.forEach((task, details) -> System.out.println("- " + task + ": " + String.join(" ", details)));
-
-        System.out.println("\nJob Types:");
-        jobTypes.forEach((job, tasks) -> {
-            System.out.println("- " + job + ":");
-            tasks.forEach(task -> System.out.println("  - " + task));
-        });
-
-        System.out.println("\nStations:");
-        stations.forEach((station, details) -> {
-            System.out.println("- " + station + ":");
-            details.forEach(detail -> System.out.println("  - " + detail));
-        });
-    }
-
-    private static void parseTaskTypes(String section, Map<String, List<String>> taskTypes) {
-        String[] parts = section.split("\\s+");
-        for (int i = 1; i < parts.length; i++) {
-            if (parts[i].matches("T\\d+")) {
-                taskTypes.put(parts[i], new ArrayList<>());
-            } else {
-                List<String> details = taskTypes.get(parts[i - 1]);
-                details.add(parts[i]);
-            }
-        }
-    }
-
-    private static void parseJobTypes(String section, Map<String, List<String>> jobTypes) {
-        String[] parts = section.split("\\s+");
-        String currentJob = null;
-        for (String part : parts) {
-            if (part.startsWith("J")) {
-                currentJob = part;
-                jobTypes.put(currentJob, new ArrayList<>());
-            } else if (currentJob != null) {
-                jobTypes.get(currentJob).add(part);
-            }
-        }
-    }
-
-    private static void parseStations(String section, Map<String, List<String>> stations) {
-        String[] parts = section.split("\\s+");
-        String currentStation = null;
-        for (String part : parts) {
-            if (part.startsWith("S")) {
-                currentStation = part;
-                stations.put(currentStation, new ArrayList<>());
-            } else if (currentStation != null) {
-                stations.get(currentStation).add(part);
-            }
-        }
-    }
     public static void parseWorkflowFile(String inputfile) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
             String line;
