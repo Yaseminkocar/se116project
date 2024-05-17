@@ -4,7 +4,7 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         try {
-            String input = TaskReading("WrongFile.txt");
+            String input = TaskReading("InputFile.txt");
             String result = Rename(input);
             System.out.println("Modified task statement: " + result);
         } catch (IOException e) {
@@ -15,7 +15,7 @@ public class Main {
 
 
 
-        String filePath = "WrongFile.txt"; // Buraya dosya yolunu yazın
+        String filePath = "InputFile.txt"; // Buraya dosya yolunu yazın
 
         try (BufferedReader bufferreader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -34,9 +34,9 @@ public class Main {
 
     }
 
-     public static String TaskReading(String WrongFile) throws IOException {
+     public static String TaskReading(String Inputfile) throws IOException {
          StringBuilder stringBuilder = new StringBuilder();
-         try (BufferedReader reader = new BufferedReader(new FileReader(WrongFile))) {
+         try (BufferedReader reader = new BufferedReader(new FileReader(Inputfile))) {
              String line;
              while ((line = reader.readLine()) != null) {
                  stringBuilder.append(line);
@@ -47,7 +47,7 @@ public class Main {
 
     public static String Rename(String input) {
         if (Character.isDigit(input.charAt(0))) {
-            throw new IllegalArgumentException("Task statement can not start with a number!");
+            throw new IllegalArgumentException("Task statement can not start with a number !.");
         }
 
         return input;
@@ -55,8 +55,6 @@ public class Main {
 
 
     
-
-
 
 
 }
