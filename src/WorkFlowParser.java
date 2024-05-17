@@ -16,7 +16,6 @@ public class WorkFlowParser {
             System.out.println("Error: " + e.getMessage());
         }
     }
-
     public static void parseWorkflowFile(String inputfile) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
             String line;
