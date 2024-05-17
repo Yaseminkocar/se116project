@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -71,7 +70,6 @@ public class WorkFlowParser {
             }
         }
     }
-
     public static String TaskReading(String inputfile) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
@@ -90,5 +88,5 @@ public class WorkFlowParser {
         return input;
 
     }
-        }
+}
 
