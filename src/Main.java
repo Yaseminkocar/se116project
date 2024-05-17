@@ -1,8 +1,10 @@
 import java.io.*;
-
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         try {
             String input = TaskReading("InputFile.txt");
             String result = Rename(input);
@@ -13,16 +15,12 @@ public class Main {
             System.out.println("Error: " + e.getMessage());
         }
 
-
-        String filePath = "InputFile.txt"; // Buraya dosya yolunu yazın
+        String filePath = "InputFile.txt";
 
         try (BufferedReader bufferreader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = bufferreader.readLine()) != null) {
-                // Satırı boşluklara göre ayır
                 String[] words = line.split("\s+");
-
-                // Kelimeleri yazdır
                 for (String word : words) {
                     System.out.println(word);
                 }
@@ -46,7 +44,6 @@ public class Main {
         if (Character.isDigit(input.charAt(0))) {
             throw new IllegalArgumentException("Task statement can not start with a number !.");
         }
-
         return input;
     }
 
