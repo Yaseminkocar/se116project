@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String input = null;
         try {
             input = TaskReading("WrongFile.txt");
@@ -69,49 +69,39 @@ public class Main {
         //tasklerin stationda var yok kontrolü
         String line2;
         HashSet<String> tasksofjobH = new HashSet<>();
-
         int startlinenumber = 0;
-        int endlinenumber = 0;
-
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
-            while ((line2 = bufferedReader.readLine()) != null) {
+        int endlinenumber = 10;
 
 
-                String[] words = line2.split("\s+");
+            try {
+                BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
+                while ((line2 = bufferedReader.readLine()) != null) {
+                    String[] words = line2.split("\s+");
 
-               /* for(int y=0;y< words.length;y++){
-                    for(int x=0;x< words.length;x++){
-                        words[x]=words[y].trim();
+
+                    for (int y = 0; y < words.length; y++) {
+                        System.out.println(words[y]);
                     }
-                }
-
-                */
 
 
-                for(int y=0;y< words.length;y++){
-                    System.out.println(words[y]);
-                }
-
-
-                int i = 0;
-                for (; i < words.length; i++) {
-                    switch (words[i]) {
-                        case "(JOBTYPES":
-                            startlinenumber = i;
-                            System.out.println(startlinenumber);
-                            break;
-                        case "(STATIONS":
-                            endlinenumber = i;
-                            System.out.println(endlinenumber);
-                            break;
-                        //default:
-                         //   System.out.println("Unmatched word: " + words[i]);
+                    int i = 0;
+                    for (; i < words.length; i++) {
+                        switch (words[i]) {
+                            case "(JOBTYPES":
+                                startlinenumber = i;
+                                System.out.println(startlinenumber);
+                                break;
+                            case "(STATIONS":
+                                endlinenumber = i;
+                                System.out.println(endlinenumber);
+                                break;
+                            //default:
+                            //   System.out.println("Unmatched word: " + words[i]);
+                        }
                     }
-                }
 
 
-                //switch-case ile aynı sonucu vermeli if de
+                    //switch-case ile aynı sonucu vermeli if de
                     /*if(words[i].equals("(JOBTYPES")){
                         startlinenumber=i;
                         System.out.println(startlinenumber);
@@ -152,10 +142,11 @@ public class Main {
                     }
                 }
 
-            }catch(Exception e){
-            System.out.println(e);
+            } catch (Exception e) {
+                System.out.println(e);
             }
         }
+
 
 
         /*
