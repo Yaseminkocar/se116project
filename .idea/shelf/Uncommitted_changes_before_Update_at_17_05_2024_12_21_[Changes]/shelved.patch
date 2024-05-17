@@ -1,0 +1,37 @@
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.io.*;\n\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        try {\n            String input = TaskReading(\"InputFile.txt\");\n            String result = Rename(input);\n            System.out.println(\"Modified task statement: \" + result);\n        } catch (IOException e) {\n            System.out.println(\"Invalid tasktypeID \" + e.getMessage());\n        } catch (IllegalArgumentException e) {\n            System.out.println(\"Error: \" + e.getMessage());\n        }\n\n\n\n        String filePath = \"InputFile.txt\"; // Buraya dosya yolunu yazın\n\n        try (BufferedReader bufferreader = new BufferedReader(new FileReader(filePath))) {\n            String line;\n            while ((line = bufferreader.readLine()) != null) {\n                // Satırı boşluklara göre ayır\n                String[] words = line.split(\"\\s+\");\n\n                // Kelimeleri yazdır\n                for (String word : words) {\n                    System.out.println(word);\n                }\n            }\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n    }\n     public static String TaskReading(String Inputfile) throws IOException {\n         StringBuilder stringBuilder = new StringBuilder();\n         try (BufferedReader reader = new BufferedReader(new FileReader(Inputfile))) {\n             String line;\n             while ((line = reader.readLine()) != null) {\n                 stringBuilder.append(line);\n             }\n         }\n         return stringBuilder.toString();\n     }\n\n    public static String Rename(String input) {\n        if (Character.isDigit(input.charAt(0))) {\n            throw new IllegalArgumentException(\"Task statement can not start with a number !.\");\n        }\n\n        return input;\n    }\n\n\n    \n\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision 3941e48b7f38ef90f6ca72a40842698e1955aaa0)
++++ b/src/Main.java	(date 1715937688803)
+@@ -1,4 +1,6 @@
+-import java.io.*;
++import java.io.BufferedReader;
++import java.io.FileReader;
++import java.io.IOException;
+ 
+ 
+ public class Main {
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_20\" default=\"true\" project-jdk-name=\"20\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 3941e48b7f38ef90f6ca72a40842698e1955aaa0)
++++ b/.idea/misc.xml	(date 1715937601329)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
