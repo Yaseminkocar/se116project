@@ -14,7 +14,6 @@ public class Main {
         }
 
 
-
         String filePath = "InputFile.txt"; // Buraya dosya yolunu yazın
 
         try (BufferedReader bufferreader = new BufferedReader(new FileReader(filePath))) {
