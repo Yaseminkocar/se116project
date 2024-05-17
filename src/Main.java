@@ -47,8 +47,4 @@ public class Main {
         return input;
     }
 
-
-    
-
-
 }
