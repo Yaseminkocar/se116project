@@ -1,9 +1,8 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         try {
             String input = TaskReading("InputFile.txt");
             String result = Rename(input);
@@ -14,18 +13,37 @@ public class Main {
             System.out.println("Error: " + e.getMessage());
         }
 
+
+
+        String filePath = "InputFile.txt"; // Buraya dosya yolunu yazın
+
+        try (BufferedReader bufferreader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = bufferreader.readLine()) != null) {
+                // Satırı boşluklara göre ayır
+                String[] words = line.split("\s+");
+
+                // Kelimeleri yazdır
+                for (String word : words) {
+                    System.out.println(word);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
      public static String TaskReading(String Inputfile) throws IOException {
-            StringBuilder stringBuilder = new StringBuilder();
-            try (BufferedReader reader = new BufferedReader(new FileReader(Inputfile))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    stringBuilder.append(line);
-                }
-            }
-            return stringBuilder.toString();
-        }
+         StringBuilder stringBuilder = new StringBuilder();
+         try (BufferedReader reader = new BufferedReader(new FileReader(Inputfile))) {
+             String line;
+             while ((line = reader.readLine()) != null) {
+                 stringBuilder.append(line);
+             }
+         }
+         return stringBuilder.toString();
+     }
 
     public static String Rename(String input) {
         if (Character.isDigit(input.charAt(0))) {
@@ -34,6 +52,9 @@ public class Main {
 
         return input;
     }
+
+
+    
 
 
 }
