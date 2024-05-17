@@ -8,8 +8,9 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
+        String input = null;
         try {
-            String input = TaskReading("WrongFile.txt");
+            input = TaskReading("WrongFile.txt");
             String result = Rename(input);
             System.out.println("Modified task statement: " + result);
         } catch (IOException e) {
@@ -41,8 +42,72 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
-    }
+        //parantez sayısı karşılaştırma
+        int sumopen = 0;
+        int sumclose = 0;
+        for (int i = 0; i < input.length(); i++) {
 
+            if (input.charAt(i) == '(') {
+                sumopen++;
+            } else if (input.charAt(i) == ')') {
+                sumclose++;
+            }
+
+        }
+        try {
+            if (sumopen < sumclose) {
+                throw new Exception("missing '('");
+
+            } else if (sumclose < sumopen) {
+                throw new Exception("missing ')'");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        //tasklerin stationda var yok kontrolü
+        String line2;
+        ArrayList tasksofjob= new ArrayList();
+        int startlinenumber=0;
+        int endlinenumber=0;
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
+            while ((line2 = bufferedReader.readLine()) != null) {
+                String[] words = line2.split("\s+");
+                for(int i=0;i<words.length;i++){
+                    if(words[i].equals("(JOBTYPES")){
+                        startlinenumber=i;
+                    }
+                }
+                for(int j=0;j<words.length;j++){
+                    if(words[j].equals("(STATIONS")){
+                        endlinenumber=j;
+                    }
+                }
+                for(int k=startlinenumber;k<endlinenumber;k++){
+                    if(words[k].startsWith("T"));
+                    tasksofjob.add(words[k]);
+                }
+                ArrayList taskofstation= new ArrayList();
+                for(int a=endlinenumber;a<words.length;a++){
+                    if(words[a].startsWith("T"));
+                    taskofstation.add(words[a]);
+                }
+                int b=taskofstation.size();
+                int c=tasksofjob.size();
+                for(int i=0;i<b;i++){
+                    for(int j=0;j<c;j++){
+                        if(taskofstation.get(i)!=tasksofjob.get(j)){
+                            throw new Exception("task"+i +"is not executed at any station");
+                        }
+                    }
+                }
+            }
+
+        }catch(Exception e){
+            System.out.println(e);
+        }
+
+    }
     public static void parseWorkflowFile(String inputfile) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
             String line;
@@ -117,6 +182,7 @@ public class Main {
         return input;
     }
 }
+
 /* public static String TaskReading(String WrongFile) throws IOException {
 
 
