@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         try {
             String input = TaskReading("InputFile.txt");
             String result = Rename(input);
@@ -44,7 +44,6 @@ public class Main {
         if (Character.isDigit(input.charAt(0))) {
             throw new IllegalArgumentException("Task statement can not start with a number !.");
         }
-
         return input;
     }
 
