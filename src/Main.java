@@ -14,7 +14,9 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
+
         String filePath = "WrongFile.txt";
+
         try (BufferedReader bufferreader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = bufferreader.readLine()) != null) {
@@ -27,6 +29,7 @@ public class Main {
             e.printStackTrace();
         }
     }
+
      public static String TaskReading(String Inputfile) throws IOException {
          StringBuilder stringBuilder = new StringBuilder();
          try (BufferedReader reader = new BufferedReader(new FileReader("WrongFile"))) {
@@ -37,10 +40,12 @@ public class Main {
          }
          return stringBuilder.toString();
      }
+
     public static String Rename(String input) {
         if (Character.isDigit(input.charAt(0))) {
             throw new IllegalArgumentException("Task statement can not start with a number !.");
         }
         return input;
     }
+
 }
