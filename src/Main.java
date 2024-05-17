@@ -2,9 +2,7 @@ import java.io.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -42,6 +40,8 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
+
+
         //parantez sayısı karşılaştırma
         int sumopen = 0;
         int sumclose = 0;
@@ -64,8 +64,10 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e);
         }
+
+
         //tasklerin stationda var yok kontrolü
-        String line2;
+    /*    String line2;
         ArrayList tasksofjob= new ArrayList();
         int startlinenumber=0;
         int endlinenumber=0;
@@ -86,6 +88,7 @@ public class Main {
                 for(int k=startlinenumber;k<endlinenumber;k++){
                     if(words[k].startsWith("T"));
                     tasksofjob.add(words[k]);
+
                 }
                 ArrayList taskofstation= new ArrayList();
                 for(int a=endlinenumber;a<words.length;a++){
@@ -106,6 +109,55 @@ public class Main {
         }catch(Exception e){
             System.out.println(e);
         }
+     */
+
+        /*
+        //sadece T4'ün station'da olmadığını söylüyor T21'i de görmesi lazım
+        String line2;
+        HashMap<String, Integer> tasksOfJob = new HashMap<>();
+        int startLineNumber = 0;
+        int endLineNumber = 0;
+
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
+            while ((line2 = bufferedReader.readLine()) != null) {
+                String[] words = line2.split("\\s+"); // Corrected the split pattern
+                for (int i = 0; i < words.length; i++) {
+                    if (words[i].equals("(JOBTYPES")) {
+                        startLineNumber = i;
+                    }
+                }
+                for (int j = 0; j < words.length; j++) {
+                    if (words[j].equals("(STATIONS")) {
+                        endLineNumber = j;
+                    }
+                }
+                for (int k = startLineNumber; k < endLineNumber; k++) {
+                    if (words[k].startsWith("T")) {
+                        tasksOfJob.put(words[k], tasksOfJob.getOrDefault(words[k], 0) + 1);
+                    }
+                }
+                HashMap<String, Integer> tasksOfStation = new HashMap<>();
+                for (int a = endLineNumber; a < words.length; a++) {
+                    if (words[a].startsWith("T")) {
+                        tasksOfStation.put(words[a], tasksOfStation.getOrDefault(words[a], 0) + 1);
+                    }
+                }
+                for (Map.Entry<String, Integer> entry : tasksOfStation.entrySet()) {
+                    String task = entry.getKey();
+                    int countInStation = entry.getValue();
+                    int countInJob = tasksOfJob.getOrDefault(task, 0);
+                    if (countInJob != countInStation) {
+                        throw new Exception("Task " + task + " is not executed at any station");
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+         */
 
     }
     public static void parseWorkflowFile(String inputfile) throws IOException {
