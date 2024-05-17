@@ -64,7 +64,6 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e);
         }
-
     }
     public static void parseWorkflowFile(String inputfile) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
