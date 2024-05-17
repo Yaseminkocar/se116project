@@ -114,14 +114,11 @@ public class Main {
                     continue;
                 }
 
-
                 Task task = new Task(taskType ,2);
                 System.out.printf("Successfully parsed line %d: Task Type: %s, Job ID: %s, Station Info: %s%n", lineNumber, taskType, jobId, stationInfo);
             }
         }
     }
-
-
 }
 
 
