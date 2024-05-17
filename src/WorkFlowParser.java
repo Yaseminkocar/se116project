@@ -16,7 +16,6 @@ public class WorkFlowParser {
             System.out.println("Error: " + e.getMessage());
         }
     }
-
     public static void parseWorkflowFile(String inputfile) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
             String line;
@@ -35,7 +34,6 @@ public class WorkFlowParser {
                     System.out.printf("Syntax error on line %d: Each line must have at least 3 parts.%n", lineNumber);
                     continue;
                 }
-
                 String taskType = parts[0];
                 String jobId = parts[1];
                 String stationInfo = parts[2];
@@ -55,13 +53,11 @@ public class WorkFlowParser {
                     continue;
                 }
 
-                // İstasyon bilgisi kontrolü
                 String[] stationParts = stationInfo.split(",");
                 if (stationParts.length != 2 || !stationParts[0].matches("\\d+") || !stationParts[1].matches("\\d+")) {
                     System.out.printf("Syntax error on line %d: Invalid station information '%s'.%n", lineNumber, stationInfo);
                     continue;
                 }
-
                 int stationNumber = Integer.parseInt(stationParts[0]);
                 int stationRange = Integer.parseInt(stationParts[1]);
 
@@ -69,9 +65,7 @@ public class WorkFlowParser {
                     System.out.printf("Semantic error on line %d: Station range '%d' must be between 1 and 100.%n", lineNumber, stationRange);
                     continue;
                 }
-
             }
         }
     }
 }
-

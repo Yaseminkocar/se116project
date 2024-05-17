@@ -30,7 +30,6 @@ public class Main {
         }
 
     }
-
      public static String TaskReading(String Inputfile) throws IOException {
          StringBuilder stringBuilder = new StringBuilder();
          try (BufferedReader reader = new BufferedReader(new FileReader("WrongFile"))) {
@@ -41,7 +40,6 @@ public class Main {
          }
          return stringBuilder.toString();
      }
-
     public static String Rename(String input) {
         if (Character.isDigit(input.charAt(0))) {
             throw new IllegalArgumentException("Task statement can not start with a number !.");
