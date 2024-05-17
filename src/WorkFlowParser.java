@@ -1,70 +1,21 @@
-import java.io.*;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
-
-public class Main {
+public class WorkFlowParser {
     public static void main(String[] args) {
+        String filePath = "WrongFile.txt";
+
         try {
-            String input = TaskReading("WrongFile.txt");
-            String result = Rename(input);
-            System.out.println("Modified task statement: " + result);
+            parseWorkflowFile(filePath);
         } catch (IOException e) {
-            System.out.println("Invalid tasktypeID " + e.getMessage());
+            System.out.println("Error reading file: " + e.getMessage());
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
-
-        String filePath = "WrongFile.txt";
-
-        try (BufferedReader bufferreader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = bufferreader.readLine()) != null) {
-                String[] words = line.split("\s+");
-                for (String word : words) {
-                    System.out.println(word);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String filePath2 = "WrongFile.txt";
-
-        try
-        {
-            parseWorkflowFile(filePath);
-        } catch(IOException e) {
-            System.out.println("Error reading file: " + e.getMessage());
-        } catch(IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-
-
     }
-
-    public static String TaskReading(String WrongFile) throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(WrongFile))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-        }
-        return stringBuilder.toString();
-    }
-
-    public static String Rename(String input) {
-        if (Character.isDigit(input.charAt(0))) {
-            throw new IllegalArgumentException("Task statement can not start with a number !.");
-        }
-        return input;
-    }
-
-
-
     public static void parseWorkflowFile(String inputfile) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
             String line;
@@ -121,11 +72,23 @@ public class Main {
         }
     }
 
+    public static String TaskReading(String inputfile) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line).append("\n"); // Her satırı yeni satır karakteriyle ekle
+            }
+        }
+        return stringBuilder.toString();
+    }
 
-}
+    public static String Rename(String input) {
+        if (Character.isDigit(input.charAt(0))) {
+            throw new IllegalArgumentException("Task statement cannot start with a number!");
+        }
+        return input;
 
-
-
-    
-
+    }
+        }
 
