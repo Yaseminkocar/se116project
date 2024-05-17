@@ -28,7 +28,6 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
      public static String TaskReading(String Inputfile) throws IOException {
@@ -48,9 +47,5 @@ public class Main {
         }
         return input;
     }
-
-
-    
-
 
 }

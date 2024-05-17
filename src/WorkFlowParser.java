@@ -69,7 +69,6 @@ public class WorkFlowParser {
                     System.out.printf("Semantic error on line %d: Station range '%d' must be between 1 and 100.%n", lineNumber, stationRange);
                     continue;
                 }
-
             }
         }
     }
