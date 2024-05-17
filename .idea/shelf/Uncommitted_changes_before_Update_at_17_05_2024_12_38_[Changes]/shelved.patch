@@ -1,75 +1,3 @@
-<<<<<<< HEAD
-Index: src/Main.java
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
-<+>import java.io.*;\r\nimport java.io.BufferedReader;\r\nimport java.io.FileReader;\r\nimport java.io.IOException;\r\n\r\npublic class Main {\r\n    public static void main(String[] args){\r\n        try {\r\n            String input = TaskReading(\"InputFile.txt\");\r\n            String result = Rename(input);\r\n            System.out.println(\"Modified task statement: \" + result);\r\n        } catch (IOException e) {\r\n            System.out.println(\"Invalid tasktypeID \" + e.getMessage());\r\n        } catch (IllegalArgumentException e) {\r\n            System.out.println(\"Error: \" + e.getMessage());\r\n        }\r\n\r\n        String filePath = \"InputFile.txt\";\r\n\r\n        try (BufferedReader bufferreader = new BufferedReader(new FileReader(filePath))) {\r\n            String line;\r\n            while ((line = bufferreader.readLine()) != null) {\r\n                String[] words = line.split(\"\\s+\");\r\n                for (String word : words) {\r\n                    System.out.println(word);\r\n                }\r\n            }\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n     public static String TaskReading(String Inputfile) throws IOException {\r\n         StringBuilder stringBuilder = new StringBuilder();\r\n         try (BufferedReader reader = new BufferedReader(new FileReader(Inputfile))) {\r\n             String line;\r\n             while ((line = reader.readLine()) != null) {\r\n                 stringBuilder.append(line);\r\n             }\r\n         }\r\n         return stringBuilder.toString();\r\n     }\r\n\r\n    public static String Rename(String input) {\r\n        if (Character.isDigit(input.charAt(0))) {\r\n            throw new IllegalArgumentException(\"Task statement can not start with a number !.\");\r\n        }\r\n        return input;\r\n    }\r\n\r\n\r\n    \r\n\r\n\r\n}
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
-diff --git a/src/Main.java b/src/Main.java
---- a/src/Main.java	(revision 6a443186f5ec5d97e0b7003ccaa31fdeeb1305f0)
-+++ b/src/Main.java	(date 1715938436339)
-@@ -1,8 +1,9 @@
--import java.io.*;
-+
- import java.io.BufferedReader;
- import java.io.FileReader;
- import java.io.IOException;
- 
-+
- public class Main {
-     public static void main(String[] args){
-         try {
-@@ -15,12 +16,17 @@
-             System.out.println("Error: " + e.getMessage());
-         }
- 
--        String filePath = "InputFile.txt";
-+
-+
-+        String filePath = "InputFile.txt"; // Buraya dosya yolunu yazın
- 
-         try (BufferedReader bufferreader = new BufferedReader(new FileReader(filePath))) {
-             String line;
-             while ((line = bufferreader.readLine()) != null) {
-+                // Satırı boşluklara göre ayır
-                 String[] words = line.split("\s+");
-+
-+                // Kelimeleri yazdır
-                 for (String word : words) {
-                     System.out.println(word);
-                 }
-@@ -28,7 +34,9 @@
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
-+
-     }
-+
-      public static String TaskReading(String Inputfile) throws IOException {
-          StringBuilder stringBuilder = new StringBuilder();
-          try (BufferedReader reader = new BufferedReader(new FileReader(Inputfile))) {
-Index: .idea/misc.xml
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_X\" default=\"true\" project-jdk-name=\"20\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
-diff --git a/.idea/misc.xml b/.idea/misc.xml
---- a/.idea/misc.xml	(revision 6a443186f5ec5d97e0b7003ccaa31fdeeb1305f0)
-+++ b/.idea/misc.xml	(date 1715938074868)
-@@ -1,6 +1,6 @@
- <?xml version="1.0" encoding="UTF-8"?>
- <project version="4">
--  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
-+  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
-     <output url="file://$PROJECT_DIR$/out" />
-   </component>
- </project>
-\ No newline at end of file
-=======
->>>>>>> origin/master
 Index: .idea/workspace.xml
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
@@ -78,114 +6,47 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
 diff --git a/.idea/workspace.xml b/.idea/workspace.xml
-<<<<<<< HEAD
---- a/.idea/workspace.xml	(revision 6a443186f5ec5d97e0b7003ccaa31fdeeb1305f0)
-+++ b/.idea/workspace.xml	(date 1715938074884)
-@@ -6,9 +6,6 @@
-   <component name="ChangeListManager">
-     <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="changes">
-       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_11_50__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_11_50__Changes_.xml" afterDir="false" />
--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_11_52__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_11_52__Changes_.xml" afterDir="false" />
--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_12_04__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_12_04__Changes_.xml" afterDir="false" />
-       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-     </list>
-@@ -27,27 +24,12 @@
-   <component name="Git.Settings">
-     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-   </component>
--  <component name="GitHubPullRequestSearchHistory">{
--  &quot;lastFilter&quot;: {
--    &quot;state&quot;: &quot;OPEN&quot;,
--    &quot;assignee&quot;: &quot;EmirayDurmaz&quot;
--  }
--}</component>
--  <component name="GithubPullRequestsUISettings">{
--  &quot;selectedUrlAndAccountId&quot;: {
--    &quot;url&quot;: &quot;https://github.com/Yaseminkocar/se116project.git&quot;,
--    &quot;accountId&quot;: &quot;f876dfee-e282-4bb3-ac51-b7a06d3e1894&quot;
--  }
--}</component>
-   <component name="MarkdownSettingsMigration">
-     <option name="stateVersion" value="1" />
-   </component>
--  <component name="ProjectColorInfo">{
--  &quot;customColor&quot;: &quot;&quot;,
--  &quot;associatedIndex&quot;: 4
--}</component>
-   <component name="ProjectId" id="2flxulGE1TD1wiPGhb4j94xWvUK" />
-   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-+    <OptionsSetting value="false" id="Update" />
-     <ConfirmationsSetting value="2" id="Add" />
-   </component>
-   <component name="ProjectViewState">
-@@ -59,12 +41,9 @@
-   </component>
-   <component name="PropertiesComponent">{
-   &quot;keyToString&quot;: {
--    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
--    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
--    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
-   }
- }</component>
-@@ -82,14 +61,6 @@
-       </list>
-     </recent_temporary>
-   </component>
--  <component name="SharedIndexes">
--    <attachedChunks>
--      <set>
--        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
--        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
--      </set>
--    </attachedChunks>
--  </component>
-   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-   <component name="TaskManager">
-     <task active="true" id="Default" summary="Default task">
-@@ -144,9 +115,6 @@
-     </task>
-     <option name="localTasksCounter" value="7" />
-     <servers />
--  </component>
--  <component name="TypeScriptGeneratedFilesManager">
--    <option name="version" value="3" />
-   </component>
-   <component name="Vcs.Log.Tabs.Properties">
-     <option name="TAB_STATES">
-=======
---- a/.idea/workspace.xml	(revision f9944835cbebba8bbe66bed2721e6a2e9ea3a7ac)
+--- a/.idea/workspace.xml	(revision 9a13be72e02058c24b260c3ffd613bf1763f2630)
++++ b/.idea/workspace.xml	(date 1715938717671)
+@@ -4,14 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
    </component>
    <component name="ChangeListManager">
+-    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="changes">
 -      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
 -      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_11_50__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_11_50__Changes_.xml" afterDir="false" />
 -      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_11_52__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_11_52__Changes_.xml" afterDir="false" />
 -      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_12_04__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_12_04__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 -      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+-    </list>
++    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="test" />
      <option name="SHOW_DIALOG" value="false" />
      <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -142,7 +135,14 @@
        <option name="project" value="LOCAL" />
        <updated>1715885718441</updated>
      </task>
 -    <option name="localTasksCounter" value="7" />
++    <task id="LOCAL-00007" summary="test">
++      <created>1715938673129</created>
 +      <option name="number" value="00007" />
 +      <option name="presentableId" value="LOCAL-00007" />
 +      <option name="project" value="LOCAL" />
++      <updated>1715938673129</updated>
 +    </task>
-+      <option name="number" value="00008" />
-+      <option name="presentableId" value="LOCAL-00008" />
-+      <option name="project" value="LOCAL" />
-+    </task>
++    <option name="localTasksCounter" value="8" />
      <servers />
    </component>
    <component name="TypeScriptGeneratedFilesManager">
+@@ -166,6 +166,7 @@
      <MESSAGE value="Classes" />
      <MESSAGE value="some bugs fixed" />
      <MESSAGE value="changes" />
+-    <option name="LAST_COMMIT_MESSAGE" value="changes" />
++    <MESSAGE value="test" />
++    <option name="LAST_COMMIT_MESSAGE" value="test" />
    </component>
->>>>>>> origin/master
+ </project>
+\ No newline at end of file

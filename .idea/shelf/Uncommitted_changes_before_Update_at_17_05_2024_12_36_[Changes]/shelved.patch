@@ -1,0 +1,20 @@
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.io.*;\r\nimport java.io.BufferedReader;\r\nimport java.io.FileReader;\r\nimport java.io.IOException;\r\n\r\npublic class Main {\r\n    public static void main(String[] args){\r\n        try {\r\n            String input = TaskReading(\"InputFile.txt\");\r\n            String result = Rename(input);\r\n            System.out.println(\"Modified task statement: \" + result);\r\n        } catch (IOException e) {\r\n            System.out.println(\"Invalid tasktypeID \" + e.getMessage());\r\n        } catch (IllegalArgumentException e) {\r\n            System.out.println(\"Error: \" + e.getMessage());\r\n        }\r\n\r\n        String filePath = \"InputFile.txt\";\r\n\r\n        try (BufferedReader bufferreader = new BufferedReader(new FileReader(filePath))) {\r\n            String line;\r\n            while ((line = bufferreader.readLine()) != null) {\r\n                String[] words = line.split(\"\\s+\");\r\n                for (String word : words) {\r\n                    System.out.println(word);\r\n                }\r\n            }\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n     public static String TaskReading(String Inputfile) throws IOException {\r\n         StringBuilder stringBuilder = new StringBuilder();\r\n         try (BufferedReader reader = new BufferedReader(new FileReader(Inputfile))) {\r\n             String line;\r\n             while ((line = reader.readLine()) != null) {\r\n                 stringBuilder.append(line);\r\n             }\r\n         }\r\n         return stringBuilder.toString();\r\n     }\r\n\r\n    public static String Rename(String input) {\r\n        if (Character.isDigit(input.charAt(0))) {\r\n            throw new IllegalArgumentException(\"Task statement can not start with a number !.\");\r\n        }\r\n        return input;\r\n    }\r\n\r\n\r\n    \r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision f9944835cbebba8bbe66bed2721e6a2e9ea3a7ac)
++++ b/src/Main.java	(date 1715938546546)
+@@ -14,9 +14,7 @@
+         } catch (IllegalArgumentException e) {
+             System.out.println("Error: " + e.getMessage());
+         }
+-
+         String filePath = "InputFile.txt";
+-
+         try (BufferedReader bufferreader = new BufferedReader(new FileReader(filePath))) {
+             String line;
+             while ((line = bufferreader.readLine()) != null) {

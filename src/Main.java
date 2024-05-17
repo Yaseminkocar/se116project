@@ -30,6 +30,7 @@ public class Main {
         }
 
     }
+
      public static String TaskReading(String Inputfile) throws IOException {
          StringBuilder stringBuilder = new StringBuilder();
          try (BufferedReader reader = new BufferedReader(new FileReader("WrongFile"))) {
