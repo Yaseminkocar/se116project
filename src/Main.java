@@ -42,6 +42,8 @@ public class Main {
         }
 
 
+
+
         //parantez sayısı karşılaştırma
         int sumopen = 0;
         int sumclose = 0;
@@ -67,8 +69,9 @@ public class Main {
 
 
         //tasklerin stationda var yok kontrolü
-    /*    String line2;
-        ArrayList tasksofjob= new ArrayList();
+       String line2;
+        HashSet tasksofjobH= new HashSet();
+        ArrayList taskOfJobA = new ArrayList();
         int startlinenumber=0;
         int endlinenumber=0;
         try {
@@ -87,19 +90,28 @@ public class Main {
                 }
                 for(int k=startlinenumber;k<endlinenumber;k++){
                     if(words[k].startsWith("T"));
-                    tasksofjob.add(words[k]);
+                    tasksofjobH.add(words[k]);
+                    taskOfJobA.add(words[k]);
 
                 }
-                ArrayList taskofstation= new ArrayList();
+                HashSet taskofstationH= new HashSet();
+                ArrayList taskOfStationA = new ArrayList();
                 for(int a=endlinenumber;a<words.length;a++){
                     if(words[a].startsWith("T"));
-                    taskofstation.add(words[a]);
+                    taskofstationH.add(words[a]);
+                    taskOfStationA.add(words[a]);
                 }
-                int b=taskofstation.size();
-                int c=tasksofjob.size();
+                int b=taskofstationH.size();
+                int c=tasksofjobH.size();
+                boolean check= true;
                 for(int i=0;i<b;i++){
                     for(int j=0;j<c;j++){
-                        if(taskofstation.get(i)!=tasksofjob.get(j)){
+                        if(taskofstationH.contains(taskOfStationA.get(j))){
+                            check=true;
+                        }else if(tasksofjobH.contains(taskOfStationA.get(i))){
+                            check=true;
+                        }else{
+                            check=false;
                             throw new Exception("task"+i +"is not executed at any station");
                         }
                     }
@@ -109,7 +121,7 @@ public class Main {
         }catch(Exception e){
             System.out.println(e);
         }
-     */
+
 
         /*
         //sadece T4'ün station'da olmadığını söylüyor T21'i de görmesi lazım
