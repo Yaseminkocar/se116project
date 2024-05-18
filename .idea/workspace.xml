@@ -79,9 +79,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="d1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="d1" />
+      <module name="asdfgh" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.d1" />
         <item itemvalue="Application.WorkFlowParser" />
       </list>
     </recent_temporary>
