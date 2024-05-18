@@ -1,0 +1,456 @@
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.io.*;\r\nimport java.io.BufferedReader;\r\nimport java.io.FileReader;\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\n\r\npublic class Main {\r\n    public static void main(String[] args) {\r\n        String input = null;\r\n        try {\r\n            input = TaskReading(\"WrongFile.txt\");\r\n            String result = Rename(input);\r\n            System.out.println(\"Modified task statement: \" + result);\r\n        } catch (IOException e) {\r\n            System.out.println(\"Invalid tasktypeID \" + e.getMessage());\r\n        } catch (IllegalArgumentException e) {\r\n            System.out.println(\"Error: \" + e.getMessage());\r\n        }\r\n\r\n        String filePath = \"WrongFile.txt\";\r\n\r\n        try (BufferedReader bufferreader = new BufferedReader(new FileReader(filePath))) {\r\n            String line;\r\n            while ((line = bufferreader.readLine()) != null) {\r\n                String[] words = line.split(\"\\s+\");\r\n                for (String word : words) {\r\n                    System.out.println(word);\r\n                }\r\n            }\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n\r\n        String filePath2 = \"WrongFile.txt\";\r\n\r\n        try {\r\n            parseWorkflowFile(filePath);\r\n        } catch (IOException e) {\r\n            System.out.println(\"Error reading file: \" + e.getMessage());\r\n        } catch (IllegalArgumentException e) {\r\n            System.out.println(\"Error: \" + e.getMessage());\r\n        }\r\n        //parantez sayısı karşılaştırma\r\n        int sumopen = 0;\r\n        int sumclose = 0;\r\n        for (int i = 0; i < input.length(); i++) {\r\n\r\n            if (input.charAt(i) == '(') {\r\n                sumopen++;\r\n            } else if (input.charAt(i) == ')') {\r\n                sumclose++;\r\n            }\r\n\r\n        }\r\n        try {\r\n            if (sumopen < sumclose) {\r\n                throw new Exception(\"missing '('\");\r\n\r\n            } else if (sumclose < sumopen) {\r\n                throw new Exception(\"missing ')'\");\r\n            }\r\n        } catch (Exception e) {\r\n            System.out.println(e);\r\n        }\r\n        //tasklerin stationda var yok kontrolü\r\n        String line2;\r\n        ArrayList tasksofjob= new ArrayList();\r\n        int startlinenumber=0;\r\n        int endlinenumber=0;\r\n        try {\r\n            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));\r\n            while ((line2 = bufferedReader.readLine()) != null) {\r\n                String[] words = line2.split(\"\\s+\");\r\n                for(int i=0;i<words.length;i++){\r\n                    if(words[i].equals(\"(JOBTYPES\")){\r\n                        startlinenumber=i;\r\n                    }\r\n                }\r\n                for(int j=0;j<words.length;j++){\r\n                    if(words[j].equals(\"(STATIONS\")){\r\n                        endlinenumber=j;\r\n                    }\r\n                }\r\n                for(int k=startlinenumber;k<endlinenumber;k++){\r\n                    if(words[k].startsWith(\"T\"));\r\n                    tasksofjob.add(words[k]);\r\n                }\r\n                ArrayList taskofstation= new ArrayList();\r\n                for(int a=endlinenumber;a<words.length;a++){\r\n                    if(words[a].startsWith(\"T\"));\r\n                    taskofstation.add(words[a]);\r\n                }\r\n                int b=taskofstation.size();\r\n                int c=tasksofjob.size();\r\n                for(int i=0;i<b;i++){\r\n                    for(int j=0;j<c;j++){\r\n                        if(taskofstation.get(i)!=tasksofjob.get(j)){\r\n                            throw new Exception(\"task\"+i +\"is not executed at any station\");\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n\r\n        }catch(Exception e){\r\n            System.out.println(e);\r\n        }\r\n\r\n    }\r\n    public static void parseWorkflowFile(String inputfile) throws IOException {\r\n        try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {\r\n            String line;\r\n            int lineNumber = 0;\r\n            ArrayList<String> uniqueIds = new ArrayList<>();  // Using ArrayList instead of List\r\n\r\n            while ((line = reader.readLine()) != null) {\r\n                lineNumber++;\r\n                line = line.trim();\r\n                if (line.isEmpty()) {\r\n                    continue;\r\n                }\r\n\r\n                String[] parts = line.split(\"\\\\s+\");\r\n                if (parts.length < 3) {\r\n                    System.out.println(\"Syntax error on line \" + lineNumber + \": Each line must have at least 3 parts.\");\r\n                    continue;\r\n                }\r\n                String taskType = parts[0];\r\n                String jobId = parts[1];\r\n                String stationInfo = parts[2];\r\n\r\n                if (Character.isDigit(taskType.charAt(0))) {\r\n                    System.out.println(\"Syntax error on line \" + lineNumber + \": Task type '\" + taskType + \"' cannot start with a number.\");\r\n                    continue;\r\n                }\r\n                if (!jobId.matches(\"\\\\d+\")) {\r\n                    System.out.println(\"Syntax error on line \" + lineNumber + \": Job ID '\" + jobId + \"' must be a numeric value.\");\r\n                    continue;\r\n                }\r\n\r\n                if (uniqueIds.contains(jobId)) {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": Job ID '\" + jobId + \"' must be unique.\");\r\n                    continue;\r\n                } else {\r\n                    uniqueIds.add(jobId);\r\n                }\r\n\r\n                String[] stationParts = stationInfo.split(\",\");\r\n                if (stationParts.length != 2 || !stationParts[0].matches(\"\\\\d+\") || !stationParts[1].matches(\"\\\\d+\")) {\r\n                    System.out.println(\"Syntax error on line \" + lineNumber + \": Invalid station information '\" + stationInfo + \"'.\");\r\n                    continue;\r\n                }\r\n                int stationNumber = Integer.parseInt(stationParts[0]);\r\n                int stationRange = Integer.parseInt(stationParts[1]);\r\n                if (stationNumber < 1 || stationRange < 1 || stationRange > 100) {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": Station range '\" + stationRange + \"' must be between 1 and 100.\");\r\n                    continue;\r\n                }\r\n\r\n                Task task = new Task(taskType, 2);\r\n                System.out.println(\"Successfully parsed line \" + lineNumber + \": Task Type: \" + taskType + \", Job ID: \" + jobId + \", Station Info: \" + stationInfo);\r\n            }\r\n        }\r\n    }\r\n\r\n    public static String TaskReading(String inputfile) throws IOException {\r\n        StringBuilder stringBuilder = new StringBuilder();\r\n        try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {\r\n            String line;\r\n            while ((line = reader.readLine()) != null) {\r\n                stringBuilder.append(line).append(\"\\n\"); // Append each line with a new line character\r\n            }\r\n        }\r\n        return stringBuilder.toString();\r\n    }\r\n\r\n    public static String Rename(String input) {\r\n        if (Character.isDigit(input.charAt(0))) {\r\n            throw new IllegalArgumentException(\"Task statement cannot start with a number!\");\r\n        }\r\n        return input;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision 97c022099ba7b441265cce2b98844f9e048c02fd)
++++ b/src/Main.java	(date 1716030894773)
+@@ -2,7 +2,7 @@
+ import java.io.BufferedReader;
+ import java.io.FileReader;
+ import java.io.IOException;
+-import java.util.ArrayList;
++import java.util.*;
+ 
+ public class Main {
+     public static void main(String[] args) {
+@@ -40,6 +40,8 @@
+         } catch (IllegalArgumentException e) {
+             System.out.println("Error: " + e.getMessage());
+         }
++
++
+         //parantez sayısı karşılaştırma
+         int sumopen = 0;
+         int sumclose = 0;
+@@ -62,50 +64,193 @@
+         } catch (Exception e) {
+             System.out.println(e);
+         }
++
++
+         //tasklerin stationda var yok kontrolü
+         String line2;
+-        ArrayList tasksofjob= new ArrayList();
+-        int startlinenumber=0;
+-        int endlinenumber=0;
++        HashSet<String> tasksofjobH = new HashSet<>();
++
++        int startlinenumber = 0;
++        int endlinenumber = 0;
++
+         try {
+             BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
+             while ((line2 = bufferedReader.readLine()) != null) {
++
++
+                 String[] words = line2.split("\s+");
+-                for(int i=0;i<words.length;i++){
+-                    if(words[i].equals("(JOBTYPES")){
++
++               /* for(int y=0;y< words.length;y++){
++                    for(int x=0;x< words.length;x++){
++                        words[x]=words[y].trim();
++                    }
++                }
++
++                */
++
++
++                int i = 0;
++                for (; i < words.length; i++) {
++                    switch (words[i]) {
++                        case "(JOBTYPES":
++                            startlinenumber = i;
++                            System.out.println(startlinenumber);
++                            break;
++                        case "(STATIONS":
++                            endlinenumber = i;
++                            System.out.println(endlinenumber);
++                            break;
++                        //default:
++                         //   System.out.println("Unmatched word: " + words[i]);
++                    }
++                }
++
++
++                //switch-case ile aynı sonucu vermeli if de
++                    /*if(words[i].equals("(JOBTYPES")){
+                         startlinenumber=i;
++                        System.out.println(startlinenumber);
+                     }
+                 }
+                 for(int j=0;j<words.length;j++){
+                     if(words[j].equals("(STATIONS")){
+                         endlinenumber=j;
++                        System.out.println(endlinenumber);
+                     }
+                 }
+-                for(int k=startlinenumber;k<endlinenumber;k++){
+-                    if(words[k].startsWith("T"));
+-                    tasksofjob.add(words[k]);
+-                }
+-                ArrayList taskofstation= new ArrayList();
+-                for(int a=endlinenumber;a<words.length;a++){
+-                    if(words[a].startsWith("T"));
+-                    taskofstation.add(words[a]);
+-                }
+-                int b=taskofstation.size();
+-                int c=tasksofjob.size();
+-                for(int i=0;i<b;i++){
+-                    for(int j=0;j<c;j++){
+-                        if(taskofstation.get(i)!=tasksofjob.get(j)){
+-                            throw new Exception("task"+i +"is not executed at any station");
++                     */
++                    for (int k = startlinenumber; k <= endlinenumber; k++) {
++                        if (words[k].startsWith("T")) ;
++                        tasksofjobH.add(words[k]);
++                    }
++                    ArrayList taskOfJobA = new ArrayList<>(tasksofjobH);
++                    HashSet taskofstationH = new HashSet();
++                    for (int a = endlinenumber; a < words.length; a++) {
++                        if (words[a].startsWith("T")) ;
++                        taskofstationH.add(words[a]);
++
++                    }
++                    int b = taskofstationH.size();
++                    int c = tasksofjobH.size();
++
++                    boolean check = true;
++                    for (int a = 0; a < b; a++) {
++                        for (int j = 0; j < c; j++) {
++                            if (taskofstationH.contains(taskOfJobA.get(j))) {
++                                check = true;
++                            } else {
++                                throw new Exception(taskOfJobA.get(j) + " is not processed in Stations");
++                            }
+                         }
+                     }
+                 }
++
++            }catch(Exception e){
++            System.out.println(e);
++            }
++
++        String fileName = "WrongFile.txt";
++        List<Job> jobs = readJobsFromFile(fileName);
++
++        // Print all jobs
++        for (Job job : jobs) {
++            System.out.println(job);
++        }
++    }
++
++    // Method to read jobs from file
++    public static List<Job> readJobsFromFile(String fileName) {
++        List<Job> jobs = new ArrayList<>();
++
++        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
++            String line;
++            while ((line = br.readLine()) != null) {
++                parseJobLine(line, jobs);
++            }
++        } catch (IOException e) {
++            e.printStackTrace();
++        }
++        return jobs;
++
++        }
++
++
++        /*
++        //sadece T4'ün station'da olmadığını söylüyor T21'i de görmesi lazım
++        String line2;
++        HashMap<String, Integer> tasksOfJob = new HashMap<>();
++        int startLineNumber = 0;
++        int endLineNumber = 0;
++
++        try {
++            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
++            while ((line2 = bufferedReader.readLine()) != null) {
++                String[] words = line2.split("\\s+"); // Corrected the split pattern
++                for (int i = 0; i < words.length; i++) {
++                    if (words[i].equals("(JOBTYPES")) {
++                        startLineNumber = i;
++                    }
++                }
++                for (int j = 0; j < words.length; j++) {
++                    if (words[j].equals("(STATIONS")) {
++                        endLineNumber = j;
++                    }
++                }
++                for (int k = startLineNumber; k < endLineNumber; k++) {
++                    if (words[k].startsWith("T")) {
++                        tasksOfJob.put(words[k], tasksOfJob.getOrDefault(words[k], 0) + 1);
++                    }
++                }
++                HashMap<String, Integer> tasksOfStation = new HashMap<>();
++                for (int a = endLineNumber; a < words.length; a++) {
++                    if (words[a].startsWith("T")) {
++                        tasksOfStation.put(words[a], tasksOfStation.getOrDefault(words[a], 0) + 1);
++                    }
++                }
++                for (Map.Entry<String, Integer> entry : tasksOfStation.entrySet()) {
++                    String task = entry.getKey();
++                    int countInStation = entry.getValue();
++                    int countInJob = tasksOfJob.getOrDefault(task, 0);
++                    if (countInJob != countInStation) {
++                        throw new Exception("Task " + task + " is not executed at any station");
++                    }
++                }
+             }
+ 
+-        }catch(Exception e){
++        } catch (Exception e) {
+             System.out.println(e);
+         }
+ 
++         */
++
++    // Method to parse each line and add to jobs list
++    private static void parseJobLine(String line, List<Job> jobs) {
++        // Remove parentheses and split by spaces
++        line = line.replaceAll("[()]", "").trim();
++        String[] parts = line.split("\\s+");
++
++        if (parts.length > 0) {
++            String jobName = parts[0];
++            ArrayList<JobDetail> details = new ArrayList<>();
++            for (int i = 1; i < parts.length; i += 2) {
++                String type = parts[i];
++                int value = (i + 1 < parts.length && isNumeric(parts[i + 1])) ? Integer.parseInt(parts[i + 1]) : 0;
++                details.add(new JobDetail(type, value));
++            }
++            jobs.add(new Job(jobName, details));
++        }
+     }
++
++    // Method to check if a string is numeric
++    private static boolean isNumeric(String str) {
++        try {
++            Integer.parseInt(str);
++            return true;
++        } catch (NumberFormatException e) {
++            return false;
++        }
++    }
++
+     public static void parseWorkflowFile(String inputfile) throws IOException {
+         try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
+             String line;
+@@ -179,4 +324,94 @@
+         }
+         return input;
+     }
+-}
+\ No newline at end of file
++}
++
++/* public static String TaskReading(String WrongFile) throws IOException {
++
++
++    public static String TaskReading(String WrongFile) throws IOException {
++        StringBuilder stringBuilder = new StringBuilder();
++        try (BufferedReader reader = new BufferedReader(new FileReader(WrongFile))) {
++            String line;
++            while ((line = reader.readLine()) != null) {
++                stringBuilder.append(line);
++            }
++        }
++        return stringBuilder.toString();
++    }
++
++    public static String Rename(String input) {
++        if (Character.isDigit(input.charAt(0))) {
++            throw new IllegalArgumentException("Task statement can not start with a number !.");
++        }
++        return input;
++    }
++
++
++
++    public static void parseWorkflowFile(String inputfile) throws IOException {
++        try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
++            String line;
++            int lineNumber = 0;
++            Set<String> uniqueIds = new HashSet<>();
++
++            while ((line = reader.readLine()) != null) {
++                lineNumber++;
++                line = line.trim();
++                if (line.isEmpty() || line.startsWith("#")) {
++                    continue;
++                }
++
++                String[] parts = line.split("\s+");
++                if (parts.length < 3) {
++                    System.out.printf("Syntax error on line %d: Each line must have at least 3 parts.%n", lineNumber);
++                    continue;
++                }
++                String taskType = parts[0];
++                String jobId = parts[1];
++                String stationInfo = parts[2];
++
++                if (Character.isDigit(taskType.charAt(0))) {
++                    System.out.printf("Syntax error on line %d: Task type '%s' cannot start with a number.%n", lineNumber, taskType);
++
++                    continue;
++                }
++                if (!jobId.matches("\\d+")) {
++                    System.out.printf("Syntax error on line %d: Job ID '%s' must be a numeric value.%n", lineNumber, jobId);
++                    continue;
++                }
++
++                if (!uniqueIds.add(jobId)) {
++                    System.out.printf("Semantic error on line %d: Job ID '%s' must be unique.%n", lineNumber, jobId);
++                    continue;
++                }
++
++                String[] stationParts = stationInfo.split(",");
++                if (stationParts.length != 2 || !stationParts[0].matches("\\d+") || !stationParts[1].matches("\\d+")) {
++                    System.out.printf("Syntax error on line %d: Invalid station information '%s'.%n", lineNumber, stationInfo);
++                    continue;
++                }
++                int stationNumber = Integer.parseInt(stationParts[0]);
++                int stationRange = Integer.parseInt(stationParts[1]);
++                if (stationNumber < 1 || stationRange < 1 || stationRange > 100) {
++                    System.out.printf("Semantic error on line %d: Station range '%d' must be between 1 and 100.%n", lineNumber, stationRange);
++                    continue;
++                }
++
++
++                Task task = new Task(taskType ,2);
++                System.out.printf("Successfully parsed line %d: Task Type: %s, Job ID: %s, Station Info: %s%n", lineNumber, taskType, jobId, stationInfo);
++            }
++        }
++    }
++
++
++}
++
++ */
++
++
++
++    
++
++
+Index: src/Job.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\r\n\r\npublic class Job {\r\n\r\n    private JobType jobType; //must start with a letter\r\n    private String jobID;\r\n    private int startTime;\r\n    private int duration;//must start with a letter\r\n    String name;\r\n    private int jobDuration;\r\n    private ArrayList<Task> taskArrayList = new ArrayList<>();\r\n    ArrayList<JobDetail> details;\r\n\r\n    public Job(JobType jobType, String jobID, int jobDuration,int startTime, int duration){\r\n        this.jobType=jobType;\r\n        this.jobID=jobID;\r\n        this.jobDuration=jobDuration;\r\n        this.startTime=startTime;\r\n        this.duration=duration;\r\n    }\r\n    public Job(String name, ArrayList<JobDetail> details) {\r\n        this.name = name;\r\n        this.details = details;\r\n    }\r\n    public int getStartTime() {\r\n        return startTime;\r\n    }\r\n\r\n    public void setStartTime(int startTime) {\r\n        this.startTime = startTime;\r\n    }\r\n\r\n    public int getDuration() {\r\n        return duration;\r\n    }\r\n\r\n    public void setDuration(int duration) {\r\n        this.duration = duration;\r\n    }\r\n\r\n    public void setJobType(JobType jobType){this.jobType=jobType;}\r\n    public void setJobID(String jobID){this.jobID=jobID;}\r\n    public void setJobDuration(int jobDuration){this.jobDuration=jobDuration;}\r\n\r\n    public ArrayList<Task> getTaskArrayList() {\r\n        return taskArrayList;\r\n    }\r\n\r\n    public void setTaskArrayList(ArrayList<Task> taskArrayList) {\r\n        this.taskArrayList = taskArrayList;\r\n    }\r\n\r\n    public JobType getJobType(){return jobType;}\r\n    public String getJobID(){return jobID;}\r\n    public int getJobDuration(){return jobDuration;}\r\n\r\n    public int deadline() {\r\n        return startTime + duration;\r\n    }\r\n    //  @Override\r\n   /* public String toString() {\r\n        return \"JobID: \" + jobID + \", JobType: \" + jobType + \", StartTime: \" + startTime + \", Duration: \" + duration + \", Deadline: \" + deadline();\r\n    }*/\r\n    @Override\r\n    public String toString() {\r\n        return \"{\" +\r\n                \"name='\" + name + '\\'' +\r\n                \", details=\" + details +\r\n                '}';\r\n    }\r\n\r\n}\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Job.java b/src/Job.java
+--- a/src/Job.java	(revision 97c022099ba7b441265cce2b98844f9e048c02fd)
++++ b/src/Job.java	(date 1716030593664)
+@@ -11,12 +11,12 @@
+     private ArrayList<Task> taskArrayList = new ArrayList<>();
+     ArrayList<JobDetail> details;
+ 
+-    public Job(JobType jobType, String jobID, int jobDuration,int startTime, int duration){
++    public Job(JobType jobType, String jobID, int jobDuration,int starTime, int duration){
+         this.jobType=jobType;
+         this.jobID=jobID;
+         this.jobDuration=jobDuration;
+-        this.startTime=startTime;
+-        this.duration=duration;
++       this.startTime=starTime;
++       this.duration=duration;
+     }
+     public Job(String name, ArrayList<JobDetail> details) {
+         this.name = name;
+@@ -57,13 +57,13 @@
+     public int deadline() {
+         return startTime + duration;
+     }
+-    //  @Override
++  //  @Override
+    /* public String toString() {
+         return "JobID: " + jobID + ", JobType: " + jobType + ", StartTime: " + startTime + ", Duration: " + duration + ", Deadline: " + deadline();
+     }*/
+-    @Override
++@Override
+     public String toString() {
+-        return "{" +
++        return "Job{" +
+                 "name='" + name + '\'' +
+                 ", details=" + details +
+                 '}';
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"easy to read\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Job.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Job.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;EmirayDurmaz&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/Yaseminkocar/se116project.git&quot;,\r\n    &quot;accountId&quot;: &quot;f876dfee-e282-4bb3-ac51-b7a06d3e1894&quot;\r\n  }\r\n}</component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;customColor&quot;: &quot;&quot;,\r\n  &quot;associatedIndex&quot;: 4\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2flxulGE1TD1wiPGhb4j94xWvUK\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <OptionsSetting value=\"false\" id=\"Update\" />\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"flattenPackages\" value=\"true\" />\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n    <option name=\"showMembers\" value=\"true\" />\r\n    <option name=\"showVisibilityIcons\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.Main.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\" selected=\"Application.Main\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\r\n      <module name=\"asdfgh\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"WorkFlowParser\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"WorkFlowParser\" />\r\n      <module name=\"asdfgh\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Main\" />\r\n        <item itemvalue=\"Application.WorkFlowParser\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240\" />\r\n        <option value=\"bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"\" />\r\n      <created>1714389694199</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1714389694199</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"commit\">\r\n      <created>1714390906500</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714390906500</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"meltemin commiti\">\r\n      <created>1714461371483</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714461371483</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"meltemin commiti 2\">\r\n      <created>1714461447617</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714461447617</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Classes\">\r\n      <created>1714565742088</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714565742088</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"some bugs fixed\">\r\n      <created>1715370784472</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715370784472</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"changes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1715885718441</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715885718441</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"changes\">\r\n      <created>1715937727609</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715937727609</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"senkronize\">\r\n      <created>1715941589521</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715941589521</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"commit repeat 2\">\r\n      <created>1715953732287</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715953732287</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"Exception addition\">\r\n      <created>1715953869614</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715953869614</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"commit\">\r\n      <created>1715963243663</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715963243663</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"hash and arraylist tries\">\r\n      <created>1715965005880</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715965005880</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"changes\">\r\n      <created>1716029189997</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1716029189998</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"easy to read\">\r\n      <created>1716029847342</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1716029847342</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"15\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"meltemin commiti\" />\r\n    <MESSAGE value=\"meltemin commiti 2\" />\r\n    <MESSAGE value=\"Classes\" />\r\n    <MESSAGE value=\"some bugs fixed\" />\r\n    <MESSAGE value=\"senkronize\" />\r\n    <MESSAGE value=\"commit repeat 2\" />\r\n    <MESSAGE value=\"Exception addition\" />\r\n    <MESSAGE value=\"commit\" />\r\n    <MESSAGE value=\"hash and arraylist tries\" />\r\n    <MESSAGE value=\"changes\" />\r\n    <MESSAGE value=\"easy to read\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"easy to read\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 97c022099ba7b441265cce2b98844f9e048c02fd)
++++ b/.idea/workspace.xml	(date 1716030895173)
+@@ -4,9 +4,16 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="easy to read">
++    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="changes">
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_14_24__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_14_24__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_14_48__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_14_48__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_15_05__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_15_05__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_16_51__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_16_51__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_23_46__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_23_46__Changes_.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Job.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -196,14 +203,7 @@
+       <option name="project" value="LOCAL" />
+       <updated>1716029189998</updated>
+     </task>
+-    <task id="LOCAL-00014" summary="easy to read">
+-      <created>1716029847342</created>
+-      <option name="number" value="00014" />
+-      <option name="presentableId" value="LOCAL-00014" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1716029847342</updated>
+-    </task>
+-    <option name="localTasksCounter" value="15" />
++    <option name="localTasksCounter" value="14" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -231,7 +231,6 @@
+     <MESSAGE value="commit" />
+     <MESSAGE value="hash and arraylist tries" />
+     <MESSAGE value="changes" />
+-    <MESSAGE value="easy to read" />
+-    <option name="LAST_COMMIT_MESSAGE" value="easy to read" />
++    <option name="LAST_COMMIT_MESSAGE" value="changes" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_X\" default=\"true\" project-jdk-name=\"20\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 97c022099ba7b441265cce2b98844f9e048c02fd)
++++ b/.idea/misc.xml	(date 1716030620852)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
