@@ -9,9 +9,9 @@ public class JobDetail {
         this.value = value;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "{" + type + ": " + value + "}";
-    }
+    }*/
 
 }

@@ -57,17 +57,17 @@ public class Job {
     public int deadline() {
         return startTime + duration;
     }
-  //  @Override
-   /* public String toString() {
+    @Override
+    public String toString() {
         return "JobID: " + jobID + ", JobType: " + jobType + ", StartTime: " + startTime + ", Duration: " + duration + ", Deadline: " + deadline();
-    }*/
-@Override
+    }
+/*@Override
     public String toString() {
         return "Job{" +
                 "name='" + name + '\'' +
                 ", details=" + details +
                 '}';
-    }
+    }*/
 
 }
 
