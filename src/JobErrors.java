@@ -19,13 +19,11 @@ public class JobErrors {
                 lineNumber++;
                 continue;
             }
-
             String jobID = parts[0];
             String jobTypeID = parts[1];
             int startTime;
             int duration;
 
-            // Check if jobTypeID is valid
             if (!jobTypeID.matches("[A-Za-z]\\d+")) {
                 System.out.println("Semantic error at line " + lineNumber + ": jobTypeID must start with a letter followed by a number.");
                 lineNumber++;
@@ -51,18 +49,14 @@ public class JobErrors {
                 lineNumber++;
                 continue;
             }
-
             if (jobIDs.contains(jobID)) {
                 System.out.println("Semantic error at line " + lineNumber + ": Duplicate jobID " + jobID);
                 lineNumber++;
                 continue;
             }
-
             jobIDs.add(jobID);
-            //   jobs.add(new Job(jobID, jobTypeID, startTime, duration)); // Correct number of arguments
             lineNumber++;
         }
-
         reader.close();
         return jobs;
 }
