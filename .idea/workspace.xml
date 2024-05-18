@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="changes">
-      <change afterPath="$PROJECT_DIR$/src/JobDetail.java" afterDir="false" />
+    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="hash and arraylist tries">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_16_49_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_16_49__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Job.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -163,7 +163,35 @@
       <option name="project" value="LOCAL" />
       <updated>1715941589521</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="commit repeat 2">
+      <created>1715953732287</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1715953732287</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Exception addition">
+      <created>1715953869614</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1715953869614</updated>
+    </task>
+    <task id="LOCAL-00011" summary="commit">
+      <created>1715963243663</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1715963243663</updated>
+    </task>
+    <task id="LOCAL-00012" summary="hash and arraylist tries">
+      <created>1715965005880</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1715965005880</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,13 +209,16 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="commit" />
     <MESSAGE value="meltemin commiti" />
     <MESSAGE value="meltemin commiti 2" />
     <MESSAGE value="Classes" />
     <MESSAGE value="some bugs fixed" />
     <MESSAGE value="changes" />
     <MESSAGE value="senkronize" />
-    <option name="LAST_COMMIT_MESSAGE" value="senkronize" />
+    <MESSAGE value="commit repeat 2" />
+    <MESSAGE value="Exception addition" />
+    <MESSAGE value="commit" />
+    <MESSAGE value="hash and arraylist tries" />
+    <option name="LAST_COMMIT_MESSAGE" value="hash and arraylist tries" />
   </component>
 </project>
