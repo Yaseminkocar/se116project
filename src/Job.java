@@ -1,21 +1,42 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Job {
 
-    private JobType jobType; //must start with a letter
+    private String jobTypeID; //must start with a letter
     private String jobID;
     private int startTime;
-    private int duration;//must start with a letter
+    private int duration;
+    private String state;
 
-    private int jobDuration;
     private ArrayList<Task> taskArrayList = new ArrayList<>();
 
-    public Job(JobType jobType, String jobID, int jobDuration,int starTime, int duration){
-        this.jobType=jobType;
+    public Job(String jobTypeID, String jobID,int starTime, int duration, String state){
+        this.jobTypeID=jobTypeID;
         this.jobID=jobID;
-        this.jobDuration=jobDuration;
        this.startTime=starTime;
        this.duration=duration;
+       this.state="waiting";
+    }
+
+
+    public String getJobTypeID() {
+        return jobTypeID;
+    }
+
+    public void setJobTypeID(String jobTypeID) {
+        this.jobTypeID = jobTypeID;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public int getStartTime() {
@@ -34,9 +55,8 @@ public class Job {
         this.duration = duration;
     }
 
-    public void setJobType(JobType jobType){this.jobType=jobType;}
+    public void setJobType(JobType jobType){this.jobTypeID=jobTypeID;}
     public void setJobID(String jobID){this.jobID=jobID;}
-    public void setJobDuration(int jobDuration){this.jobDuration=jobDuration;}
 
     public ArrayList<Task> getTaskArrayList() {
         return taskArrayList;
@@ -46,17 +66,21 @@ public class Job {
         this.taskArrayList = taskArrayList;
     }
 
-    public JobType getJobType(){return jobType;}
+    public String  getJobType(){return jobTypeID;}
     public String getJobID(){return jobID;}
-    public int getJobDuration(){return jobDuration;}
 
     public int deadline() {
         return startTime + duration;
     }
+
+
+
     @Override
     public String toString() {
-        return "JobID: " + jobID + ", JobType: " + jobType + ", StartTime: " + startTime + ", Duration: " + duration + ", Deadline: " + deadline();
+        return "JobID: " + jobID + ", JobType: " + jobTypeID + ", StartTime: " + startTime + ", Duration: " + duration + ", Deadline: " + deadline();
     }
+
+
 }
 
 

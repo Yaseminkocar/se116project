@@ -5,11 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="commit1.2">
-      <change afterPath="$PROJECT_DIR$/src/Deneme.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/d.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/d1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jobfile.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/JobErrors.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/JobTracker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/d2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_16_49_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_16_49__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_44_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_44__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_59_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_59__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_15_07__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_15_07__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_15_08__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_15_08__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_16_47__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_16_47__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Deneme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Deneme.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Job.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/d.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/d1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/d1.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,8 +74,16 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.DDeneme.executor": "Run",
     "Application.Deneme.executor": "Run",
+    "Application.JobTracker.executor": "Run",
+    "Application.JobTracker1.executor": "Run",
     "Application.Main.executor": "Run",
+    "Application.d.executor": "Run",
+    "Application.d1.executor": "Run",
+    "Application.d2.executor": "Run",
+    "Application.d3.executor": "Run",
+    "Application.d4.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
@@ -69,7 +92,14 @@
     "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.d">
+  <component name="RunManager" selected="Application.Deneme">
+    <configuration name="DDeneme" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DDeneme" />
+      <module name="asdfgh" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Deneme" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Deneme" />
       <module name="asdfgh" />
@@ -84,15 +114,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WorkFlowParser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="WorkFlowParser" />
+    <configuration name="d1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="d1" />
       <module name="asdfgh" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="d" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="d" />
+    <configuration name="d2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="d2" />
       <module name="asdfgh" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -100,10 +130,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.d" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Deneme" />
-        <item itemvalue="Application.WorkFlowParser" />
+        <item itemvalue="Application.d2" />
+        <item itemvalue="Application.d1" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.DDeneme" />
       </list>
     </recent_temporary>
   </component>
@@ -189,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715947480245</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="commit1.2">
+      <option name="closed" value="true" />
+      <created>1715954164980</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1715954164980</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

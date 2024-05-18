@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
 
@@ -105,6 +106,21 @@ public class Main {
 
         }catch(Exception e){
             System.out.println(e);
+        }
+        System.out.println();
+        try {
+            JobErrors parser = new JobErrors();
+            List<Job> jobs = parser.parseJobFile("jobfile.txt");
+          //  JobTracker tracker = new JobTracker(jobs);
+
+        /*    for (int time = 0; time <= 50; time += 1) {
+                System.out.println("Tracking jobs at time: " + time);
+                tracker.trackJobStates(time);
+                System.out.println();
+            } */
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
