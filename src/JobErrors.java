@@ -20,24 +20,15 @@ public class JobErrors {
                 lineNumber++;
                 continue;
             }
-
             String jobID = parts[0];
             String jobTypeID = parts[1];
             int startTime;
             int duration;
 
             if (!jobTypeID.matches("[A-Za-z]\\d+")) {
-                System.out.println("Semantic error at line " + lineNumber + ": jobTypeID must start with a letter followed by a number.");
+                System.out.println("error at line " + lineNumber + ": jobTypeID must start with a letter followed by a number.");
                 lineNumber++;
                 continue;
-            }
-
-            try {
-                if (jobIDs.contains(jobID)) {
-                    throw new IllegalArgumentException("Duplicate jobID " + jobID);
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println("Semantic error at line " + lineNumber + ": Duplicate jobID " + jobID);
             }
 
             try {
@@ -45,26 +36,34 @@ public class JobErrors {
                 duration = Integer.parseInt(parts[3]);
 
                 if (startTime < 0) {
-                    System.out.println("Semantic error at line " + lineNumber + ": startTime must be non-negative.");
+                    System.out.println("error at line " + lineNumber + ": start time has to be greater than 0 .");
                     lineNumber++;
                     continue;
                 }
                 if (duration <= 0) {
-                    System.out.println("Semantic error at line " + lineNumber + ": duration must be greater than zero.");
+                    System.out.println("error at line " + lineNumber + ": duration has to be greater than 0 .");
                     lineNumber++;
                     continue;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Semantic error at line " + lineNumber + ": Non-numeric value in startTime or duration.");
+                System.out.println(" error at line " + lineNumber + ": start time or duration has to be numeric value .");
+                lineNumber++;
+                continue;
+            }
+            try {
+                if (jobIDs.contains(jobID)) {
+                    throw new IllegalArgumentException("Duplicate jobID " + jobID);
+                } else {
+                    jobIDs.add(jobID);
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println(" error at line " + lineNumber + ": " + e.getMessage());
                 lineNumber++;
                 continue;
             }
 
         }
-
         reader.close();
         return jobs;
-    }
+ }
 }
-
-

@@ -117,6 +117,7 @@ public class Main {
                 System.out.println();
             } */
 
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -177,7 +178,6 @@ public class Main {
             }
         }
     }
-
     public static String TaskReading(String inputfile) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
