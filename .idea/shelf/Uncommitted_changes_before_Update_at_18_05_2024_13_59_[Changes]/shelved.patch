@@ -1,0 +1,931 @@
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_59__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_59__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_59__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_59__Changes_.xml	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
++++ /dev/null	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_10_05_2024_22_59_[Changes]" date="1715371166345" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_59_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 10.05.2024 22:59 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_44__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_44__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_44__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_44__Changes_.xml	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
++++ /dev/null	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_10_05_2024_22_44_[Changes]" date="1715370248458" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_44_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 10.05.2024 22:44 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_59_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_59_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_59_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_59_[Changes]/shelved.patch	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
++++ /dev/null	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
+@@ -1,125 +0,0 @@
+-Index: src/Task.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>public class Task {\n\n    private String taskType; //must start with a letter\n    private double taskSize;\n\n\n    public void setTaskType(String taskType){this.taskType= taskType;}\n    public void setTaskSize(double taskSize){this.taskSize=taskSize;}\n\n    public String getTaskType(){return taskType;}\n    public double getTaskSize(){return taskSize;}\n\n    public Task(String taskType, double taskSize){\n        this.taskType= taskType;\n        this.taskSize=taskSize;\n    }\n\n    public Task(){}\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/src/Task.java b/src/Task.java
+---- a/src/Task.java	(revision 82f930f2f0e38c5398a42b6bc232ab2118d1499a)
+-+++ b/src/Task.java	(date 1715329591815)
+-@@ -15,5 +15,9 @@
+-         this.taskSize=taskSize;
+-     }
+- 
+-+
+-+
+-+
+-+
+-     public Task(){}
+- }
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"commit\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Station.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Station.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/TaskType.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/TaskType.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2flxulGE1TD1wiPGhb4j94xWvUK\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"flattenPackages\" value=\"true\" />\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n    <option name=\"showMembers\" value=\"true\" />\n    <option name=\"showVisibilityIcons\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"\" />\n      <created>1714389694199</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1714389694199</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"commit\">\n      <created>1714390906500</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1714390906500</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"meltemin commiti\">\n      <created>1714461371483</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1714461371483</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"meltemin commiti 2\">\n      <created>1714461447617</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1714461447617</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Classes\">\n      <created>1714565742088</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1714565742088</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"5\" />\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"commit\" />\n    <MESSAGE value=\"meltemin commiti\" />\n    <MESSAGE value=\"meltemin commiti 2\" />\n    <MESSAGE value=\"Classes\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Classes\" />\n  </component>\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision 82f930f2f0e38c5398a42b6bc232ab2118d1499a)
+-+++ b/.idea/workspace.xml	(date 1715329593231)
+-@@ -4,10 +4,10 @@
+-     <option name="autoReloadType" value="SELECTIVE" />
+-   </component>
+-   <component name="ChangeListManager">
+--    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="commit">
+-+    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="some changes">
+-       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/src/Station.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Station.java" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/src/TaskType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TaskType.java" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/src/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Task.java" afterDir="false" />
+-     </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-@@ -18,6 +18,7 @@
+-     <option name="RECENT_TEMPLATES">
+-       <list>
+-         <option value="Class" />
+-+        <option value="HTML File" />
+-       </list>
+-     </option>
+-   </component>
+-@@ -38,12 +39,14 @@
+-     <option name="showMembers" value="true" />
+-     <option name="showVisibilityIcons" value="true" />
+-   </component>
+--  <component name="PropertiesComponent">{
+--  &quot;keyToString&quot;: {
+--    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+--    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+-+  <component name="PropertiesComponent"><![CDATA[{
+-+  "keyToString": {
+-+    "DefaultHtmlFileTemplate": "HTML File",
+-+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-+    "RunOnceActivity.ShowReadmeOnStart": "true",
+-+    "settings.editor.selected.configurable": "preferences.pluginManager"
+-   }
+--}</component>
+-+}]]></component>
+-   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+-   <component name="TaskManager">
+-     <task active="true" id="Default" summary="Default task">
+-@@ -81,7 +84,21 @@
+-       <option name="project" value="LOCAL" />
+-       <updated>1714565742088</updated>
+-     </task>
+--    <option name="localTasksCounter" value="5" />
+-+    <task id="LOCAL-00005" summary="new classes">
+-+      <created>1714899975534</created>
+-+      <option name="number" value="00005" />
+-+      <option name="presentableId" value="LOCAL-00005" />
+-+      <option name="project" value="LOCAL" />
+-+      <updated>1714899975534</updated>
+-+    </task>
+-+    <task id="LOCAL-00006" summary="some changes">
+-+      <created>1714901491841</created>
+-+      <option name="number" value="00006" />
+-+      <option name="presentableId" value="LOCAL-00006" />
+-+      <option name="project" value="LOCAL" />
+-+      <updated>1714901491842</updated>
+-+    </task>
+-+    <option name="localTasksCounter" value="7" />
+-     <servers />
+-   </component>
+-   <component name="Vcs.Log.Tabs.Properties">
+-@@ -100,6 +117,8 @@
+-     <MESSAGE value="meltemin commiti" />
+-     <MESSAGE value="meltemin commiti 2" />
+-     <MESSAGE value="Classes" />
+--    <option name="LAST_COMMIT_MESSAGE" value="Classes" />
+-+    <MESSAGE value="new classes" />
+-+    <MESSAGE value="some changes" />
+-+    <option name="LAST_COMMIT_MESSAGE" value="some changes" />
+-   </component>
+- </project>
+-\ No newline at end of file
+-Index: .idea/misc.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_19\" default=\"true\" project-jdk-name=\"20\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/misc.xml b/.idea/misc.xml
+---- a/.idea/misc.xml	(revision 82f930f2f0e38c5398a42b6bc232ab2118d1499a)
+-+++ b/.idea/misc.xml	(date 1715104215498)
+-@@ -1,6 +1,6 @@
+- <?xml version="1.0" encoding="UTF-8"?>
+- <project version="4">
+--  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
+-+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
+-     <output url="file://$PROJECT_DIR$/out" />
+-   </component>
+- </project>
+-\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_16_49__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_16_49__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_16_49__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_16_49__Changes_.xml	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
++++ /dev/null	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_10_05_2024_16_49_[Changes]" date="1715348948038" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_16_49_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 10.05.2024 16:49 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_16_49_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_16_49_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_16_49_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_16_49_[Changes]/shelved.patch	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
++++ /dev/null	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
+@@ -1,133 +0,0 @@
+-Index: src/Job.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>import java.util.ArrayList;\r\n\r\npublic class Job {\r\n\r\n    private String jobType; //must start with a letter\r\n    private String jobID; //must start with a letter\r\n    private int jobDuration;\r\n    private ArrayList<Task> taskArrayList = new ArrayList<>();\r\n\r\n    public void setJobType(String jobType){this.jobType=jobType;}\r\n    public void setJobID(String jobID){this.jobID=jobID;}\r\n    public void setJobDuration(int jobDuration){this.jobDuration=jobDuration;}\r\n\r\n    public Job(String jobType, String jobID, int jobDuration){\r\n        this.jobType=jobType;\r\n        this.jobID=jobID;\r\n        this.jobDuration=jobDuration;\r\n    }\r\n\r\n    public String getJobType(){return jobType;}\r\n    public String getJobID(){return jobID;}\r\n    public int getJobDuration(){return jobDuration;}\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/src/Job.java b/src/Job.java
+---- a/src/Job.java	(revision 94271358a0515015bbfed734fdd87ab720772a06)
+-+++ b/src/Job.java	(date 1715348940688)
+-@@ -21,3 +21,5 @@
+-     public String getJobID(){return jobID;}
+-     public int getJobDuration(){return jobDuration;}
+- }
+-+
+-+
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"commit\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Station.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Station.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2flxulGE1TD1wiPGhb4j94xWvUK\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"flattenPackages\" value=\"true\" />\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n    <option name=\"showMembers\" value=\"true\" />\r\n    <option name=\"showVisibilityIcons\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"\" />\r\n      <created>1714389694199</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1714389694199</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"commit\">\r\n      <created>1714390906500</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714390906500</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"meltemin commiti\">\r\n      <created>1714461371483</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714461371483</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"meltemin commiti 2\">\r\n      <created>1714461447617</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714461447617</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Classes\">\r\n      <created>1714565742088</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714565742088</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"5\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"commit\" />\r\n    <MESSAGE value=\"meltemin commiti\" />\r\n    <MESSAGE value=\"meltemin commiti 2\" />\r\n    <MESSAGE value=\"Classes\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Classes\" />\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision 94271358a0515015bbfed734fdd87ab720772a06)
+-+++ b/.idea/workspace.xml	(date 1715348896573)
+-@@ -4,9 +4,8 @@
+-     <option name="autoReloadType" value="SELECTIVE" />
+-   </component>
+-   <component name="ChangeListManager">
+--    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="commit">
+--      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/src/Station.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Station.java" afterDir="false" />
+-+    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="constructors are done">
+-+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-     </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-@@ -23,9 +22,25 @@
+-   <component name="Git.Settings">
+-     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+-   </component>
+-+  <component name="GitHubPullRequestSearchHistory">{
+-+  &quot;lastFilter&quot;: {
+-+    &quot;state&quot;: &quot;OPEN&quot;,
+-+    &quot;assignee&quot;: &quot;EmirayDurmaz&quot;
+-+  }
+-+}</component>
+-+  <component name="GithubPullRequestsUISettings">{
+-+  &quot;selectedUrlAndAccountId&quot;: {
+-+    &quot;url&quot;: &quot;https://github.com/Yaseminkocar/se116project.git&quot;,
+-+    &quot;accountId&quot;: &quot;f876dfee-e282-4bb3-ac51-b7a06d3e1894&quot;
+-+  }
+-+}</component>
+-   <component name="MarkdownSettingsMigration">
+-     <option name="stateVersion" value="1" />
+-   </component>
+-+  <component name="ProjectColorInfo">{
+-+  &quot;customColor&quot;: &quot;&quot;,
+-+  &quot;associatedIndex&quot;: 4
+-+}</component>
+-   <component name="ProjectId" id="2flxulGE1TD1wiPGhb4j94xWvUK" />
+-   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+-     <ConfirmationsSetting value="2" id="Add" />
+-@@ -40,9 +55,25 @@
+-   <component name="PropertiesComponent">{
+-   &quot;keyToString&quot;: {
+-     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+--    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+-+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+-+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+-   }
+- }</component>
+-+  <component name="SharedIndexes">
+-+    <attachedChunks>
+-+      <set>
+-+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+-+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+-+      </set>
+-+    </attachedChunks>
+-+  </component>
+-   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+-   <component name="TaskManager">
+-     <task active="true" id="Default" summary="Default task">
+-@@ -51,6 +82,9 @@
+-       <option name="number" value="Default" />
+-       <option name="presentableId" value="Default" />
+-       <updated>1714389694199</updated>
+-+      <workItem from="1714814241389" duration="2821000" />
+-+      <workItem from="1715348335093" duration="13000" />
+-+      <workItem from="1715348353512" duration="539000" />
+-     </task>
+-     <task id="LOCAL-00001" summary="commit">
+-       <created>1714390906500</created>
+-@@ -80,9 +114,20 @@
+-       <option name="project" value="LOCAL" />
+-       <updated>1714565742088</updated>
+-     </task>
+--    <option name="localTasksCounter" value="5" />
+-+    <task id="LOCAL-00005" summary="constructors are done">
+-+      <option name="closed" value="true" />
+-+      <created>1714814575474</created>
+-+      <option name="number" value="00005" />
+-+      <option name="presentableId" value="LOCAL-00005" />
+-+      <option name="project" value="LOCAL" />
+-+      <updated>1714814575474</updated>
+-+    </task>
+-+    <option name="localTasksCounter" value="6" />
+-     <servers />
+-   </component>
+-+  <component name="TypeScriptGeneratedFilesManager">
+-+    <option name="version" value="3" />
+-+  </component>
+-   <component name="Vcs.Log.Tabs.Properties">
+-     <option name="TAB_STATES">
+-       <map>
+-@@ -99,6 +144,7 @@
+-     <MESSAGE value="meltemin commiti" />
+-     <MESSAGE value="meltemin commiti 2" />
+-     <MESSAGE value="Classes" />
+--    <option name="LAST_COMMIT_MESSAGE" value="Classes" />
+-+    <MESSAGE value="constructors are done" />
+-+    <option name="LAST_COMMIT_MESSAGE" value="constructors are done" />
+-   </component>
+- </project>
+-\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_44_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_44_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_44_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_44_[Changes]/shelved.patch	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
++++ /dev/null	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
+@@ -1,49 +0,0 @@
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"changes\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/JobType.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Job.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Job.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2flxulGE1TD1wiPGhb4j94xWvUK\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"flattenPackages\" value=\"true\" />\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n    <option name=\"showMembers\" value=\"true\" />\r\n    <option name=\"showVisibilityIcons\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"\" />\r\n      <created>1714389694199</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1714389694199</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"commit\">\r\n      <created>1714390906500</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714390906500</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"meltemin commiti\">\r\n      <created>1714461371483</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714461371483</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"meltemin commiti 2\">\r\n      <created>1714461447617</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714461447617</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Classes\">\r\n      <created>1714565742088</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714565742088</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"5\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"commit\" />\r\n    <MESSAGE value=\"meltemin commiti\" />\r\n    <MESSAGE value=\"meltemin commiti 2\" />\r\n    <MESSAGE value=\"Classes\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Classes\" />\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision a513a047c14645c533d397e0c353f3411a87d6e9)
+-+++ b/.idea/workspace.xml	(date 1714857657032)
+-@@ -4,11 +4,8 @@
+-     <option name="autoReloadType" value="SELECTIVE" />
+-   </component>
+-   <component name="ChangeListManager">
+--    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="changes">
+--      <change afterPath="$PROJECT_DIR$/src/JobType.java" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-+    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="additional class">
+-       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/src/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Job.java" afterDir="false" />
+-     </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-@@ -82,7 +79,14 @@
+-       <option name="project" value="LOCAL" />
+-       <updated>1714565742088</updated>
+-     </task>
+--    <option name="localTasksCounter" value="5" />
+-+    <task id="LOCAL-00005" summary="additional class">
+-+      <created>1714857407026</created>
+-+      <option name="number" value="00005" />
+-+      <option name="presentableId" value="LOCAL-00005" />
+-+      <option name="project" value="LOCAL" />
+-+      <updated>1714857407026</updated>
+-+    </task>
+-+    <option name="localTasksCounter" value="6" />
+-     <servers />
+-   </component>
+-   <component name="Vcs.Log.Tabs.Properties">
+-@@ -101,6 +105,7 @@
+-     <MESSAGE value="meltemin commiti" />
+-     <MESSAGE value="meltemin commiti 2" />
+-     <MESSAGE value="Classes" />
+--    <option name="LAST_COMMIT_MESSAGE" value="Classes" />
+-+    <MESSAGE value="additional class" />
+-+    <option name="LAST_COMMIT_MESSAGE" value="additional class" />
+-   </component>
+- </project>
+-\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_16_47__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_16_47__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_16_47__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_16_47__Changes_.xml	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
++++ /dev/null	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_17_05_2024_16_47_[Changes]" date="1715953680951" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_16_47_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 17.05.2024 16:47 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.io.*;\r\nimport java.io.BufferedReader;\r\nimport java.io.FileReader;\r\nimport java.io.IOException;\r\nimport java.util.HashSet;\r\nimport java.util.Set;\r\nimport java.util.ArrayList;\r\n\r\npublic class Main {\r\n    public static void main(String[] args) {\r\n        String input = null;\r\n        try {\r\n            input = TaskReading(\"WrongFile.txt\");\r\n            String result = Rename(input);\r\n            System.out.println(\"Modified task statement: \" + result);\r\n        } catch (IOException e) {\r\n            System.out.println(\"Invalid tasktypeID \" + e.getMessage());\r\n        } catch (IllegalArgumentException e) {\r\n            System.out.println(\"Error: \" + e.getMessage());\r\n        }\r\n\r\n        String filePath = \"WrongFile.txt\";\r\n\r\n        try (BufferedReader bufferreader = new BufferedReader(new FileReader(filePath))) {\r\n            String line;\r\n            while ((line = bufferreader.readLine()) != null) {\r\n                String[] words = line.split(\"\\s+\");\r\n                for (String word : words) {\r\n                    System.out.println(word);\r\n                }\r\n            }\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n\r\n        String filePath2 = \"WrongFile.txt\";\r\n\r\n        try {\r\n            parseWorkflowFile(filePath);\r\n        } catch (IOException e) {\r\n            System.out.println(\"Error reading file: \" + e.getMessage());\r\n        } catch (IllegalArgumentException e) {\r\n            System.out.println(\"Error: \" + e.getMessage());\r\n        }\r\n        //parantez sayısı karşılaştırma\r\n        int sumopen = 0;\r\n        int sumclose = 0;\r\n        for (int i = 0; i < input.length(); i++) {\r\n\r\n            if (input.charAt(i) == '(') {\r\n                sumopen++;\r\n            } else if (input.charAt(i) == ')') {\r\n                sumclose++;\r\n            }\r\n\r\n        }\r\n        try {\r\n            if (sumopen < sumclose) {\r\n                throw new Exception(\"missing '('\");\r\n\r\n            } else if (sumclose < sumopen) {\r\n                throw new Exception(\"missing ')'\");\r\n            }\r\n        } catch (Exception e) {\r\n            System.out.println(e);\r\n        }\r\n        //tasklerin stationda var yok kontrolü\r\n        String line2;\r\n        ArrayList tasksofjob= new ArrayList();\r\n        int startlinenumber=0;\r\n        int endlinenumber=0;\r\n        try {\r\n            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));\r\n            while ((line2 = bufferedReader.readLine()) != null) {\r\n                String[] words = line2.split(\"\\s+\");\r\n                for(int i=0;i<words.length;i++){\r\n                    if(words[i].equals(\"(JOBTYPES\")){\r\n                        startlinenumber=i;\r\n                    }\r\n                }\r\n                for(int j=0;j<words.length;j++){\r\n                    if(words[j].equals(\"(STATIONS\")){\r\n                        endlinenumber=j;\r\n                    }\r\n                }\r\n                for(int k=startlinenumber;k<endlinenumber;k++){\r\n                    if(words[k].startsWith(\"T\"));\r\n                    tasksofjob.add(words[k]);\r\n                }\r\n                ArrayList taskofstation= new ArrayList();\r\n                for(int a=endlinenumber;a<words.length;a++){\r\n                    if(words[a].startsWith(\"T\"));\r\n                    taskofstation.add(words[a]);\r\n                }\r\n                int b=taskofstation.size();\r\n                int c=tasksofjob.size();\r\n                for(int i=0;i<b;i++){\r\n                    for(int j=0;j<c;j++){\r\n                        if(taskofstation.get(i)!=tasksofjob.get(j)){\r\n                            throw new Exception(\"task\"+i +\"is not executed at any station\");\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n\r\n        }catch(Exception e){\r\n            System.out.println(e);\r\n        }\r\n\r\n    }\r\n    public static void parseWorkflowFile(String inputfile) throws IOException {\r\n        try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {\r\n            String line;\r\n            int lineNumber = 0;\r\n            ArrayList<String> uniqueIds = new ArrayList<>();  // Using ArrayList instead of List\r\n\r\n            while ((line = reader.readLine()) != null) {\r\n                lineNumber++;\r\n                line = line.trim();\r\n                if (line.isEmpty()) {\r\n                    continue;\r\n                }\r\n\r\n                String[] parts = line.split(\"\\\\s+\");\r\n                if (parts.length < 3) {\r\n                    System.out.println(\"Syntax error on line \" + lineNumber + \": Each line must have at least 3 parts.\");\r\n                    continue;\r\n                }\r\n                String taskType = parts[0];\r\n                String jobId = parts[1];\r\n                String stationInfo = parts[2];\r\n\r\n                if (Character.isDigit(taskType.charAt(0))) {\r\n                    System.out.println(\"Syntax error on line \" + lineNumber + \": Task type '\" + taskType + \"' cannot start with a number.\");\r\n                    continue;\r\n                }\r\n                if (!jobId.matches(\"\\\\d+\")) {\r\n                    System.out.println(\"Syntax error on line \" + lineNumber + \": Job ID '\" + jobId + \"' must be a numeric value.\");\r\n                    continue;\r\n                }\r\n\r\n                if (uniqueIds.contains(jobId)) {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": Job ID '\" + jobId + \"' must be unique.\");\r\n                    continue;\r\n                } else {\r\n                    uniqueIds.add(jobId);\r\n                }\r\n\r\n                String[] stationParts = stationInfo.split(\",\");\r\n                if (stationParts.length != 2 || !stationParts[0].matches(\"\\\\d+\") || !stationParts[1].matches(\"\\\\d+\")) {\r\n                    System.out.println(\"Syntax error on line \" + lineNumber + \": Invalid station information '\" + stationInfo + \"'.\");\r\n                    continue;\r\n                }\r\n                int stationNumber = Integer.parseInt(stationParts[0]);\r\n                int stationRange = Integer.parseInt(stationParts[1]);\r\n                if (stationNumber < 1 || stationRange < 1 || stationRange > 100) {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": Station range '\" + stationRange + \"' must be between 1 and 100.\");\r\n                    continue;\r\n                }\r\n\r\n                Task task = new Task(taskType, 2);\r\n                System.out.println(\"Successfully parsed line \" + lineNumber + \": Task Type: \" + taskType + \", Job ID: \" + jobId + \", Station Info: \" + stationInfo);\r\n            }\r\n        }\r\n    }\r\n\r\n    public static String TaskReading(String inputfile) throws IOException {\r\n        StringBuilder stringBuilder = new StringBuilder();\r\n        try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {\r\n            String line;\r\n            while ((line = reader.readLine()) != null) {\r\n                stringBuilder.append(line).append(\"\\n\"); // Append each line with a new line character\r\n            }\r\n        }\r\n        return stringBuilder.toString();\r\n    }\r\n\r\n    public static String Rename(String input) {\r\n        if (Character.isDigit(input.charAt(0))) {\r\n            throw new IllegalArgumentException(\"Task statement cannot start with a number!\");\r\n        }\r\n        return input;\r\n    }\r\n}\r\n\r\n/* public static String TaskReading(String WrongFile) throws IOException {\r\n\r\n\r\n    public static String TaskReading(String WrongFile) throws IOException {\r\n        StringBuilder stringBuilder = new StringBuilder();\r\n        try (BufferedReader reader = new BufferedReader(new FileReader(WrongFile))) {\r\n            String line;\r\n            while ((line = reader.readLine()) != null) {\r\n                stringBuilder.append(line);\r\n            }\r\n        }\r\n        return stringBuilder.toString();\r\n    }\r\n\r\n    public static String Rename(String input) {\r\n        if (Character.isDigit(input.charAt(0))) {\r\n            throw new IllegalArgumentException(\"Task statement can not start with a number !.\");\r\n        }\r\n        return input;\r\n    }\r\n\r\n\r\n\r\n    public static void parseWorkflowFile(String inputfile) throws IOException {\r\n        try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {\r\n            String line;\r\n            int lineNumber = 0;\r\n            Set<String> uniqueIds = new HashSet<>();\r\n\r\n            while ((line = reader.readLine()) != null) {\r\n                lineNumber++;\r\n                line = line.trim();\r\n                if (line.isEmpty() || line.startsWith(\"#\")) {\r\n                    continue;\r\n                }\r\n\r\n                String[] parts = line.split(\"\\s+\");\r\n                if (parts.length < 3) {\r\n                    System.out.printf(\"Syntax error on line %d: Each line must have at least 3 parts.%n\", lineNumber);\r\n                    continue;\r\n                }\r\n                String taskType = parts[0];\r\n                String jobId = parts[1];\r\n                String stationInfo = parts[2];\r\n\r\n                if (Character.isDigit(taskType.charAt(0))) {\r\n                    System.out.printf(\"Syntax error on line %d: Task type '%s' cannot start with a number.%n\", lineNumber, taskType);\r\n\r\n                    continue;\r\n                }\r\n                if (!jobId.matches(\"\\\\d+\")) {\r\n                    System.out.printf(\"Syntax error on line %d: Job ID '%s' must be a numeric value.%n\", lineNumber, jobId);\r\n                    continue;\r\n                }\r\n\r\n                if (!uniqueIds.add(jobId)) {\r\n                    System.out.printf(\"Semantic error on line %d: Job ID '%s' must be unique.%n\", lineNumber, jobId);\r\n                    continue;\r\n                }\r\n\r\n                String[] stationParts = stationInfo.split(\",\");\r\n                if (stationParts.length != 2 || !stationParts[0].matches(\"\\\\d+\") || !stationParts[1].matches(\"\\\\d+\")) {\r\n                    System.out.printf(\"Syntax error on line %d: Invalid station information '%s'.%n\", lineNumber, stationInfo);\r\n                    continue;\r\n                }\r\n                int stationNumber = Integer.parseInt(stationParts[0]);\r\n                int stationRange = Integer.parseInt(stationParts[1]);\r\n                if (stationNumber < 1 || stationRange < 1 || stationRange > 100) {\r\n                    System.out.printf(\"Semantic error on line %d: Station range '%d' must be between 1 and 100.%n\", lineNumber, stationRange);\r\n                    continue;\r\n                }\r\n\r\n\r\n                Task task = new Task(taskType ,2);\r\n                System.out.printf(\"Successfully parsed line %d: Task Type: %s, Job ID: %s, Station Info: %s%n\", lineNumber, taskType, jobId, stationInfo);\r\n            }\r\n        }\r\n    }\r\n\r\n\r\n}\r\n\r\n */\r\n\r\n\r\n\r\n    \r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
++++ b/src/Main.java	(date 1716029939042)
+@@ -2,8 +2,6 @@
+ import java.io.BufferedReader;
+ import java.io.FileReader;
+ import java.io.IOException;
+-import java.util.HashSet;
+-import java.util.Set;
+ import java.util.ArrayList;
+ 
+ public class Main {
+@@ -32,7 +30,6 @@
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+-
+         String filePath2 = "WrongFile.txt";
+ 
+         try {
+@@ -106,7 +103,6 @@
+         }catch(Exception e){
+             System.out.println(e);
+         }
+-
+     }
+     public static void parseWorkflowFile(String inputfile) throws IOException {
+         try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
+@@ -182,7 +178,6 @@
+         return input;
+     }
+ }
+-
+ /* public static String TaskReading(String WrongFile) throws IOException {
+ 
+ 
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_19\" default=\"true\" project-jdk-name=\"20\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
++++ b/.idea/misc.xml	(date 1716029876511)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/Job.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\r\n\r\npublic class Job {\r\n\r\n    private JobType jobType; //must start with a letter\r\n    private String jobID;\r\n    private int startTime;\r\n    private int duration;//must start with a letter\r\n\r\n    private int jobDuration;\r\n    private ArrayList<Task> taskArrayList = new ArrayList<>();\r\n\r\n    public Job(JobType jobType, String jobID, int jobDuration,int starTime, int duration){\r\n        this.jobType=jobType;\r\n        this.jobID=jobID;\r\n        this.jobDuration=jobDuration;\r\n       this.startTime=starTime;\r\n       this.duration=duration;\r\n    }\r\n\r\n    public int getStartTime() {\r\n        return startTime;\r\n    }\r\n\r\n    public void setStartTime(int startTime) {\r\n        this.startTime = startTime;\r\n    }\r\n\r\n    public int getDuration() {\r\n        return duration;\r\n    }\r\n\r\n    public void setDuration(int duration) {\r\n        this.duration = duration;\r\n    }\r\n\r\n    public void setJobType(JobType jobType){this.jobType=jobType;}\r\n    public void setJobID(String jobID){this.jobID=jobID;}\r\n    public void setJobDuration(int jobDuration){this.jobDuration=jobDuration;}\r\n\r\n    public ArrayList<Task> getTaskArrayList() {\r\n        return taskArrayList;\r\n    }\r\n\r\n    public void setTaskArrayList(ArrayList<Task> taskArrayList) {\r\n        this.taskArrayList = taskArrayList;\r\n    }\r\n\r\n    public JobType getJobType(){return jobType;}\r\n    public String getJobID(){return jobID;}\r\n    public int getJobDuration(){return jobDuration;}\r\n\r\n    public int deadline() {\r\n        return startTime + duration;\r\n    }\r\n    @Override\r\n    public String toString() {\r\n        return \"JobID: \" + jobID + \", JobType: \" + jobType + \", StartTime: \" + startTime + \", Duration: \" + duration + \", Deadline: \" + deadline();\r\n    }\r\n}\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Job.java b/src/Job.java
+--- a/src/Job.java	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
++++ b/src/Job.java	(date 1716029876519)
+@@ -1,4 +1,8 @@
++import java.io.BufferedReader;
++import java.io.FileReader;
++import java.io.IOException;
+ import java.util.ArrayList;
++import java.util.List;
+ 
+ public class Job {
+ 
+@@ -7,15 +11,25 @@
+     private int startTime;
+     private int duration;//must start with a letter
+ 
+-    private int jobDuration;
++   // private int jobDuration;
++    private int deadline;
+     private ArrayList<Task> taskArrayList = new ArrayList<>();
+ 
+-    public Job(JobType jobType, String jobID, int jobDuration,int starTime, int duration){
++    public Job(String jobID,JobType jobType,int startTime, int duration){
+         this.jobType=jobType;
+         this.jobID=jobID;
+-        this.jobDuration=jobDuration;
+-       this.startTime=starTime;
++       // this.jobDuration=jobDuration;
++       this.startTime=startTime;
+        this.duration=duration;
++       this.deadline = startTime + duration;
++    }
++
++    public int getDeadline() {
++        return deadline;
++    }
++
++    public void setDeadline(int deadline) {
++        this.deadline = deadline;
+     }
+ 
+     public int getStartTime() {
+@@ -36,7 +50,7 @@
+ 
+     public void setJobType(JobType jobType){this.jobType=jobType;}
+     public void setJobID(String jobID){this.jobID=jobID;}
+-    public void setJobDuration(int jobDuration){this.jobDuration=jobDuration;}
++   // public void setJobDuration(int jobDuration){this.jobDuration=jobDuration;}
+ 
+     public ArrayList<Task> getTaskArrayList() {
+         return taskArrayList;
+@@ -48,7 +62,7 @@
+ 
+     public JobType getJobType(){return jobType;}
+     public String getJobID(){return jobID;}
+-    public int getJobDuration(){return jobDuration;}
++   // public int getJobDuration(){return jobDuration;}
+ 
+     public int deadline() {
+         return startTime + duration;
+@@ -58,6 +72,65 @@
+         return "JobID: " + jobID + ", JobType: " + jobType + ", StartTime: " + startTime + ", Duration: " + duration + ", Deadline: " + deadline();
+     }
+ }
++/*public class JobParser {
++    public static void main(String[] args) {
++        String filePath = "WrongFile.txt"; // Path to your job file
++        List<String> jobIDs = new ArrayList<>();
++        int lineNumber = 0;
++
++        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
++            String line;
++            while ((line = br.readLine()) != null) {
++                lineNumber++;
++                String[] parts = line.split("\\s+");
++
++                if (parts.length != 4) {
++                    System.err.println("Syntax error on line " + lineNumber + ": Expected 4 fields, found " + parts.length);
++                    continue;
++                }
++
++                String jobID = parts[0];
++                int jobTypeID;
++                try {
++                    jobTypeID = Integer.parseInt(parts[1]);
++                } catch (NumberFormatException e) {
++                    System.err.println("Syntax error on line " + lineNumber + ": JobTypeID must be an integer.");
++                    continue;
++                }
++                int startTime, duration;
++                try {
++                    startTime = Integer.parseInt(parts[2]);
++                    duration = Integer.parseInt(parts[3]);
++                } catch (NumberFormatException e) {
++                    System.err.println("Syntax error on line " + lineNumber + ": Start time and duration must be integers.");
++                    continue;
++                }
++
++                if (jobIDs.contains(jobID)) {
++                    System.err.println("Semantic error on line " + lineNumber + ": Job ID " + jobID + " is not unique.");
++                    continue;
++                }
++                if (startTime < 0 || duration < 0) {
++                    System.err.println("Semantic error on line " + lineNumber + ": Start time and duration must be non-negative.");
++                    continue;
++                }
++
++                jobIDs.add(jobID);
++
++                // Create an empty list of tasks for each job
++                ArrayList<Task> taskArrayList = new ArrayList<>();
++                // Using jobTypeID as the type string for simplicity
++                JobType jobType = new JobType(jobTypeID, "Type" + jobTypeID, taskArrayList);
++                Job job = new Job(jobID, jobType, startTime, duration);
++                System.out.println("Parsed job: " + job);
++            }
++        } catch (IOException e) {
++            e.printStackTrace();
++        }
++    }
++}
++
++ */
+ 
+ 
+ 
+Index: src/TaskType.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class TaskType {\r\n    private double size;\r\n    private String type;\r\n\r\n    public TaskType(double size, String type) {\r\n        this.size = size;\r\n        this.type=type;\r\n    }\r\n    public void check(){\r\n        if(type.equals(\"T1\")){\r\n\r\n        }\r\n    }\r\n    public String getType() {\r\n        return type;\r\n    }\r\n    public void setType(String type){\r\n        this.type = type;\r\n    }\r\n\r\n    public double getSize() {\r\n        return size;\r\n    }\r\n\r\n    public void setSize(double size) {\r\n        this.size = size;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/TaskType.java b/src/TaskType.java
+--- a/src/TaskType.java	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
++++ b/src/TaskType.java	(date 1716029876527)
+@@ -1,7 +1,6 @@
+ public class TaskType {
+     private double size;
+     private String type;
+-
+     public TaskType(double size, String type) {
+         this.size = size;
+         this.type=type;
+Index: src/f.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/f.java b/src/f.java
+new file mode 100644
+--- /dev/null	(date 1716029876527)
++++ b/src/f.java	(date 1716029876527)
+@@ -0,0 +1,157 @@
++import java.io.BufferedReader;
++import java.io.FileReader;
++import java.io.IOException;
++import java.util.ArrayList;
++import java.util.HashSet;
++import java.util.Set;
++
++public class f {
++
++    public static void main(String[] args) {
++        String fileName = "WrongFile.txt";
++        try {
++            checkWorkflowFile(fileName);
++        } catch (IOException e) {
++            e.printStackTrace();
++        }
++        /*String fileNames = "WrongFile.txt";
++        try {
++            printFileWithoutParentheses(fileNames);
++        } catch (IOException e) {
++            e.printStackTrace();
++        }
++
++         */
++    }
++
++   /* public static void printFileWithoutParentheses(String fileName) throws IOException {
++        BufferedReader reader = new BufferedReader(new FileReader(fileName));
++        String line;
++
++        while ((line = reader.readLine()) != null) {
++            line = line.replace("(", "").replace(")", "");
++            System.out.println(line);
++        }
++        reader.close();
++    }
++
++    */
++
++    public static void checkWorkflowFile(String fileName) throws IOException {
++        BufferedReader reader = new BufferedReader(new FileReader(fileName));
++        String line;
++        int lineNumber = 0;
++
++        Set<String> taskTypeIds = new HashSet<>();
++        Set<String> jobTypeIds = new HashSet<>();
++        Set<String> stationIds = new HashSet<>();
++
++        while ((line = reader.readLine()) != null) {
++            lineNumber++;
++            line = line.trim();
++
++            if (line.isEmpty() || line.startsWith("#")) {
++                continue; // Skip empty lines and comments
++            }
++
++            if (line.startsWith("(TASKTYPES")) {
++                checkTaskTypes(line, lineNumber, taskTypeIds);
++            } else if (line.startsWith("(JOBTYPES")) {
++                checkJobTypes(reader, lineNumber, jobTypeIds, taskTypeIds);
++            } else if (line.startsWith("(STATIONS")) {
++                checkStations(reader, lineNumber, stationIds, taskTypeIds);
++            } else {
++                System.out.println("Syntax error on line " + lineNumber + ": " + line);
++            }
++        }
++
++        reader.close();
++    }
++
++    public static void checkTaskTypes(String line, int lineNumber, Set<String> taskTypeIds) {
++        String[] parts = line.substring(line.indexOf(' ') + 1).split("\\s+");
++        Set<String> seenTaskTypes = new HashSet<>();
++
++        for (int i = 0; i < parts.length; i++) {
++            String part = parts[i];
++            if (part.matches("[a-zA-Z]\\w*")) {
++                if (!seenTaskTypes.add(part)) {
++                    System.out.println("Semantic error on line " + lineNumber + ": " + part + " is listed twice.");
++                }
++                if (!taskTypeIds.add(part)) {
++                    System.out.println("Semantic error on line " + lineNumber + ": Duplicate task type ID " + part);
++                }
++                // Check for a following size value
++                if (i + 1 < parts.length && parts[i + 1].matches("[0-9.]+")) {
++                    i++; // Skip the size value
++                } else {
++                    System.out.println("Semantic error on line " + lineNumber + ": Task type " + part + " is missing a size value.");
++                }
++            } else {
++                System.out.println("Semantic error on line " + lineNumber + ": " + part + " is an invalid tasktypeID.");
++            }
++        }
++    }
++
++    public static void checkJobTypes(BufferedReader reader, int lineNumber, Set<String> jobTypeIds, Set<String> taskTypeIds) throws IOException {
++        String line;
++        while ((line = reader.readLine()) != null) {
++            lineNumber++;
++            line = line.trim();
++
++            if (line.startsWith(")")) {
++                break;
++            }
++
++            String[] parts = line.substring(line.indexOf(' ') + 1).split("\\s+");
++            String jobId = parts[0];
++            if (!jobTypeIds.add(jobId)) {
++                System.out.println("Semantic error on line " + lineNumber + ": " + jobId + " already declared.");
++            }
++
++            for (int i = 1; i < parts.length; i++) {
++                String taskType = parts[i];
++                if (!taskTypeIds.contains(taskType)) {
++                    System.out.println("Semantic error on line " + lineNumber + ": " + taskType + " is not one of the declared task types.");
++                }
++                if (i + 1 < parts.length && parts[i + 1].matches("[0-9.]+")) {
++                    i++; // Skip the size value
++                } else {
++                    System.out.println("Semantic error on line " + lineNumber + ": Task type " + taskType + " is missing a size value.");
++                }
++            }
++        }
++    }
++
++    public static void checkStations(BufferedReader reader, int lineNumber, Set<String> stationIds, Set<String> taskTypeIds) throws IOException {
++        String line;
++        while ((line = reader.readLine()) != null) {
++            lineNumber++;
++            line = line.trim();
++
++            if (line.startsWith(")")) {
++                break;
++            } else if (line.startsWith("(")){
++                continue;
++            }
++
++            String[] parts = line.substring(line.indexOf(' ') + 1).split("\\s+");
++            String stationId = parts[0];
++            if (!stationIds.add(stationId)) {
++                System.out.println("Semantic error on line " + lineNumber + ": Duplicate station ID " + stationId);
++            }
++
++            for (int i = 4; i < parts.length; i++) {
++                String taskType = parts[i];
++                if (!taskTypeIds.contains(taskType)) {
++                    System.out.println("Semantic error on line " + lineNumber + ": " + taskType + " is not one of the declared task types.");
++                }
++                if (i + 1 < parts.length && parts[i + 1].matches("[0-9.]+")) {
++                    i++; // Skip the speed value
++                } else {
++                    System.out.println("Semantic error on line " + lineNumber + ": Task type " + taskType + " is missing a speed value.");
++                }
++            }
++        }
++    }
++}
+Index: src/JobType.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\r\n\r\npublic class JobType {\r\n    private int jobTypeId;\r\n    private String type;\r\n\r\n    public int getJobTypeId() {\r\n        return jobTypeId;\r\n    }\r\n\r\n    public void setJobTypeId(int jobTypeId) {\r\n        this.jobTypeId = jobTypeId;\r\n    }\r\n\r\n    public String getType() {\r\n        return type;\r\n    }\r\n\r\n    public void setType(String type) {\r\n        this.type = type;\r\n    }\r\n\r\n    public ArrayList<Task> getTaskArrayList() {\r\n        return taskArrayList;\r\n    }\r\n\r\n    public void setTaskArrayList(ArrayList<Task> taskArrayList) {\r\n        this.taskArrayList = taskArrayList;\r\n    }\r\n\r\n    private ArrayList<Task> taskArrayList;\r\n\r\n    public JobType(int jobTypeId, String type, ArrayList<Task> taskArrayList) {\r\n        this.jobTypeId = jobTypeId;\r\n        this.type = type;\r\n        this.taskArrayList = taskArrayList;\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/JobType.java b/src/JobType.java
+--- a/src/JobType.java	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
++++ b/src/JobType.java	(date 1716029876522)
+@@ -3,7 +3,33 @@
+ public class JobType {
+     private int jobTypeId;
+     private String type;
++    private ArrayList<Task> taskArrayList;
++
++   /* public JobType(String jobTypeId) {
++        this.jobTypeId = jobTypeId;
++        this.tasks = new ArrayList<>();
++    }
++
++    public String getJobTypeId() {
++        return jobTypeId;
++    }
++
++    public ArrayList<String> getTasks() {
++        return tasks;
++    }
+ 
++    public void addTask(String task) {
++        this.tasks.add(task);
++    }
++
++    @Override
++    public String toString() {
++        return "JobType{" +
++                "jobTypeId='" + jobTypeId + '\'' +
++                ", tasks=" + tasks +
++                '}';
++    }
++    */
+     public int getJobTypeId() {
+         return jobTypeId;
+     }
+@@ -28,12 +54,19 @@
+         this.taskArrayList = taskArrayList;
+     }
+ 
+-    private ArrayList<Task> taskArrayList;
++    //private ArrayList<Task> taskArrayList;
+ 
+     public JobType(int jobTypeId, String type, ArrayList<Task> taskArrayList) {
+         this.jobTypeId = jobTypeId;
+         this.type = type;
+         this.taskArrayList = taskArrayList;
+     }
+-
++    @Override
++    public String toString() {
++        return "JobType{" +
++                "jobTypeId=" + jobTypeId +
++                ", type='" + type + '\'' +
++                ", taskArrayList=" + taskArrayList +
++                '}';
++    }
+ }
+Index: src/Station.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\r\n\r\npublic class Station {\r\n\r\n    private int stationSpeed;\r\n    private String stationID; //must start with a letter\r\n\r\n    ArrayList<Task> taskQueue = new ArrayList<>();\r\n\r\n    //singleTask, multipleTaskSameType, multipleTaskDifType-> bazılarının hızları değişken bazılarınınki sabit\r\n\r\n    ArrayList<Station> singleTask= new ArrayList<>();\r\n    ArrayList<Station> multipleTaskSameType= new ArrayList<>();\r\n    ArrayList<Station> multipleTaskDifType= new ArrayList<>();\r\n\r\n\r\n\r\n    public Station(int stationSpeed, String stationID) {\r\n        this.stationSpeed = stationSpeed;\r\n        this.stationID = stationID;\r\n    }\r\n\r\n\r\n    public int getStationSpeed() {\r\n        return stationSpeed;\r\n    }\r\n\r\n    public void setStationSpeed(int stationSpeed) {\r\n        this.stationSpeed = stationSpeed;\r\n    }\r\n\r\n    public String getStationID() {\r\n        return stationID;\r\n    }\r\n\r\n    public void setStationID(String stationID) {\r\n        this.stationID = stationID;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Station.java b/src/Station.java
+--- a/src/Station.java	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
++++ b/src/Station.java	(date 1716029876527)
+@@ -4,7 +4,6 @@
+ 
+     private int stationSpeed;
+     private String stationID; //must start with a letter
+-
+     ArrayList<Task> taskQueue = new ArrayList<>();
+ 
+     //singleTask, multipleTaskSameType, multipleTaskDifType-> bazılarının hızları değişken bazılarınınki sabit
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"commit before update\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;EmirayDurmaz&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/Yaseminkocar/se116project.git&quot;,\r\n    &quot;accountId&quot;: &quot;f876dfee-e282-4bb3-ac51-b7a06d3e1894&quot;\r\n  }\r\n}</component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;customColor&quot;: &quot;&quot;,\r\n  &quot;associatedIndex&quot;: 4\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2flxulGE1TD1wiPGhb4j94xWvUK\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <OptionsSetting value=\"false\" id=\"Update\" />\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"flattenPackages\" value=\"true\" />\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n    <option name=\"showMembers\" value=\"true\" />\r\n    <option name=\"showVisibilityIcons\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.Main.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\" selected=\"Application.d\">\r\n    <configuration name=\"Deneme\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Deneme\" />\r\n      <module name=\"asdfgh\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\r\n      <module name=\"asdfgh\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"d\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"d\" />\r\n      <module name=\"asdfgh\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"f\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"f\" />\r\n      <module name=\"asdfgh\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.d\" />\r\n        <item itemvalue=\"Application.Main\" />\r\n        <item itemvalue=\"Application.f\" />\r\n        <item itemvalue=\"Application.Deneme\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240\" />\r\n        <option value=\"bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"\" />\r\n      <created>1714389694199</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1714389694199</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"commit\">\r\n      <created>1714390906500</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714390906500</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"meltemin commiti\">\r\n      <created>1714461371483</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714461371483</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"meltemin commiti 2\">\r\n      <created>1714461447617</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714461447617</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Classes\">\r\n      <created>1714565742088</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714565742088</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"some bugs fixed\">\r\n      <created>1715370784472</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715370784472</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"changes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1715885718441</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715885718441</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"changes\">\r\n      <created>1715937727609</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715937727609</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"senkronize3\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1715943007905</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715943007905</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"commit before update\">\r\n      <created>1715954183307</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715954183307</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"10\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"commit\" />\r\n    <MESSAGE value=\"meltemin commiti\" />\r\n    <MESSAGE value=\"meltemin commiti 2\" />\r\n    <MESSAGE value=\"Classes\" />\r\n    <MESSAGE value=\"some bugs fixed\" />\r\n    <MESSAGE value=\"changes\" />\r\n    <MESSAGE value=\"senkronize3\" />\r\n    <MESSAGE value=\"commit before update\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"commit before update\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 14ebe76c60f8af11d76fb3f8995a97fb3ef2fcf9)
++++ b/.idea/workspace.xml	(date 1716029876511)
+@@ -4,7 +4,23 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="commit before update" />
++    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="load d.java">
++      <change afterPath="$PROJECT_DIR$/src/f.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_16_49_[Changes]/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_16_49__Changes_.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_44_[Changes]/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_44__Changes_.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_59_[Changes]/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2024_22_59__Changes_.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_16_47__Changes_.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Job.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/JobType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JobType.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Station.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Station.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/TaskType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TaskType.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -62,9 +78,16 @@
+     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+   }
+ }</component>
+-  <component name="RunManager" selected="Application.d">
++  <component name="RunManager" selected="Application.Main">
+     <configuration name="Deneme" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="Deneme" />
++      <module name="asdfgh" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="JobParser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="JobParser" />
+       <module name="asdfgh" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+@@ -93,9 +116,10 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Application.d" />
+         <item itemvalue="Application.Main" />
+         <item itemvalue="Application.f" />
++        <item itemvalue="Application.JobParser" />
++        <item itemvalue="Application.d" />
+         <item itemvalue="Application.Deneme" />
+       </list>
+     </recent_temporary>
+@@ -182,7 +206,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1715954183307</updated>
+     </task>
+-    <option name="localTasksCounter" value="10" />
++    <task id="LOCAL-00010" summary="load d.java">
++      <created>1715954306794</created>
++      <option name="number" value="00010" />
++      <option name="presentableId" value="LOCAL-00010" />
++      <option name="project" value="LOCAL" />
++      <updated>1715954306794</updated>
++    </task>
++    <option name="localTasksCounter" value="11" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -208,6 +239,7 @@
+     <MESSAGE value="changes" />
+     <MESSAGE value="senkronize3" />
+     <MESSAGE value="commit before update" />
+-    <option name="LAST_COMMIT_MESSAGE" value="commit before update" />
++    <MESSAGE value="load d.java" />
++    <option name="LAST_COMMIT_MESSAGE" value="load d.java" />
+   </component>
+ </project>
+\ No newline at end of file
