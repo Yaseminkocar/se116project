@@ -103,7 +103,7 @@ public class Main {
         System.out.println();
         try {
             JobErrors parser = new JobErrors();
-            List<Job> jobs = parser.parseJobFile("jobfile.txt");
+         List<Job> jobs = parser.parseJobFile("jobfile.txt");
             //  JobTracker tracker = new JobTracker(jobs);
 
         /*    for (int time = 0; time <= 50; time += 1) {
@@ -117,7 +117,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        String fileName = "jobfile.txt";
+        String fileName = "WrongFile.txt";
         List<Job> jobs = readJobsFromFile(fileName);
 
         // Print all jobs
