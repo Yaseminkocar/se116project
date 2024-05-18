@@ -2,10 +2,7 @@ import java.io.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -43,6 +40,8 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
+
+
         //parantez sayısı karşılaştırma
         int sumopen = 0;
         int sumclose = 0;
@@ -65,65 +64,149 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e);
         }
+
+
         //tasklerin stationda var yok kontrolü
         String line2;
-        ArrayList tasksofjob= new ArrayList();
-        int startlinenumber=0;
-        int endlinenumber=0;
+        HashSet<String> tasksofjobH = new HashSet<>();
+
+        int startlinenumber = 0;
+        int endlinenumber = 0;
+
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
             while ((line2 = bufferedReader.readLine()) != null) {
+
+
                 String[] words = line2.split("\s+");
-                for(int i=0;i<words.length;i++){
-                    if(words[i].equals("(JOBTYPES")){
+
+               /* for(int y=0;y< words.length;y++){
+                    for(int x=0;x< words.length;x++){
+                        words[x]=words[y].trim();
+                    }
+                }
+
+                */
+
+
+                for(int y=0;y< words.length;y++){
+                    System.out.println(words[y]);
+                }
+
+
+                int i = 0;
+                for (; i < words.length; i++) {
+                    switch (words[i]) {
+                        case "(JOBTYPES":
+                            startlinenumber = i;
+                            System.out.println(startlinenumber);
+                            break;
+                        case "(STATIONS":
+                            endlinenumber = i;
+                            System.out.println(endlinenumber);
+                            break;
+                        //default:
+                         //   System.out.println("Unmatched word: " + words[i]);
+                    }
+                }
+
+
+                //switch-case ile aynı sonucu vermeli if de
+                    /*if(words[i].equals("(JOBTYPES")){
                         startlinenumber=i;
+                        System.out.println(startlinenumber);
                     }
                 }
                 for(int j=0;j<words.length;j++){
                     if(words[j].equals("(STATIONS")){
                         endlinenumber=j;
+                        System.out.println(endlinenumber);
                     }
                 }
-                for(int k=startlinenumber;k<endlinenumber;k++){
-                    if(words[k].startsWith("T"));
-                    tasksofjob.add(words[k]);
-                }
-                ArrayList taskofstation= new ArrayList();
-                for(int a=endlinenumber;a<words.length;a++){
-                    if(words[a].startsWith("T"));
-                    taskofstation.add(words[a]);
-                }
-                int b=taskofstation.size();
-                int c=tasksofjob.size();
-                for(int i=0;i<b;i++){
-                    for(int j=0;j<c;j++){
-                        if(taskofstation.get(i)!=tasksofjob.get(j)){
-                            throw new Exception("task"+i +"is not executed at any station");
+                     */
+
+
+                    for (int k = startlinenumber; k <= endlinenumber; k++) {
+                        if (words[k].startsWith("T")) ;
+                        tasksofjobH.add(words[k]);
+                    }
+                    ArrayList taskOfJobA = new ArrayList<>(tasksofjobH);
+                    HashSet taskofstationH = new HashSet();
+                    for (int a = endlinenumber; a < words.length; a++) {
+                        if (words[a].startsWith("T")) ;
+                        taskofstationH.add(words[a]);
+
+                    }
+                    int b = taskofstationH.size();
+                    int c = tasksofjobH.size();
+
+                    boolean check = true;
+                    for (int a = 0; a < b; a++) {
+                        for (int j = 0; j < c; j++) {
+                            if (taskofstationH.contains(taskOfJobA.get(j))) {
+                                check = true;
+                            } else {
+                                throw new Exception(taskOfJobA.get(j) + " is not processed in Stations");
+                            }
                         }
+                    }
+                }
+
+            }catch(Exception e){
+            System.out.println(e);
+            }
+        }
+
+
+        /*
+        //sadece T4'ün station'da olmadığını söylüyor T21'i de görmesi lazım
+        String line2;
+        HashMap<String, Integer> tasksOfJob = new HashMap<>();
+        int startLineNumber = 0;
+        int endLineNumber = 0;
+
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
+            while ((line2 = bufferedReader.readLine()) != null) {
+                String[] words = line2.split("\\s+"); // Corrected the split pattern
+                for (int i = 0; i < words.length; i++) {
+                    if (words[i].equals("(JOBTYPES")) {
+                        startLineNumber = i;
+                    }
+                }
+                for (int j = 0; j < words.length; j++) {
+                    if (words[j].equals("(STATIONS")) {
+                        endLineNumber = j;
+                    }
+                }
+                for (int k = startLineNumber; k < endLineNumber; k++) {
+                    if (words[k].startsWith("T")) {
+                        tasksOfJob.put(words[k], tasksOfJob.getOrDefault(words[k], 0) + 1);
+                    }
+                }
+                HashMap<String, Integer> tasksOfStation = new HashMap<>();
+                for (int a = endLineNumber; a < words.length; a++) {
+                    if (words[a].startsWith("T")) {
+                        tasksOfStation.put(words[a], tasksOfStation.getOrDefault(words[a], 0) + 1);
+                    }
+                }
+                for (Map.Entry<String, Integer> entry : tasksOfStation.entrySet()) {
+                    String task = entry.getKey();
+                    int countInStation = entry.getValue();
+                    int countInJob = tasksOfJob.getOrDefault(task, 0);
+                    if (countInJob != countInStation) {
+                        throw new Exception("Task " + task + " is not executed at any station");
                     }
                 }
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
-        System.out.println();
-        try {
-            JobErrors parser = new JobErrors();
-            List<Job> jobs = parser.parseJobFile("jobfile.txt");
-          //  JobTracker tracker = new JobTracker(jobs);
 
-        /*    for (int time = 0; time <= 50; time += 1) {
-                System.out.println("Tracking jobs at time: " + time);
-                tracker.trackJobStates(time);
-                System.out.println();
-            } */
+         */
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-    }
     public static void parseWorkflowFile(String inputfile) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
             String line;
