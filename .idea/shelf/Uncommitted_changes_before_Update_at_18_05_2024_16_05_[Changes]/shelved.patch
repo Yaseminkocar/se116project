@@ -1,0 +1,199 @@
+Index: jobfile.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/jobfile.txt b/jobfile.txt
+--- a/jobfile.txt	
++++ b/jobfile.txt	
+@@ -1,5 +1,5 @@
+- Job1 J1  -1 30
++ Job1 J1  1 30
+  Job1 J1  2  29
+  Job3 J2  5  40
+- Job4 J2  7  35
++ Job4 J2  7 35
+  Job5 J3  10  30
+\ No newline at end of file
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	
++++ b/src/Main.java	
+@@ -120,12 +120,12 @@
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+-        String fileName = "WrongFile.txt";
++        String fileName = "jobfile.txt";
+         List<Job> jobs = readJobsFromFile(fileName);
+ 
+         // Print all jobs
+-        for (Job job : jobs) {
+-            System.out.println(job);
++        for(int i=0;i<jobs.size();i++){
++            System.out.println(jobs.get(i));
+         }
+     }
+     // Method to read jobs from file
+@@ -145,17 +145,58 @@
+     }
+ 
+     // Method to parse each line and add to jobs list
+-    private static void parseJobLine(String line, List<Job> jobs) {
++    public static void parseJobLine(String line, List<Job> jobs) {
+         // Remove parentheses and split by spaces
+         line = line.replaceAll("[()]", "").trim();
+-        String[] parts = line.split("\\s+");
+-
++        String[] parts = line.split("\n+");
++        ArrayList<String>jobidlist=new ArrayList<>();
++        ArrayList<String>jobtypeidlist=new ArrayList<>();
++        ArrayList<String>startlist=new ArrayList<>();
++        ArrayList<String>durationlist=new ArrayList<>();
++        ArrayList<Integer>deadlinelist=new ArrayList<>();
++        for(int i=0;i< parts.length;i+=4){
++            jobidlist.add(parts[i]);
++        }
++        for(int i=1;i< parts.length;i+=4){
++            jobtypeidlist.add(parts[i]);
++        }for(int i=2;i< parts.length;i+=4){
++            startlist.add(parts[i]);
++        }
++        for(int i=3;i< parts.length;i+=4){
++            durationlist.add(parts[i]);
++        }
++        for(int i=4;i< parts.length;i+=4){
++            deadlinelist.add(Job.deadline());
++        }
++        for(int i=0;i< jobidlist.size();i++){
++            System.out.print(jobidlist.get(i));
++        }
++        System.out.println();
++        for(int i=0;i< jobtypeidlist.size();i++){
++            System.out.print(jobtypeidlist.get(i));
++        }
++       System.out.println();
++        for(int i=0;i< startlist.size();i++){
++            System.out.print(startlist.get(i));
++        }
++        System.out.println();
++        for(int i=0;i< durationlist.size();i++){
++           System.out.print(durationlist.get(i));
++        }
++        System.out.println();
++        for(int i=0;i< deadlinelist.size();i++){
++            System.out.print(deadlinelist.get(i));
++        }
+         if (parts.length > 0) {
+             String jobName = parts[0];
+             ArrayList<JobDetail> details = new ArrayList<>();
+-            for (int i = 1; i < parts.length; i += 2) {
++            for (int i = 1; i < parts.length; i++) {
+                 String type = parts[i];
+-                int value = (i + 1 < parts.length && isNumeric(parts[i + 1])) ? Integer.parseInt(parts[i + 1]) : 0;
++                int value = 0; // Default value is 0
++                if (i + 1 < parts.length && isNumeric(parts[i + 1])) {
++                    value = Integer.parseInt(parts[i + 1]);
++                    i++; // Skip the next part since it's a value
++                }
+                 details.add(new JobDetail(type, value));
+             }
+             jobs.add(new Job(jobName, details));
+Index: src/Job.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Job.java b/src/Job.java
+--- a/src/Job.java	
++++ b/src/Job.java	
+@@ -4,8 +4,8 @@
+ 
+     private JobType jobType; //must start with a letter
+     private String jobID;
+-    private int startTime;
+-    private int duration;//must start with a letter
++    private static int startTime;
++    private static int duration;//must start with a letter
+     String name;
+     private int jobDuration;
+     private ArrayList<Task> taskArrayList = new ArrayList<>();
+@@ -54,20 +54,21 @@
+     public String getJobID(){return jobID;}
+     public int getJobDuration(){return jobDuration;}
+ 
+-    public int deadline() {
++    public static int deadline() {
+         return startTime + duration;
+     }
+-    //  @Override
+-   /* public String toString() {
+-        return "JobID: " + jobID + ", JobType: " + jobType + ", StartTime: " + startTime + ", Duration: " + duration + ", Deadline: " + deadline();
+-    }*/
++
+     @Override
++   public String toString() {
++        return "JobID: " + jobID + ", JobType: " + jobType + ", StartTime: " + startTime + ", Duration: " + duration + ", Deadline: " + deadline();
++    }
++   /* @Override
+     public String toString() {
+         return "{" +
+                 "name='" + name + '\'' +
+                 ", details=" + details +
+                 '}';
+-    }
++    }*/
+ 
+ }
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,8 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="new classes">
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="easy to read3">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/jobfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/jobfile.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Job.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/JobDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JobDetail.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+     </list>
+@@ -204,7 +206,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1716029847342</updated>
+     </task>
+-    <option name="localTasksCounter" value="15" />
++    <task id="LOCAL-00015" summary="easy to read3">
++      <created>1716031281796</created>
++      <option name="number" value="00015" />
++      <option name="presentableId" value="LOCAL-00015" />
++      <option name="project" value="LOCAL" />
++      <updated>1716031281797</updated>
++    </task>
++    <option name="localTasksCounter" value="16" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -233,6 +242,7 @@
+     <MESSAGE value="hash and arraylist tries" />
+     <MESSAGE value="changes" />
+     <MESSAGE value="easy to read" />
+-    <option name="LAST_COMMIT_MESSAGE" value="easy to read" />
++    <MESSAGE value="easy to read3" />
++    <option name="LAST_COMMIT_MESSAGE" value="easy to read3" />
+   </component>
+ </project>
+\ No newline at end of file

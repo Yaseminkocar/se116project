@@ -1,0 +1,20 @@
+Index: src/JobDetail.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/JobDetail.java b/src/JobDetail.java
+--- a/src/JobDetail.java	
++++ b/src/JobDetail.java	
+@@ -9,9 +9,9 @@
+         this.value = value;
+     }
+ 
+-    @Override
++    /*@Override
+     public String toString() {
+         return "{" + type + ": " + value + "}";
+-    }
++    }*/
+ 
+ }
