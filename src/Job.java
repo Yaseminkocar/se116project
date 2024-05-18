@@ -11,12 +11,12 @@ public class Job {
     private ArrayList<Task> taskArrayList = new ArrayList<>();
     ArrayList<JobDetail> details;
 
-    public Job(JobType jobType, String jobID, int jobDuration,int starTime, int duration){
+    public Job(JobType jobType, String jobID, int jobDuration,int startTime, int duration){
         this.jobType=jobType;
         this.jobID=jobID;
         this.jobDuration=jobDuration;
-       this.startTime=starTime;
-       this.duration=duration;
+        this.startTime=startTime;
+        this.duration=duration;
     }
     public Job(String name, ArrayList<JobDetail> details) {
         this.name = name;
@@ -57,11 +57,11 @@ public class Job {
     public int deadline() {
         return startTime + duration;
     }
-  //  @Override
+    //  @Override
    /* public String toString() {
         return "JobID: " + jobID + ", JobType: " + jobType + ", StartTime: " + startTime + ", Duration: " + duration + ", Deadline: " + deadline();
     }*/
-@Override
+    @Override
     public String toString() {
         return "{" +
                 "name='" + name + '\'' +

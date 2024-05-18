@@ -4,7 +4,6 @@ public class Station {
 
     private int stationSpeed;
     private String stationID; //must start with a letter
-
     ArrayList<Task> taskQueue = new ArrayList<>();
 
     //singleTask, multipleTaskSameType, multipleTaskDifType-> bazılarının hızları değişken bazılarınınki sabit

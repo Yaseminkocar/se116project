@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class JobDetail {
     String type;
     int value;
