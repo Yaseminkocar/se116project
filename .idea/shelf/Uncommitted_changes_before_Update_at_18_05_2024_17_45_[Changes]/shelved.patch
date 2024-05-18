@@ -1,22 +1,21 @@
-Index: .idea/misc.xml
+Index: src/d1.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_20\" default=\"true\" project-jdk-name=\"20\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+<+>import java.io.BufferedReader;\r\nimport java.io.FileReader;\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class d1 {\r\n\r\n    public static void main(String[] args) {\r\n        String fileName = \"WrongFile.txt\";\r\n        try {\r\n            // Dosyayı kontrol eden metodu çağırıyoruz\r\n            checkWorkflowFile(fileName);\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    public static void checkWorkflowFile(String fileName) throws IOException {\r\n        // Dosyayı okumak için BufferedReader kullanıyoruz\r\n        BufferedReader reader = new BufferedReader(new FileReader(fileName));\r\n        String line;\r\n        int lineNumber = 0;\r\n\r\n        // ID'leri saklamak için listeler oluşturuyoruz\r\n        List<String> taskTypeIds = new ArrayList<>();\r\n        List<String> jobTypeIds = new ArrayList<>();\r\n        List<String> stationIds = new ArrayList<>();\r\n\r\n        // Dosyadaki her satırı okuyoruz\r\n        while ((line = reader.readLine()) != null) {\r\n            lineNumber++;\r\n            line = line.trim(); // Satırın başındaki ve sonundaki boşlukları kaldırıyoruz\r\n\r\n            if (line.isEmpty() || line.startsWith(\"#\")) {\r\n                continue; // Boş satırları ve yorumları atlıyoruz\r\n            }\r\n\r\n            // Satırın içeriğine göre uygun kontrol metodunu çağırıyoruz\r\n            if (line.startsWith(\"(TASKTYPES\")) {\r\n                checkTaskTypes(line, lineNumber, taskTypeIds);\r\n            } else if (line.startsWith(\"(JOBTYPES\")) {\r\n                checkJobTypes(reader, lineNumber, jobTypeIds, taskTypeIds);\r\n            } else if (line.startsWith(\"(STATIONS\")) {\r\n                checkStations(reader, lineNumber, stationIds, taskTypeIds);\r\n            } else {\r\n                System.out.println(\"Syntax error on line \" + lineNumber + \": \" + line);\r\n            }\r\n        }\r\n\r\n        // Dosyayı kapatıyoruz\r\n        reader.close();\r\n    }\r\n\r\n    public static void checkTaskTypes(String line, int lineNumber, List<String> taskTypeIds) {\r\n        // İlk boşluktan sonrasını alıp boşluklara göre bölüyoruz\r\n        String[] parts = line.substring(line.indexOf(' ') + 1).split(\"\\\\s+\");\r\n        List<String> seenTaskTypes = new ArrayList<>();\r\n\r\n        // Her parçayı kontrol ediyoruz\r\n        for (int i = 0; i < parts.length; i++) {\r\n            String part = parts[i];\r\n            if (!part.startsWith(\"[a-zA-Z]\\\\w*\")) {\r\n                // Eğer part geçerli bir task type id ise\r\n                if (seenTaskTypes.contains(part)) {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": \" + part + \" is listed twice.\");\r\n                } else {\r\n                    seenTaskTypes.add(part);\r\n                }\r\n                if (taskTypeIds.contains(part)) {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": Duplicate task type ID \" + part);\r\n                } else {\r\n                    taskTypeIds.add(part);\r\n                }\r\n                // Boyut değerinin var olup olmadığını kontrol ediyoruz\r\n                if (i + 1 < parts.length && parts[i + 1].matches(\"[0-9.]+\")) {\r\n                    i++; // Boyut değerini atlıyoruz\r\n                } else {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": Task type \" + part + \" is missing a size value.\");\r\n                }\r\n            } else {\r\n                System.out.println(\"Semantic error on line \" + lineNumber + \": \" + part + \" is an invalid tasktypeID.\");\r\n            }\r\n        }\r\n    }\r\n\r\n    public static void checkJobTypes(BufferedReader reader, int lineNumber, List<String> jobTypeIds, List<String> taskTypeIds) throws IOException {\r\n        String line;\r\n        while ((line = reader.readLine()) != null) {\r\n            lineNumber++;\r\n            line = line.trim();\r\n\r\n            if (line.startsWith(\")\")) {\r\n                break; // Kapanış parantezine kadar okuyoruz\r\n            }\r\n\r\n            String[] parts = line.substring(line.indexOf(' ') + 1).split(\"\\\\s+\");\r\n            String jobId = parts[0];\r\n            if (jobTypeIds.contains(jobId)) {\r\n                System.out.println(\"Semantic error on line \" + lineNumber + \": \" + jobId + \" already declared.\");\r\n            } else {\r\n                jobTypeIds.add(jobId);\r\n            }\r\n\r\n            for (int i = 1; i < parts.length; i++) {\r\n                String taskType = parts[i];\r\n                if (!taskTypeIds.contains(taskType)) {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": \" + taskType + \" is not one of the declared task types.\");\r\n                }\r\n                if (i + 1 < parts.length && parts[i + 1].matches(\"[0-9.]+\")) {\r\n                    i++; // Boyut değerini atlıyoruz\r\n                } else {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": Task type \" + taskType + \" is missing a size value.\");\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    public static void checkStations(BufferedReader reader, int lineNumber, List<String> stationIds, List<String> taskTypeIds) throws IOException {\r\n        String line;\r\n        while ((line = reader.readLine()) != null) {\r\n            lineNumber++;\r\n            line = line.trim();\r\n\r\n            if (line.startsWith(\")\")) {\r\n                break; // Kapanış parantezine kadar okuyoruz\r\n            }\r\n\r\n            String[] parts = line.substring(line.indexOf(' ') + 1).split(\"\\\\s+\");\r\n            String stationId = parts[0];\r\n            if (stationIds.contains(stationId)) {\r\n                System.out.println(\"Semantic error on line \" + lineNumber + \": Duplicate station ID \" + stationId);\r\n            } else {\r\n                stationIds.add(stationId);\r\n            }\r\n\r\n            for (int i = 4; i < parts.length; i++) {\r\n                String taskType = parts[i];\r\n                if (!taskTypeIds.contains(taskType)) {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": \" + taskType + \" is not one of the declared task types.\");\r\n                }\r\n                if (i + 1 < parts.length && parts[i + 1].matches(\"[0-9.]+\")) {\r\n                    i++; // Hız değerini atlıyoruz\r\n                } else {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": Task type \" + taskType + \" is missing a speed value.\");\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
-diff --git a/.idea/misc.xml b/.idea/misc.xml
---- a/.idea/misc.xml	(revision fb31b03822e37121994ee9c2347bee23aa3aef30)
-+++ b/.idea/misc.xml	(date 1716043244339)
-@@ -1,6 +1,6 @@
- <?xml version="1.0" encoding="UTF-8"?>
- <project version="4">
--  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
-+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
-     <output url="file://$PROJECT_DIR$/out" />
-   </component>
- </project>
-\ No newline at end of file
+diff --git a/src/d1.java b/src/d1.java
+--- a/src/d1.java	(revision 1bcf3a1bc13aab9f7bcb654f93b23c8f8510af9a)
++++ b/src/d1.java	(date 1716043524917)
+@@ -51,7 +51,6 @@
+         // Dosyayı kapatıyoruz
+         reader.close();
+     }
+-
+     public static void checkTaskTypes(String line, int lineNumber, List<String> taskTypeIds) {
+         // İlk boşluktan sonrasını alıp boşluklara göre bölüyoruz
+         String[] parts = line.substring(line.indexOf(' ') + 1).split("\\s+");
 Index: .idea/workspace.xml
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
@@ -25,15 +24,14 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
 diff --git a/.idea/workspace.xml b/.idea/workspace.xml
---- a/.idea/workspace.xml	(revision fb31b03822e37121994ee9c2347bee23aa3aef30)
-+++ b/.idea/workspace.xml	(date 1716043476068)
-@@ -4,17 +4,8 @@
+--- a/.idea/workspace.xml	(revision 1bcf3a1bc13aab9f7bcb654f93b23c8f8510af9a)
++++ b/.idea/workspace.xml	(date 1716043281064)
+@@ -4,17 +4,10 @@
      <option name="autoReloadType" value="SELECTIVE" />
    </component>
    <component name="ChangeListManager">
 -    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="new classes">
-+    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="changes">
-       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
 -      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_13_49__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_13_49__Changes_.xml" afterDir="false" />
 -      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_13_59__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_13_59__Changes_.xml" afterDir="false" />
 -      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_15_56__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_15_56__Changes_.xml" afterDir="false" />
@@ -43,22 +41,259 @@ diff --git a/.idea/workspace.xml b/.idea/workspace.xml
 -      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_06__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_06__Changes_.xml" afterDir="false" />
 -      <change beforePath="$PROJECT_DIR$/jobfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/jobfile.txt" afterDir="false" />
 -      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
++    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="2 errors">
++      <change afterPath="$PROJECT_DIR$/src/d2.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/d1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/d1.java" afterDir="false" />
      </list>
      <option name="SHOW_DIALOG" value="false" />
      <option name="HIGHLIGHT_CONFLICTS" value="true" />
-@@ -211,7 +202,14 @@
+@@ -62,18 +55,20 @@
+     <option name="showMembers" value="true" />
+     <option name="showVisibilityIcons" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "Application.Main.executor": "Run",
++    "Application.d1.executor": "Run",
++    "Application.d2.executor": "Run",
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "git-widget-placeholder": "master",
++    "node.js.detected.package.eslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)"
+   }
+-}</component>
+-  <component name="RunManager" selected="Application.Main">
++}]]></component>
++  <component name="RunManager" selected="Application.d1">
+     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="Main" />
+       <module name="asdfgh" />
+@@ -83,6 +78,20 @@
+     </configuration>
+     <configuration name="WorkFlowParser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="WorkFlowParser" />
++      <module name="asdfgh" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="d1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="d1" />
++      <module name="asdfgh" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="d2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="d2" />
+       <module name="asdfgh" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+@@ -90,6 +99,8 @@
+     </configuration>
+     <recent_temporary>
+       <list>
++        <item itemvalue="Application.d1" />
++        <item itemvalue="Application.d2" />
+         <item itemvalue="Application.Main" />
+         <item itemvalue="Application.WorkFlowParser" />
+       </list>
+@@ -211,7 +222,15 @@
        <option name="project" value="LOCAL" />
        <updated>1716029847342</updated>
      </task>
 -    <option name="localTasksCounter" value="15" />
-+    <task id="LOCAL-00015" summary="changes">
-+      <created>1716043191838</created>
++    <task id="LOCAL-00015" summary="2 errors">
++      <option name="closed" value="true" />
++      <created>1716038676802</created>
 +      <option name="number" value="00015" />
 +      <option name="presentableId" value="LOCAL-00015" />
 +      <option name="project" value="LOCAL" />
-+      <updated>1716043191838</updated>
++      <updated>1716038676802</updated>
 +    </task>
 +    <option name="localTasksCounter" value="16" />
      <servers />
    </component>
    <component name="TypeScriptGeneratedFilesManager">
+@@ -240,6 +259,7 @@
+     <MESSAGE value="hash and arraylist tries" />
+     <MESSAGE value="changes" />
+     <MESSAGE value="easy to read" />
+-    <option name="LAST_COMMIT_MESSAGE" value="easy to read" />
++    <MESSAGE value="2 errors" />
++    <option name="LAST_COMMIT_MESSAGE" value="2 errors" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/d2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/d2.java b/src/d2.java
+new file mode 100644
+--- /dev/null	(date 1716041805158)
++++ b/src/d2.java	(date 1716041805158)
+@@ -0,0 +1,150 @@
++import java.io.BufferedReader;
++import java.io.FileReader;
++import java.io.IOException;
++import java.util.ArrayList;
++import java.util.List;
++
++public class d2 {
++
++    public static void main(String[] args) {
++        String fileName = "WrongFile.txt";
++        try {
++            // Dosyayı kontrol eden metodu çağırıyoruz
++            checkWorkflowFile(fileName);
++        } catch (IOException e) {
++            e.printStackTrace();
++        }
++    }
++
++    public static void checkWorkflowFile(String fileName) throws IOException {
++        // Dosyayı okumak için BufferedReader kullanıyoruz
++        BufferedReader reader = new BufferedReader(new FileReader(fileName));
++        String line;
++        int lineNumber = 0;
++
++        // ID'leri saklamak için listeler oluşturuyoruz
++        List<String> taskTypeIds = new ArrayList<>();
++        List<String> jobTypeIds = new ArrayList<>();
++        List<String> stationIds = new ArrayList<>();
++
++        // Dosyadaki her satırı okuyoruz
++        while ((line = reader.readLine()) != null) {
++            lineNumber++;
++            line = line.trim(); // Satırın başındaki ve sonundaki boşlukları kaldırıyoruz
++
++            if (line.isEmpty() || line.startsWith("#")) {
++                continue; // Boş satırları ve yorumları atlıyoruz
++            }
++
++            // Satırın içeriğine göre uygun kontrol metodunu çağırıyoruz
++            if (line.startsWith("(TASKTYPES")) {
++                checkTaskTypes(line, lineNumber, taskTypeIds);
++            } else if (line.startsWith("(JOBTYPES")) {
++                checkJobTypes(reader, lineNumber, jobTypeIds, taskTypeIds);
++            } else if (line.startsWith("(STATIONS")) {
++                checkStations(reader, lineNumber, stationIds, taskTypeIds);
++            } else {
++                System.out.println("Syntax error on line " + lineNumber + ": " + line);
++            }
++        }
++
++
++        reader.close();
++    }
++
++    public static void checkTaskTypes(String line, int lineNumber, List<String> taskTypeIds) {
++        // İlk boşluktan sonrasını alıp boşluklara göre bölüyoruz
++        String[] parts = line.substring(line.indexOf(' ') + 1).split("\\s+");
++        List<String> seenTaskTypes = new ArrayList<>();
++
++        // Her parçayı kontrol ediyoruz
++        for (int i = 0; i < parts.length; i++) {
++            String part = parts[i];
++            if (!part.startsWith("[a-zA-Z]\\w*")) {
++                // Eğer part geçerli bir task type id ise
++                if (seenTaskTypes.contains(part)) {
++                    System.out.println("Semantic error on line " + lineNumber + ": " + part + " is listed twice.");
++                } else {
++                    seenTaskTypes.add(part);
++                }
++                if (taskTypeIds.contains(part)) {
++                    System.out.println("Semantic error on line " + lineNumber + ": Duplicate task type ID " + part);
++                } else {
++                    taskTypeIds.add(part);
++                }
++                // Boyut değerinin var olup olmadığını kontrol ediyoruz
++                if (i + 1 < parts.length && parts[i + 1].matches("[0-9.]+")) {
++                    i++; // Boyut değerini atlıyoruz
++                } else {
++                    System.out.println("Semantic error on line " + lineNumber + ": Task type " + part + " is missing a size value.");
++                }
++            } else {
++                System.out.println("Semantic error on line " + lineNumber + ": " + part + " is an invalid tasktypeID.");
++            }
++        }
++    }
++
++    public static void checkJobTypes(BufferedReader reader, int lineNumber, List<String> jobTypeIds, List<String> taskTypeIds) throws IOException {
++        String line;
++        while ((line = reader.readLine()) != null) {
++            lineNumber++;
++            line = line.trim();
++
++            if (line.startsWith(")")) {
++                break; // Kapanış parantezine kadar okuyoruz
++            }
++
++            String[] parts = line.substring(line.indexOf(' ') + 1).split("\\s+");
++            String jobId = parts[0];
++            if (jobTypeIds.contains(jobId)) {
++                System.out.println("Semantic error on line " + lineNumber + ": " + jobId + " already declared.");
++            } else {
++                jobTypeIds.add(jobId);
++            }
++
++            for (int i = 1; i < parts.length; i++) {
++                String taskType = parts[i];
++                if (!taskTypeIds.contains(taskType)) {
++                    System.out.println("Semantic error on line " + lineNumber + ": " + taskType + " is not one of the declared task types.");
++                }
++                if (i + 1 < parts.length && parts[i + 1].matches("[0-9.]+")) {
++                    i++; // Boyut değerini atlıyoruz
++                } else {
++                    System.out.println("Semantic error on line " + lineNumber + ": Task type " + taskType + " is missing a size value.");
++                }
++            }
++        }
++    }
++
++    public static void checkStations(BufferedReader reader, int lineNumber, List<String> stationIds, List<String> taskTypeIds) throws IOException {
++        String line;
++        while ((line = reader.readLine()) != null) {
++            lineNumber++;
++            line = line.trim();
++
++            if (line.startsWith(")")) {
++                break; // Kapanış parantezine kadar okuyoruz
++            }
++
++            String[] parts = line.substring(line.indexOf(' ') + 1).split("\\s+");
++            String stationId = parts[0];
++            if (stationIds.contains(stationId)) {
++                System.out.println("Semantic error on line " + lineNumber + ": Duplicate station ID " + stationId);
++            } else {
++                stationIds.add(stationId);
++            }
++
++            for (int i = 4; i < parts.length; i++) {
++                String taskType = parts[i];
++                if (!taskTypeIds.contains(taskType)) {
++                    System.out.println("Semantic error on line " + lineNumber + ": " + taskType + " is not one of the declared task types.");
++                }
++                if (i + 1 < parts.length && parts[i + 1].matches("[0-9.]+")) {
++                    i++; // Hız değerini atlıyoruz
++                } else {
++                    System.out.println("Semantic error on line " + lineNumber + ": Task type " + taskType + " is missing a speed value.");
++                }
++            }
++        }
++    }
++}
