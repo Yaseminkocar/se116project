@@ -60,9 +60,6 @@ public class JobErrors {
                 continue;
             }
 
-          /*  jobIDs.add(jobID);
-            // jobs.add(new Job(jobID, jobTypeID, startTime, duration));
-            lineNumber++; */
         }
 
         reader.close();

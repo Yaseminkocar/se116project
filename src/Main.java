@@ -120,58 +120,8 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String fileName = "WrongFile.txt";
-        List<Job> jobs = readJobsFromFile(fileName);
 
-        // Print all jobs
-        for (Job job : jobs) {
-            System.out.println(job);
-        }
     }
-    // Method to read jobs from file
-    public static List<Job> readJobsFromFile(String fileName) {
-        List<Job> jobs = new ArrayList<>();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                parseJobLine(line, jobs);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return jobs;
-    }
-
-    // Method to parse each line and add to jobs list
-    private static void parseJobLine(String line, List<Job> jobs) {
-        // Remove parentheses and split by spaces
-        line = line.replaceAll("[()]", "").trim();
-        String[] parts = line.split("\\s+");
-
-        if (parts.length > 0) {
-            String jobName = parts[0];
-            ArrayList<JobDetail> details = new ArrayList<>();
-            for (int i = 1; i < parts.length; i += 2) {
-                String type = parts[i];
-                int value = (i + 1 < parts.length && isNumeric(parts[i + 1])) ? Integer.parseInt(parts[i + 1]) : 0;
-                details.add(new JobDetail(type, value));
-            }
-            jobs.add(new Job(jobName, details));
-        }
-    }
-
-    // Method to check if a string is numeric
-    private static boolean isNumeric(String str) {
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
     public static void parseWorkflowFile(String inputfile) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
             String line;
