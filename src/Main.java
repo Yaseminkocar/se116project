@@ -123,12 +123,11 @@ public class Main {
         String fileName = "WrongFile.txt";
         List<Job> jobs = readJobsFromFile(fileName);
 
-        // Print all jobs
         for (Job job : jobs) {
             System.out.println(job);
         }
     }
-    // Method to read jobs from file
+
     public static List<Job> readJobsFromFile(String fileName) {
         List<Job> jobs = new ArrayList<>();
 
@@ -144,7 +143,6 @@ public class Main {
         return jobs;
     }
 
-    // Method to parse each line and add to jobs list
     private static void parseJobLine(String line, List<Job> jobs) {
         // Remove parentheses and split by spaces
         line = line.replaceAll("[()]", "").trim();
@@ -162,7 +160,6 @@ public class Main {
         }
     }
 
-    // Method to check if a string is numeric
     private static boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);
