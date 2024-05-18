@@ -19,6 +19,8 @@ public class Main {
 
         String filePath = "WrongFile.txt";
 
+
+
         try (BufferedReader bufferreader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = bufferreader.readLine()) != null) {
@@ -26,12 +28,32 @@ public class Main {
                 for (String word : words) {
                     System.out.println(word);
                 }
+
+                int startlinenumber ;
+                int endlinenumber;
+
+                int follow=0;
+                for (int i = 0; i < words.length; i++) {
+                    switch (words[i]) {
+                        case "(JOBTYPES":
+                            startlinenumber = follow;
+                            System.out.println(follow);
+                            break;
+                        case "(STATIONS":
+                            endlinenumber = follow;
+                            System.out.println(follow);
+                            break;
+                        default:
+                        //   System.out.println("Unmatched word: " + words[i]);
+                        follow++;
+                    }
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        String filePath2 = "WrongFile.txt";
+
 
         try {
             parseWorkflowFile(filePath);
@@ -76,8 +98,6 @@ public class Main {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
             while ((line2 = bufferedReader.readLine()) != null) {
-
-
                 String[] words = line2.split("\s+");
 
                /* for(int y=0;y< words.length;y++){
