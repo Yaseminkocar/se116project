@@ -56,6 +56,8 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e);
         }
+
+
         //tasklerin stationda var yok kontrolü
         String line2;
         ArrayList tasksofjob= new ArrayList();
