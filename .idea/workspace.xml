@@ -4,9 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="changes">
+    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="commit before update">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_14_48__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_14_48__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_15_07__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_15_07__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_15_08__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_15_08__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_16_51__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_16_51__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_23_46__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2024_23_46__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Job.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JobType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JobType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Station.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Station.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TaskType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TaskType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/d.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +76,14 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.d">
+    <configuration name="Deneme" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Deneme" />
+      <module name="asdfgh" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="asdfgh" />
@@ -73,8 +91,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WorkFlowParser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="WorkFlowParser" />
+    <configuration name="d" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="d" />
+      <module name="asdfgh" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="f" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="f" />
       <module name="asdfgh" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -82,8 +107,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.d" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.WorkFlowParser" />
+        <item itemvalue="Application.f" />
+        <item itemvalue="Application.Deneme" />
       </list>
     </recent_temporary>
   </component>
@@ -154,49 +181,22 @@
       <option name="project" value="LOCAL" />
       <updated>1715937727609</updated>
     </task>
-    <task id="LOCAL-00008" summary="senkronize">
-      <created>1715941589521</created>
+    <task id="LOCAL-00008" summary="senkronize3">
+      <option name="closed" value="true" />
+      <created>1715943007905</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1715941589521</updated>
+      <updated>1715943007905</updated>
     </task>
-    <task id="LOCAL-00009" summary="commit repeat 2">
-      <created>1715953732287</created>
+    <task id="LOCAL-00009" summary="commit before update">
+      <created>1715954183307</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1715953732287</updated>
+      <updated>1715954183307</updated>
     </task>
-    <task id="LOCAL-00010" summary="Exception addition">
-      <created>1715953869614</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1715953869614</updated>
-    </task>
-    <task id="LOCAL-00011" summary="commit">
-      <created>1715963243663</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1715963243663</updated>
-    </task>
-    <task id="LOCAL-00012" summary="hash and arraylist tries">
-      <created>1715965005880</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1715965005880</updated>
-    </task>
-    <task id="LOCAL-00013" summary="changes">
-      <created>1716029189997</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1716029189998</updated>
-    </task>
-    <option name="localTasksCounter" value="14" />
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,16 +214,14 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="commit" />
     <MESSAGE value="meltemin commiti" />
     <MESSAGE value="meltemin commiti 2" />
     <MESSAGE value="Classes" />
     <MESSAGE value="some bugs fixed" />
-    <MESSAGE value="senkronize" />
-    <MESSAGE value="commit repeat 2" />
-    <MESSAGE value="Exception addition" />
-    <MESSAGE value="commit" />
-    <MESSAGE value="hash and arraylist tries" />
     <MESSAGE value="changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes" />
+    <MESSAGE value="senkronize3" />
+    <MESSAGE value="commit before update" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit before update" />
   </component>
 </project>

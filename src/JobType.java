@@ -35,5 +35,4 @@ public class JobType {
         this.type = type;
         this.taskArrayList = taskArrayList;
     }
-
 }

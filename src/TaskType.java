@@ -1,7 +1,6 @@
 public class TaskType {
     private double size;
     private String type;
-
     public TaskType(double size, String type) {
         this.size = size;
         this.type=type;
