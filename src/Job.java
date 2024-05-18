@@ -63,7 +63,7 @@ public class Job {
     }*/
     @Override
     public String toString() {
-        return "Job{" +
+        return "{" +
                 "name='" + name + '\'' +
                 ", details=" + details +
                 '}';
