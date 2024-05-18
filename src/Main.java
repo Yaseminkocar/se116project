@@ -136,6 +136,7 @@ public class Main {
                     continue;
                 }
 
+
                 String[] parts = line.split("\\s+");
                 if (parts.length < 3) {
                     System.out.println("Syntax error on line " + lineNumber + ": Each line must have at least 3 parts.");

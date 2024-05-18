@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JobErrors {
-
     public List<Job> parseJobFile(String filename) throws IOException {
         List<Job> jobs = new ArrayList<>();
         List<String> jobIDs = new ArrayList<>();
@@ -20,13 +19,15 @@ public class JobErrors {
                 lineNumber++;
                 continue;
             }
+
             String jobID = parts[0];
             String jobTypeID = parts[1];
             int startTime;
             int duration;
 
+            // Check if jobTypeID is valid
             if (!jobTypeID.matches("[A-Za-z]\\d+")) {
-                System.out.println("error at line " + lineNumber + ": jobTypeID must start with a letter followed by a number.");
+                System.out.println("Semantic error at line " + lineNumber + ": jobTypeID must start with a letter followed by a number.");
                 lineNumber++;
                 continue;
             }
@@ -36,34 +37,33 @@ public class JobErrors {
                 duration = Integer.parseInt(parts[3]);
 
                 if (startTime < 0) {
-                    System.out.println("error at line " + lineNumber + ": start time has to be greater than 0 .");
-                    lineNumber++;
-                    continue;
+                    throw new IllegalArgumentException("startTime must be non-negative.");
                 }
                 if (duration <= 0) {
-                    System.out.println("error at line " + lineNumber + ": duration has to be greater than 0 .");
-                    lineNumber++;
-                    continue;
+                    throw new IllegalArgumentException("duration must be greater than zero.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println(" error at line " + lineNumber + ": start time or duration has to be numeric value .");
+                System.out.println("Semantic error at line " + lineNumber + ": Non-numeric value in startTime or duration.");
                 lineNumber++;
                 continue;
-            }
-            try {
-                if (jobIDs.contains(jobID)) {
-                    throw new IllegalArgumentException("Duplicate jobID " + jobID);
-                } else {
-                    jobIDs.add(jobID);
-                }
             } catch (IllegalArgumentException e) {
-                System.out.println(" error at line " + lineNumber + ": " + e.getMessage());
+                System.out.println("Semantic error at line " + lineNumber + ": " + e.getMessage());
                 lineNumber++;
                 continue;
             }
 
+            if (jobIDs.contains(jobID)) {
+                System.out.println("Semantic error at line " + lineNumber + ": Duplicate jobID " + jobID);
+                lineNumber++;
+                continue;
+            }
+
+            jobIDs.add(jobID);
+            //   jobs.add(new Job(jobID, jobTypeID, startTime, duration)); // Correct number of arguments
+            lineNumber++;
         }
+
         reader.close();
         return jobs;
- }
+}
 }
