@@ -6,9 +6,10 @@ public class Job {
     private String jobID;
     private int startTime;
     private int duration;//must start with a letter
-
+    String name;
     private int jobDuration;
     private ArrayList<Task> taskArrayList = new ArrayList<>();
+    ArrayList<JobDetail> details;
 
     public Job(JobType jobType, String jobID, int jobDuration,int starTime, int duration){
         this.jobType=jobType;
@@ -17,7 +18,10 @@ public class Job {
        this.startTime=starTime;
        this.duration=duration;
     }
-
+    public Job(String name, ArrayList<JobDetail> details) {
+        this.name = name;
+        this.details = details;
+    }
     public int getStartTime() {
         return startTime;
     }
@@ -53,10 +57,18 @@ public class Job {
     public int deadline() {
         return startTime + duration;
     }
-    @Override
-    public String toString() {
+  //  @Override
+   /* public String toString() {
         return "JobID: " + jobID + ", JobType: " + jobType + ", StartTime: " + startTime + ", Duration: " + duration + ", Deadline: " + deadline();
+    }*/
+@Override
+    public String toString() {
+        return "Job{" +
+                "name='" + name + '\'' +
+                ", details=" + details +
+                '}';
     }
+
 }
 
 
