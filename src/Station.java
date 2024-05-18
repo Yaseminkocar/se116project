@@ -19,6 +19,8 @@ public class Station {
         this.stationID = stationID;
     }
 
+    public Station(){}
+
 
     public int getStationSpeed() {
         return stationSpeed;

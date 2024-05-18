@@ -82,6 +82,8 @@ public class Main {
                         endlinenumber=j;
                     }
                 }
+
+
                 for(int k=startlinenumber;k<endlinenumber;k++){
                     if(words[k].startsWith("T"));
                     tasksofjob.add(words[k]);
@@ -91,6 +93,8 @@ public class Main {
                     if(words[a].startsWith("T"));
                     taskofstation.add(words[a]);
                 }
+
+
                 int b=taskofstation.size();
                 int c=tasksofjob.size();
                 for(int i=0;i<b;i++){
@@ -121,7 +125,6 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         String fileName = "jobfile.txt";
         List<Job> jobs = readJobsFromFile(fileName);
 
