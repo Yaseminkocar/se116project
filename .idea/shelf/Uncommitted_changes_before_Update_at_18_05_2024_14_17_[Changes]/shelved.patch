@@ -1,0 +1,85 @@
+Index: src/Job.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Job.java b/src/Job.java
+--- a/src/Job.java	
++++ b/src/Job.java	
+@@ -57,17 +57,17 @@
+     public int deadline() {
+         return startTime + duration;
+     }
+-  //  @Override
+-   /* public String toString() {
+-        return "JobID: " + jobID + ", JobType: " + jobType + ", StartTime: " + startTime + ", Duration: " + duration + ", Deadline: " + deadline();
+-    }*/
+-@Override
++   @Override
++    public String toString() {
++        return "JobID: " + jobID + ", JobType: " + jobType + ", StartTime: " + startTime + ", Duration: " + duration + ", Deadline: " + deadline()+",details"+details;
++    }
++/*@Override
+     public String toString() {
+         return "{" +
+                 "name='" + name + '\'' +
+                 ", details=" + details +
+                 '}';
+-    }
++    }*/
+ 
+ }
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,9 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="easy to read">
++    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="easy to read2">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Job.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/JobDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JobDetail.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -203,7 +204,21 @@
+       <option name="project" value="LOCAL" />
+       <updated>1716029847342</updated>
+     </task>
+-    <option name="localTasksCounter" value="15" />
++    <task id="LOCAL-00015" summary="easy to read2">
++      <created>1716030335460</created>
++      <option name="number" value="00015" />
++      <option name="presentableId" value="LOCAL-00015" />
++      <option name="project" value="LOCAL" />
++      <updated>1716030335460</updated>
++    </task>
++    <task id="LOCAL-00016" summary="easy to read2">
++      <created>1716030346140</created>
++      <option name="number" value="00016" />
++      <option name="presentableId" value="LOCAL-00016" />
++      <option name="project" value="LOCAL" />
++      <updated>1716030346140</updated>
++    </task>
++    <option name="localTasksCounter" value="17" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -232,6 +247,7 @@
+     <MESSAGE value="hash and arraylist tries" />
+     <MESSAGE value="changes" />
+     <MESSAGE value="easy to read" />
+-    <option name="LAST_COMMIT_MESSAGE" value="easy to read" />
++    <MESSAGE value="easy to read2" />
++    <option name="LAST_COMMIT_MESSAGE" value="easy to read2" />
+   </component>
+ </project>
+\ No newline at end of file
