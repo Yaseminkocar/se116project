@@ -32,8 +32,6 @@ public class Main {
             e.printStackTrace();
         }
 
-        String filePath2 = "WrongFile.txt";
-
         //parantez sayısı karşılaştırma
         int sumopen = 0;
         int sumclose = 0;
