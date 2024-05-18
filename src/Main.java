@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         String input = null;
         try {
-            input = TaskReading("WrongFile.txt");
+            input = ReadTask("WrongFile.txt");
             String result = Rename(input);
             System.out.println("Modified task statement: " + result);
         } catch (IOException e) {
@@ -161,7 +161,8 @@ public class Main {
     }
 
     // Method to check if a string is numeric
-    private static boolean isNumeric(String str) {
+    private static boolean isNumeric(String str
+    ) {
         try {
             Integer.parseInt(str);
             return true;
@@ -169,7 +170,7 @@ public class Main {
             return false;
         }
     }
-    public static String TaskReading(String inputfile) throws IOException {
+    public static String ReadTask(String inputfile) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
             String line;
