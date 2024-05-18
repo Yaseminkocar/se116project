@@ -88,7 +88,6 @@ public class Main {
 
                 */
 
-
                 for(int y=0;y< words.length;y++){
                     System.out.println(words[y]);
                 }
