@@ -6,7 +6,7 @@ public class Station {
     private String stationID; //must start with a letter
     ArrayList<Task> taskQueue = new ArrayList<>();
 
-    //singleTask, multipleTaskSameType, multipleTaskDifType-> bazılarının hızları değişken bazılarınınki sabit
+    //singleTask, multipleTaskSameType, multipleTaskDifType->
 
     ArrayList<Station> singleTask= new ArrayList<>();
     ArrayList<Station> multipleTaskSameType= new ArrayList<>();
