@@ -13,6 +13,7 @@ public class Main {
             System.out.println("Please enter workflow file and job file names...");
             return;
         }
+
         String workflowFileName;
         String jobFileName;
 
@@ -59,6 +60,7 @@ public class Main {
             }
         }
         System.out.println();
+        //d3
         Control();
 
         try {
@@ -131,7 +133,6 @@ public class Main {
             JobErrors parser = new JobErrors();
             List<Job> job = parser.parseJobFile("jobfile.txt");
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -140,7 +141,8 @@ public class Main {
         WorkFlow();
 
     }
-    public static void Control() {
+    //d3
+    private static void Control() {
         StringBuilder stringBuilder = new StringBuilder();
 
         try (BufferedReader br = new BufferedReader(new FileReader("WrongFile.txt"))) {
@@ -159,16 +161,16 @@ public class Main {
         String element = stringBuilder.toString();
 
         String[] lines = element.split("\n");
-        ArrayList<String> List = new ArrayList<>();
+        List<String> inputList = new ArrayList<>();
 
         for (String line : lines) {
             String[] words = line.trim().split("\\s+");
             for (String word : words) {
-                List.add(word.replaceAll("[()]", ""));
+                inputList.add(word.replaceAll("[()]", ""));
             }
         }
 
-        String[] wordsArray = List.toArray(new String[0]);
+        String[] wordsArray = inputList.toArray(new String[0]);
         for (int i=0; i< wordsArray.length; i++){
             System.out.println(wordsArray[i]);
         }

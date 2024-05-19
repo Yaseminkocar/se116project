@@ -14,6 +14,7 @@ public class JobErrors {
 
         while ((line = reader.readLine()) != null) {
             String[] parts = line.trim().split("\\s+");
+
             if (parts.length != 4) {
                 System.out.println("Syntax error at line " + lineNumber + ": " + line);
                 lineNumber++;
