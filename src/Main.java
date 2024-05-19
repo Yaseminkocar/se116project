@@ -142,7 +142,6 @@ public class Main {
     }
     public static void Control() {
         StringBuilder stringBuilder = new StringBuilder();
-
         try (BufferedReader br = new BufferedReader(new FileReader("WrongFile.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
