@@ -117,7 +117,6 @@ public class Main {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
-
         String fileName = args[0];
         List<Job> jobs = readJobs(fileName);
 
