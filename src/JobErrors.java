@@ -45,12 +45,12 @@ public class JobErrors {
                 lineNumber++;
                 continue;
             } catch (IllegalArgumentException e) {
-                System.out.println(" error at line " + lineNumber + ": " + e.getMessage());
+                System.out.println("Error at line " + lineNumber + ": " + e.getMessage());
                 lineNumber++;
                 continue;
             }
             if (jobIDs.contains(jobID)) {
-                System.out.println(" error at line " + lineNumber + ": Duplicate jobID " + jobID);
+                System.out.println("Error at line " + lineNumber + ": Duplicate jobID " + jobID);
                 lineNumber++;
                 continue;
             }
