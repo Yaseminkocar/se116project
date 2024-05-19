@@ -59,7 +59,7 @@ public class Main {
             }
         }
         System.out.println();
-        Control();
+        Control(args[0]);
 
         try {
             if (sumOpen < sumClose) {
@@ -118,7 +118,7 @@ public class Main {
             System.out.println(e.getMessage());
         }
 
-        String fileName = "WrongFile.txt";
+        String fileName = args[0];
         List<Job> jobs = readJobs(fileName);
 
         // Print all jobs
@@ -129,7 +129,7 @@ public class Main {
         System.out.println();
         try {
             JobErrors parser = new JobErrors();
-            List<Job> job = parser.parseJobFile("jobfile.txt");
+            List<Job> job = parser.parseJobFile(args[1]);
 
 
         } catch (IOException e) {
@@ -140,9 +140,9 @@ public class Main {
         WorkFlow();
 
     }
-    public static void Control() {
+    public static void Control(String filename) {
         StringBuilder stringBuilder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader("WrongFile.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
                 stringBuilder.append(line).append("\n");
