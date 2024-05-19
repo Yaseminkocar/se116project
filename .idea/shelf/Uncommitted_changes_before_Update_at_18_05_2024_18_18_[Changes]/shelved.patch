@@ -1,0 +1,274 @@
+Index: src/d2.java
+===================================================================
+diff --git a/src/d2.java b/src/d2.java
+deleted file mode 100644
+--- a/src/d2.java	(revision 580cd58b63a97181ea027a07109e2aae0c737006)
++++ /dev/null	(revision 580cd58b63a97181ea027a07109e2aae0c737006)
+@@ -1,150 +0,0 @@
+-import java.io.BufferedReader;
+-import java.io.FileReader;
+-import java.io.IOException;
+-import java.util.ArrayList;
+-import java.util.List;
+-
+-public class d2 {
+-
+-    public static void main(String[] args) {
+-        String fileName = "WrongFile.txt";
+-        try {
+-            // Dosyayı kontrol eden metodu çağırıyoruz
+-            checkWorkflowFile(fileName);
+-        } catch (IOException e) {
+-            e.printStackTrace();
+-        }
+-    }
+-
+-    public static void checkWorkflowFile(String fileName) throws IOException {
+-        // Dosyayı okumak için BufferedReader kullanıyoruz
+-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+-        String line;
+-        int lineNumber = 0;
+-
+-        // ID'leri saklamak için listeler oluşturuyoruz
+-        List<String> taskTypeIds = new ArrayList<>();
+-        List<String> jobTypeIds = new ArrayList<>();
+-        List<String> stationIds = new ArrayList<>();
+-
+-        // Dosyadaki her satırı okuyoruz
+-        while ((line = reader.readLine()) != null) {
+-            lineNumber++;
+-            line = line.trim(); // Satırın başındaki ve sonundaki boşlukları kaldırıyoruz
+-
+-            if (line.isEmpty() || line.startsWith("#")) {
+-                continue; // Boş satırları ve yorumları atlıyoruz
+-            }
+-
+-            // Satırın içeriğine göre uygun kontrol metodunu çağırıyoruz
+-            if (line.startsWith("(TASKTYPES")) {
+-                checkTaskTypes(line, lineNumber, taskTypeIds);
+-            } else if (line.startsWith("(JOBTYPES")) {
+-                checkJobTypes(reader, lineNumber, jobTypeIds, taskTypeIds);
+-            } else if (line.startsWith("(STATIONS")) {
+-                checkStations(reader, lineNumber, stationIds, taskTypeIds);
+-            } else {
+-                System.out.println("Syntax error on line " + lineNumber + ": " + line);
+-            }
+-        }
+-
+-
+-        reader.close();
+-    }
+-
+-    public static void checkTaskTypes(String line, int lineNumber, List<String> taskTypeIds) {
+-        // İlk boşluktan sonrasını alıp boşluklara göre bölüyoruz
+-        String[] parts = line.substring(line.indexOf(' ') + 1).split("\\s+");
+-        List<String> seenTaskTypes = new ArrayList<>();
+-
+-        // Her parçayı kontrol ediyoruz
+-        for (int i = 0; i < parts.length; i++) {
+-            String part = parts[i];
+-            if (!part.startsWith("[a-zA-Z]\\w*")) {
+-                // Eğer part geçerli bir task type id ise
+-                if (seenTaskTypes.contains(part)) {
+-                    System.out.println("Semantic error on line " + lineNumber + ": " + part + " is listed twice.");
+-                } else {
+-                    seenTaskTypes.add(part);
+-                }
+-                if (taskTypeIds.contains(part)) {
+-                    System.out.println("Semantic error on line " + lineNumber + ": Duplicate task type ID " + part);
+-                } else {
+-                    taskTypeIds.add(part);
+-                }
+-                // Boyut değerinin var olup olmadığını kontrol ediyoruz
+-                if (i + 1 < parts.length && parts[i + 1].matches("[0-9.]+")) {
+-                    i++; // Boyut değerini atlıyoruz
+-                } else {
+-                    System.out.println("Semantic error on line " + lineNumber + ": Task type " + part + " is missing a size value.");
+-                }
+-            } else {
+-                System.out.println("Semantic error on line " + lineNumber + ": " + part + " is an invalid tasktypeID.");
+-            }
+-        }
+-    }
+-
+-    public static void checkJobTypes(BufferedReader reader, int lineNumber, List<String> jobTypeIds, List<String> taskTypeIds) throws IOException {
+-        String line;
+-        while ((line = reader.readLine()) != null) {
+-            lineNumber++;
+-            line = line.trim();
+-
+-            if (line.startsWith(")")) {
+-                break; // Kapanış parantezine kadar okuyoruz
+-            }
+-
+-            String[] parts = line.substring(line.indexOf(' ') + 1).split("\\s+");
+-            String jobId = parts[0];
+-            if (jobTypeIds.contains(jobId)) {
+-                System.out.println("Semantic error on line " + lineNumber + ": " + jobId + " already declared.");
+-            } else {
+-                jobTypeIds.add(jobId);
+-            }
+-
+-            for (int i = 1; i < parts.length; i++) {
+-                String taskType = parts[i];
+-                if (!taskTypeIds.contains(taskType)) {
+-                    System.out.println("Semantic error on line " + lineNumber + ": " + taskType + " is not one of the declared task types.");
+-                }
+-                if (i + 1 < parts.length && parts[i + 1].matches("[0-9.]+")) {
+-                    i++; // Boyut değerini atlıyoruz
+-                } else {
+-                    System.out.println("Semantic error on line " + lineNumber + ": Task type " + taskType + " is missing a size value.");
+-                }
+-            }
+-        }
+-    }
+-
+-    public static void checkStations(BufferedReader reader, int lineNumber, List<String> stationIds, List<String> taskTypeIds) throws IOException {
+-        String line;
+-        while ((line = reader.readLine()) != null) {
+-            lineNumber++;
+-            line = line.trim();
+-
+-            if (line.startsWith(")")) {
+-                break; // Kapanış parantezine kadar okuyoruz
+-            }
+-
+-            String[] parts = line.substring(line.indexOf(' ') + 1).split("\\s+");
+-            String stationId = parts[0];
+-            if (stationIds.contains(stationId)) {
+-                System.out.println("Semantic error on line " + lineNumber + ": Duplicate station ID " + stationId);
+-            } else {
+-                stationIds.add(stationId);
+-            }
+-
+-            for (int i = 4; i < parts.length; i++) {
+-                String taskType = parts[i];
+-                if (!taskTypeIds.contains(taskType)) {
+-                    System.out.println("Semantic error on line " + lineNumber + ": " + taskType + " is not one of the declared task types.");
+-                }
+-                if (i + 1 < parts.length && parts[i + 1].matches("[0-9.]+")) {
+-                    i++; // Hız değerini atlıyoruz
+-                } else {
+-                    System.out.println("Semantic error on line " + lineNumber + ": Task type " + taskType + " is missing a speed value.");
+-                }
+-            }
+-        }
+-    }
+-}
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"new classes\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/d2.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_05__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_05__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_05__Changes_1.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_05__Changes_1.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_19__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_19__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_17_41__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_17_41__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/d1.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/d1.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;EmirayDurmaz&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/Yaseminkocar/se116project.git&quot;,\r\n    &quot;accountId&quot;: &quot;f876dfee-e282-4bb3-ac51-b7a06d3e1894&quot;\r\n  }\r\n}</component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;customColor&quot;: &quot;&quot;,\r\n  &quot;associatedIndex&quot;: 4\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2flxulGE1TD1wiPGhb4j94xWvUK\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <OptionsSetting value=\"false\" id=\"Update\" />\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"flattenPackages\" value=\"true\" />\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n    <option name=\"showMembers\" value=\"true\" />\r\n    <option name=\"showVisibilityIcons\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.Main.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\" selected=\"Application.Main\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\r\n      <module name=\"asdfgh\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"WorkFlowParser\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"WorkFlowParser\" />\r\n      <module name=\"asdfgh\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Main\" />\r\n        <item itemvalue=\"Application.WorkFlowParser\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240\" />\r\n        <option value=\"bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"\" />\r\n      <created>1714389694199</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1714389694199</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"commit\">\r\n      <created>1714390906500</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714390906500</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"meltemin commiti\">\r\n      <created>1714461371483</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714461371483</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"meltemin commiti 2\">\r\n      <created>1714461447617</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714461447617</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Classes\">\r\n      <created>1714565742088</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714565742088</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"some bugs fixed\">\r\n      <created>1715370784472</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715370784472</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"changes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1715885718441</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715885718441</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"changes\">\r\n      <created>1715937727609</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715937727609</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"senkronize\">\r\n      <created>1715941589521</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715941589521</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"commit repeat 2\">\r\n      <created>1715953732287</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715953732287</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"Exception addition\">\r\n      <created>1715953869614</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715953869614</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"commit\">\r\n      <created>1715963243663</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715963243663</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"hash and arraylist tries\">\r\n      <created>1715965005880</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715965005880</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"changes\">\r\n      <created>1716029189997</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1716029189998</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"easy to read\">\r\n      <created>1716029847342</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1716029847342</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"15\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"meltemin commiti\" />\r\n    <MESSAGE value=\"meltemin commiti 2\" />\r\n    <MESSAGE value=\"Classes\" />\r\n    <MESSAGE value=\"some bugs fixed\" />\r\n    <MESSAGE value=\"senkronize\" />\r\n    <MESSAGE value=\"commit repeat 2\" />\r\n    <MESSAGE value=\"Exception addition\" />\r\n    <MESSAGE value=\"commit\" />\r\n    <MESSAGE value=\"hash and arraylist tries\" />\r\n    <MESSAGE value=\"changes\" />\r\n    <MESSAGE value=\"easy to read\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"easy to read\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 580cd58b63a97181ea027a07109e2aae0c737006)
++++ b/.idea/workspace.xml	(date 1716045456953)
+@@ -4,15 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="new classes">
+-      <change afterPath="$PROJECT_DIR$/src/d2.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_05__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_05__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_05__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_05__Changes_1.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_19__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_19__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_17_41__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_17_41__Changes_.xml" afterDir="false" />
++    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="main class has updated">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/d1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/d1.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/d2.java" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -60,18 +55,20 @@
+     <option name="showMembers" value="true" />
+     <option name="showVisibilityIcons" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "Application.Main.executor": "Run",
++    "Application.WorkflowChecker.executor": "Run",
++    "Application.d1.executor": "Run",
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "git-widget-placeholder": "master",
++    "node.js.detected.package.eslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)"
+   }
+-}</component>
+-  <component name="RunManager" selected="Application.Main">
++}]]></component>
++  <component name="RunManager" selected="Application.d1">
+     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="Main" />
+       <module name="asdfgh" />
+@@ -81,6 +78,20 @@
+     </configuration>
+     <configuration name="WorkFlowParser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="WorkFlowParser" />
++      <module name="asdfgh" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="WorkflowChecker" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="WorkflowChecker" />
++      <module name="asdfgh" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="d1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="d1" />
+       <module name="asdfgh" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+@@ -88,6 +99,8 @@
+     </configuration>
+     <recent_temporary>
+       <list>
++        <item itemvalue="Application.d1" />
++        <item itemvalue="Application.WorkflowChecker" />
+         <item itemvalue="Application.Main" />
+         <item itemvalue="Application.WorkFlowParser" />
+       </list>
+@@ -209,7 +222,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1716029847342</updated>
+     </task>
+-    <option name="localTasksCounter" value="15" />
++    <task id="LOCAL-00015" summary="main class has updated">
++      <option name="closed" value="true" />
++      <created>1716044805119</created>
++      <option name="number" value="00015" />
++      <option name="presentableId" value="LOCAL-00015" />
++      <option name="project" value="LOCAL" />
++      <updated>1716044805119</updated>
++    </task>
++    <option name="localTasksCounter" value="16" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -238,6 +259,7 @@
+     <MESSAGE value="hash and arraylist tries" />
+     <MESSAGE value="changes" />
+     <MESSAGE value="easy to read" />
+-    <option name="LAST_COMMIT_MESSAGE" value="easy to read" />
++    <MESSAGE value="main class has updated" />
++    <option name="LAST_COMMIT_MESSAGE" value="main class has updated" />
+   </component>
+ </project>
+\ No newline at end of file

@@ -1,0 +1,299 @@
+Index: src/d2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.io.BufferedReader;\r\nimport java.io.FileReader;\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class d2 {\r\n\r\n    public static void main(String[] args) {\r\n        String fileName = \"WrongFile.txt\";\r\n        try {\r\n            // Dosyayı kontrol eden metodu çağırıyoruz\r\n            checkWorkflowFile(fileName);\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    public static void checkWorkflowFile(String fileName) throws IOException {\r\n        // Dosyayı okumak için BufferedReader kullanıyoruz\r\n        BufferedReader reader = new BufferedReader(new FileReader(fileName));\r\n        String line;\r\n        int lineNumber = 0;\r\n\r\n        // ID'leri saklamak için listeler oluşturuyoruz\r\n        List<String> taskTypeIds = new ArrayList<>();\r\n        List<String> jobTypeIds = new ArrayList<>();\r\n        List<String> stationIds = new ArrayList<>();\r\n\r\n        // Dosyadaki her satırı okuyoruz\r\n        while ((line = reader.readLine()) != null) {\r\n            lineNumber++;\r\n            line = line.trim(); // Satırın başındaki ve sonundaki boşlukları kaldırıyoruz\r\n\r\n            if (line.isEmpty() || line.startsWith(\"#\")) {\r\n                continue; // Boş satırları ve yorumları atlıyoruz\r\n            }\r\n\r\n            // Satırın içeriğine göre uygun kontrol metodunu çağırıyoruz\r\n            if (line.startsWith(\"(TASKTYPES\")) {\r\n                checkTaskTypes(line, lineNumber, taskTypeIds);\r\n            } else if (line.startsWith(\"(JOBTYPES\")) {\r\n                checkJobTypes(reader, lineNumber, jobTypeIds, taskTypeIds);\r\n            } else if (line.startsWith(\"(STATIONS\")) {\r\n                checkStations(reader, lineNumber, stationIds, taskTypeIds);\r\n            } else {\r\n                System.out.println(\"Syntax error on line \" + lineNumber + \": \" + line);\r\n            }\r\n        }\r\n\r\n\r\n        reader.close();\r\n    }\r\n\r\n    public static void checkTaskTypes(String line, int lineNumber, List<String> taskTypeIds) {\r\n        // İlk boşluktan sonrasını alıp boşluklara göre bölüyoruz\r\n        String[] parts = line.substring(line.indexOf(' ') + 1).split(\"\\\\s+\");\r\n        List<String> seenTaskTypes = new ArrayList<>();\r\n\r\n        // Her parçayı kontrol ediyoruz\r\n        for (int i = 0; i < parts.length; i++) {\r\n            String part = parts[i];\r\n            if (!part.startsWith(\"[a-zA-Z]\\\\w*\")) {\r\n                // Eğer part geçerli bir task type id ise\r\n                if (seenTaskTypes.contains(part)) {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": \" + part + \" is listed twice.\");\r\n                } else {\r\n                    seenTaskTypes.add(part);\r\n                }\r\n                if (taskTypeIds.contains(part)) {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": Duplicate task type ID \" + part);\r\n                } else {\r\n                    taskTypeIds.add(part);\r\n                }\r\n                // Boyut değerinin var olup olmadığını kontrol ediyoruz\r\n                if (i + 1 < parts.length && parts[i + 1].matches(\"[0-9.]+\")) {\r\n                    i++; // Boyut değerini atlıyoruz\r\n                } else {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": Task type \" + part + \" is missing a size value.\");\r\n                }\r\n            } else {\r\n                System.out.println(\"Semantic error on line \" + lineNumber + \": \" + part + \" is an invalid tasktypeID.\");\r\n            }\r\n        }\r\n    }\r\n\r\n    public static void checkJobTypes(BufferedReader reader, int lineNumber, List<String> jobTypeIds, List<String> taskTypeIds) throws IOException {\r\n        String line;\r\n        while ((line = reader.readLine()) != null) {\r\n            lineNumber++;\r\n            line = line.trim();\r\n\r\n            if (line.startsWith(\")\")) {\r\n                break; // Kapanış parantezine kadar okuyoruz\r\n            }\r\n\r\n            String[] parts = line.substring(line.indexOf(' ') + 1).split(\"\\\\s+\");\r\n            String jobId = parts[0];\r\n            if (jobTypeIds.contains(jobId)) {\r\n                System.out.println(\"Semantic error on line \" + lineNumber + \": \" + jobId + \" already declared.\");\r\n            } else {\r\n                jobTypeIds.add(jobId);\r\n            }\r\n\r\n            for (int i = 1; i < parts.length; i++) {\r\n                String taskType = parts[i];\r\n                if (!taskTypeIds.contains(taskType)) {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": \" + taskType + \" is not one of the declared task types.\");\r\n                }\r\n                if (i + 1 < parts.length && parts[i + 1].matches(\"[0-9.]+\")) {\r\n                    i++; // Boyut değerini atlıyoruz\r\n                } else {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": Task type \" + taskType + \" is missing a size value.\");\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    public static void checkStations(BufferedReader reader, int lineNumber, List<String> stationIds, List<String> taskTypeIds) throws IOException {\r\n        String line;\r\n        while ((line = reader.readLine()) != null) {\r\n            lineNumber++;\r\n            line = line.trim();\r\n\r\n            if (line.startsWith(\")\")) {\r\n                break; // Kapanış parantezine kadar okuyoruz\r\n            }\r\n\r\n            String[] parts = line.substring(line.indexOf(' ') + 1).split(\"\\\\s+\");\r\n            String stationId = parts[0];\r\n            if (stationIds.contains(stationId)) {\r\n                System.out.println(\"Semantic error on line \" + lineNumber + \": Duplicate station ID \" + stationId);\r\n            } else {\r\n                stationIds.add(stationId);\r\n            }\r\n\r\n            for (int i = 4; i < parts.length; i++) {\r\n                String taskType = parts[i];\r\n                if (!taskTypeIds.contains(taskType)) {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": \" + taskType + \" is not one of the declared task types.\");\r\n                }\r\n                if (i + 1 < parts.length && parts[i + 1].matches(\"[0-9.]+\")) {\r\n                    i++; // Hız değerini atlıyoruz\r\n                } else {\r\n                    System.out.println(\"Semantic error on line \" + lineNumber + \": Task type \" + taskType + \" is missing a speed value.\");\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/d2.java b/src/d2.java
+--- a/src/d2.java	
++++ b/src/d2.java	
+@@ -2,149 +2,177 @@
+ import java.io.FileReader;
+ import java.io.IOException;
+ import java.util.ArrayList;
++import java.util.HashSet;
+ import java.util.List;
++import java.util.Set;
+ 
+ public class d2 {
+-
+     public static void main(String[] args) {
+-        String fileName = "WrongFile.txt";
+-        try {
+-            // Dosyayı kontrol eden metodu çağırıyoruz
+-            checkWorkflowFile(fileName);
++        WorkFlow();
++    }
++
++    private static void WorkFlow() {
++        StringBuilder contentBuilder = new StringBuilder();
++
++        try (BufferedReader br = new BufferedReader(new FileReader("WrongFile.txt"))) {
++            String line;
++            while ((line = br.readLine()) != null) {
++                contentBuilder.append(line).append("\n");
++            }
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+-    }
+-
+-    public static void checkWorkflowFile(String fileName) throws IOException {
+-        // Dosyayı okumak için BufferedReader kullanıyoruz
+-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+-        String line;
+-        int lineNumber = 0;
+ 
+-        // ID'leri saklamak için listeler oluşturuyoruz
+-        List<String> taskTypeIds = new ArrayList<>();
+-        List<String> jobTypeIds = new ArrayList<>();
+-        List<String> stationIds = new ArrayList<>();
++        if (contentBuilder.length() > 0) {
++            contentBuilder.setLength(contentBuilder.length() - 1);
++        }
+ 
+-        // Dosyadaki her satırı okuyoruz
+-        while ((line = reader.readLine()) != null) {
+-            lineNumber++;
+-            line = line.trim(); // Satırın başındaki ve sonundaki boşlukları kaldırıyoruz
++        String elementString = contentBuilder.toString();
+ 
+-            if (line.isEmpty() || line.startsWith("#")) {
+-                continue; // Boş satırları ve yorumları atlıyoruz
+-            }
++        String[] lines = elementString.split("\n");
++        List<String> inputList = new ArrayList<>();
+ 
+-            // Satırın içeriğine göre uygun kontrol metodunu çağırıyoruz
+-            if (line.startsWith("(TASKTYPES")) {
+-                checkTaskTypes(line, lineNumber, taskTypeIds);
+-            } else if (line.startsWith("(JOBTYPES")) {
+-                checkJobTypes(reader, lineNumber, jobTypeIds, taskTypeIds);
+-            } else if (line.startsWith("(STATIONS")) {
+-                checkStations(reader, lineNumber, stationIds, taskTypeIds);
+-            } else {
+-                System.out.println("Syntax error on line " + lineNumber + ": " + line);
++        for (String print : lines) {
++            String[] words = print.trim().split("\\s+");
++            for (String word : words) {
++                // Remove parentheses
++                inputList.add(word.replaceAll("[()]", ""));
+             }
+         }
+ 
+-
+-        reader.close();
+-    }
++        String[] wordsArray = inputList.toArray(new String[0]);
++        for (String word : wordsArray) {
++            System.out.println(word);
++        }
+ 
+-    public static void checkTaskTypes(String line, int lineNumber, List<String> taskTypeIds) {
+-        // İlk boşluktan sonrasını alıp boşluklara göre bölüyoruz
+-        String[] parts = line.substring(line.indexOf(' ') + 1).split("\\s+");
+-        List<String> seenTaskTypes = new ArrayList<>();
++        int jobTypesIndex = 0;
++        int stationsIndex = 0;
+ 
+-        // Her parçayı kontrol ediyoruz
+-        for (int i = 0; i < parts.length; i++) {
+-            String part = parts[i];
+-            if (!part.startsWith("[a-zA-Z]\\w*")) {
+-                // Eğer part geçerli bir task type id ise
+-                if (seenTaskTypes.contains(part)) {
+-                    System.out.println("Semantic error on line " + lineNumber + ": " + part + " is listed twice.");
+-                } else {
+-                    seenTaskTypes.add(part);
+-                }
+-                if (taskTypeIds.contains(part)) {
+-                    System.out.println("Semantic error on line " + lineNumber + ": Duplicate task type ID " + part);
+-                } else {
+-                    taskTypeIds.add(part);
+-                }
+-                // Boyut değerinin var olup olmadığını kontrol ediyoruz
+-                if (i + 1 < parts.length && parts[i + 1].matches("[0-9.]+")) {
+-                    i++; // Boyut değerini atlıyoruz
+-                } else {
+-                    System.out.println("Semantic error on line " + lineNumber + ": Task type " + part + " is missing a size value.");
+-                }
+-            } else {
+-                System.out.println("Semantic error on line " + lineNumber + ": " + part + " is an invalid tasktypeID.");
++        for (int i = 0; i < wordsArray.length; i++) {
++            if (wordsArray[i].equals("JOBTYPES")) {
++                jobTypesIndex = i;
++            }
++        }
++        for (int j = 0; j < wordsArray.length; j++) {
++            if (wordsArray[j].equals("STATIONS")) {
++                stationsIndex = j;
+             }
+         }
+-    }
+ 
+-    public static void checkJobTypes(BufferedReader reader, int lineNumber, List<String> jobTypeIds, List<String> taskTypeIds) throws IOException {
+-        String line;
+-        while ((line = reader.readLine()) != null) {
+-            lineNumber++;
+-            line = line.trim();
++        System.out.println(jobTypesIndex);
++        System.out.println(stationsIndex);
+ 
+-            if (line.startsWith(")")) {
+-                break; // Kapanış parantezine kadar okuyoruz
+-            }
++        // Task array list and size array
++        List<String> taskTypes = new ArrayList<>();
++        List<Double> defaultSizes = new ArrayList<>();
++        Set<String> declaredTaskTypes = new HashSet<>();
++        Set<String> duplicateTaskTypes = new HashSet<>();
++        List<String> invalidTaskTypes = new ArrayList<>();
++        List<String> negativeSizeTasks = new ArrayList<>();
+ 
+-            String[] parts = line.substring(line.indexOf(' ') + 1).split("\\s+");
+-            String jobId = parts[0];
+-            if (jobTypeIds.contains(jobId)) {
+-                System.out.println("Semantic error on line " + lineNumber + ": " + jobId + " already declared.");
+-            } else {
+-                jobTypeIds.add(jobId);
+-            }
+-
+-            for (int i = 1; i < parts.length; i++) {
+-                String taskType = parts[i];
+-                if (!taskTypeIds.contains(taskType)) {
+-                    System.out.println("Semantic error on line " + lineNumber + ": " + taskType + " is not one of the declared task types.");
++        // Extracting T elements and default sizes
++        for (int i = 0; i < jobTypesIndex; i++) {
++            String word = wordsArray[i];
++            if (word.startsWith("T")) {
++                if (declaredTaskTypes.contains(word)) {
++                    duplicateTaskTypes.add(word);
++                } else {
++                    declaredTaskTypes.add(word);
++                    taskTypes.add(word);
++                    try {
++                        double size = Double.parseDouble(wordsArray[i + 1]);
++                        if (size < 0) {
++                            negativeSizeTasks.add(word);
++                        }
++                        defaultSizes.add(size);
++                        i++; // Skip the size element
++                    } catch (NumberFormatException e) {
++                        defaultSizes.add(null); // No default size
++                    }
+                 }
+-                if (i + 1 < parts.length && parts[i + 1].matches("[0-9.]+")) {
+-                    i++; // Boyut değerini atlıyoruz
++            } else if (!word.matches("[0-9]+") && !word.equals("TASKTYPES")) {
++                invalidTaskTypes.add(word);
++            }
++        }
++
++        // Check for JOBTYPES errors
++        List<String> declaredJobTypes = new ArrayList<>();
++        List<String> jobsWithNegativeSize = new ArrayList<>();
++        List<String> undeclaredTaskTypes = new ArrayList<>();
++        List<String> taskTypesWithoutSize = new ArrayList<>();
++
++        for (int i = jobTypesIndex + 1; i < stationsIndex; i++) {
++            String word = wordsArray[i];
++            if (word.startsWith("J")) {
++                if (declaredJobTypes.contains(word)) {
++                    System.out.println("Error: Job type " + word + " already declared.");
+                 } else {
+-                    System.out.println("Semantic error on line " + lineNumber + ": Task type " + taskType + " is missing a size value.");
++                    declaredJobTypes.add(word);
+                 }
+-            }
+-        }
+-    }
++            } else if (word.startsWith("T")) {
++                if (!taskTypes.contains(word)) {
++                    undeclaredTaskTypes.add(word);
++                    System.out.println("Error: Task type " + word + " not declared in TASKTYPES.");
++                }
++                try {
++                    double size = Double.parseDouble(wordsArray[i + 1]);
++                    if (size < 0) {
++                        System.out.println("Error: Negative size for task type " + word + " in job type " + wordsArray[i - 1]);
++                        jobsWithNegativeSize.add(wordsArray[i - 1]);
++                    }
++                    i++; // Skip the size element
++                } catch (NumberFormatException e) {
++                    int taskIndex = taskTypes.indexOf(word);
++                    if (taskIndex >= 0 && defaultSizes.get(taskIndex) == null) {
++                        System.out.println("Error: Task type " + word + " has no default size.");
++                    }
++                }
++            }
++        }
+ 
+-    public static void checkStations(BufferedReader reader, int lineNumber, List<String> stationIds, List<String> taskTypeIds) throws IOException {
+-        String line;
+-        while ((line = reader.readLine()) != null) {
+-            lineNumber++;
+-            line = line.trim();
++        // Check for tasks not assigned to any stations
++        List<String> stationTasks = new ArrayList<>();
++        for (int i = stationsIndex + 1; i < wordsArray.length; i++) {
++            String word = wordsArray[i];
++            if (word.startsWith("T")) {
++                stationTasks.add(word);
++            }
++        }
+ 
+-            if (line.startsWith(")")) {
+-                break; // Kapanış parantezine kadar okuyoruz
++        for (String task : taskTypes) {
++            if (!stationTasks.contains(task)) {
++                System.out.println("Error: Task type " + task + " is not executed in any station.");
+             }
++        }
+ 
+-            String[] parts = line.substring(line.indexOf(' ') + 1).split("\\s+");
+-            String stationId = parts[0];
+-            if (stationIds.contains(stationId)) {
+-                System.out.println("Semantic error on line " + lineNumber + ": Duplicate station ID " + stationId);
+-            } else {
+-                stationIds.add(stationId);
++        // Check for unmatched parentheses (simple check)
++        int openParenCount = 0;
++        int closeParenCount = 0;
++        for (String word : wordsArray) {
++            if (word.contains("(")) {
++                openParenCount++;
++            }
++            if (word.contains(")")) {
++                closeParenCount++;
+             }
++        }
+ 
+-            for (int i = 4; i < parts.length; i++) {
+-                String taskType = parts[i];
+-                if (!taskTypeIds.contains(taskType)) {
+-                    System.out.println("Semantic error on line " + lineNumber + ": " + taskType + " is not one of the declared task types.");
+-                }
+-                if (i + 1 < parts.length && parts[i + 1].matches("[0-9.]+")) {
+-                    i++; // Hız değerini atlıyoruz
+-                } else {
+-                    System.out.println("Semantic error on line " + lineNumber + ": Task type " + taskType + " is missing a speed value.");
+-                }
+-            }
++        if (openParenCount != closeParenCount) {
++            System.out.println("Error: Unmatched parentheses found.");
++        }
++
++        // Print errors and warnings for TASKTYPES
++        for (String duplicate : duplicateTaskTypes) {
++            System.out.println("Error: Duplicate task type " + duplicate + " found.");
++        }
++
++        for (String invalid : invalidTaskTypes) {
++            System.out.println("Error: Invalid task type ID " + invalid);
++        }
++
++        for (String negative : negativeSizeTasks) {
++            System.out.println("Error: Negative default size for task type " + negative);
+         }
+     }
++
+ }
