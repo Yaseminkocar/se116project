@@ -334,8 +334,7 @@ public class Main {
     }
 
     // Method to check if a string is numeric
-    private static boolean isNumeric(String str
-    ) {
+    private static boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);
             return true;
