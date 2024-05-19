@@ -1,0 +1,413 @@
+Index: src/JobErrors.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.io.BufferedReader;\r\nimport java.io.FileReader;\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class JobErrors {\r\n    public List<Job> parseJobFile(String filename) throws IOException {\r\n        List<Job> jobs = new ArrayList<>();\r\n        List<String> jobIDs = new ArrayList<>();\r\n        BufferedReader reader = new BufferedReader(new FileReader(filename));\r\n        String line;\r\n        int lineNumber = 1;\r\n\r\n        while ((line = reader.readLine()) != null) {\r\n            String[] parts = line.trim().split(\"\\\\s+\");\r\n            if (parts.length != 4) {\r\n                System.out.println(\"Syntax error at line \" + lineNumber + \": \" + line);\r\n                lineNumber++;\r\n                continue;\r\n            }\r\n            String jobID = parts[0];\r\n            String jobTypeID = parts[1];\r\n            int startTime;\r\n            int duration;\r\n\r\n            if (!jobTypeID.matches(\"[A-Za-z]\\\\d+\")) {\r\n                System.out.println(\"Semantic error at line \" + lineNumber + \": jobTypeID must start with a letter followed by a number.\");\r\n                lineNumber++;\r\n                continue;\r\n            }\r\n\r\n            try {\r\n                startTime = Integer.parseInt(parts[2]);\r\n                duration = Integer.parseInt(parts[3]);\r\n\r\n                if (startTime < 0) {\r\n                    throw new IllegalArgumentException(\"startTime must be non-negative.\");\r\n                }\r\n                if (duration <= 0) {\r\n                    throw new IllegalArgumentException(\"duration must be greater than zero.\");\r\n                }\r\n            } catch (NumberFormatException e) {\r\n                System.out.println(\"Semantic error at line \" + lineNumber + \": Non-numeric value in startTime or duration.\");\r\n                lineNumber++;\r\n                continue;\r\n            } catch (IllegalArgumentException e) {\r\n                System.out.println(\"Semantic error at line \" + lineNumber + \": \" + e.getMessage());\r\n                lineNumber++;\r\n                continue;\r\n            }\r\n            if (jobIDs.contains(jobID)) {\r\n                System.out.println(\"Semantic error at line \" + lineNumber + \": Duplicate jobID \" + jobID);\r\n                lineNumber++;\r\n                continue;\r\n            }\r\n            jobIDs.add(jobID);\r\n            lineNumber++;\r\n        }\r\n        reader.close();\r\n        return jobs;\r\n}\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/JobErrors.java b/src/JobErrors.java
+--- a/src/JobErrors.java	
++++ b/src/JobErrors.java	
+@@ -6,8 +6,8 @@
+ 
+ public class JobErrors {
+     public List<Job> parseJobFile(String filename) throws IOException {
+-        List<Job> jobs = new ArrayList<>();
+-        List<String> jobIDs = new ArrayList<>();
++        ArrayList<Job> jobs = new ArrayList<>();
++        ArrayList<String> jobIDs = new ArrayList<>();
+         BufferedReader reader = new BufferedReader(new FileReader(filename));
+         String line;
+         int lineNumber = 1;
+@@ -25,32 +25,32 @@
+             int duration;
+ 
+             if (!jobTypeID.matches("[A-Za-z]\\d+")) {
+-                System.out.println("Semantic error at line " + lineNumber + ": jobTypeID must start with a letter followed by a number.");
++                System.out.println(" error at line " + lineNumber + ": jobTypeID must start with a letter followed by a number.");
+                 lineNumber++;
+                 continue;
+             }
+ 
+             try {
+-                startTime = Integer.parseInt(parts[2]);
+-                duration = Integer.parseInt(parts[3]);
++              startTime = Integer.parseInt(parts[2]);
++              duration = Integer.parseInt(parts[3]);
+ 
+                 if (startTime < 0) {
+-                    throw new IllegalArgumentException("startTime must be non-negative.");
++                    throw new IllegalArgumentException("start time has to be greater than zero.");
+                 }
+                 if (duration <= 0) {
+                     throw new IllegalArgumentException("duration must be greater than zero.");
+                 }
+             } catch (NumberFormatException e) {
+-                System.out.println("Semantic error at line " + lineNumber + ": Non-numeric value in startTime or duration.");
++                System.out.println("error at line " + lineNumber + ": Non-numeric value in startTime or duration.");
+                 lineNumber++;
+                 continue;
+             } catch (IllegalArgumentException e) {
+-                System.out.println("Semantic error at line " + lineNumber + ": " + e.getMessage());
++                System.out.println(" error at line " + lineNumber + ": " + e.getMessage());
+                 lineNumber++;
+                 continue;
+             }
+             if (jobIDs.contains(jobID)) {
+-                System.out.println("Semantic error at line " + lineNumber + ": Duplicate jobID " + jobID);
++                System.out.println(" error at line " + lineNumber + ": Duplicate jobID " + jobID);
+                 lineNumber++;
+                 continue;
+             }
+Index: src/Station_Req7.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.io.BufferedReader;\r\nimport java.io.FileReader;\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class Station_Req7 {\r\n    public static void main(String[] args) {\r\n\r\n        WorkFlow();\r\n\r\n    }\r\n\r\n    private static void WorkFlow() {\r\n\r\n        int keepTrack = 0;\r\n\r\n        StringBuilder contentBuilder = new StringBuilder();\r\n\r\n        try (BufferedReader br = new BufferedReader(new FileReader(\"InputFile.txt\"))) {\r\n            String line;\r\n            while ((line = br.readLine()) != null) {\r\n                contentBuilder.append(line).append(\" \");\r\n            }\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n\r\n        if (contentBuilder.length() > 0) {\r\n            contentBuilder.setLength(contentBuilder.length() - 1);\r\n        }\r\n\r\n        String ElementString = contentBuilder.toString();\r\n\r\n        String[] lines = ElementString.split(\"\\n\");\r\n        List<String> InputList = new ArrayList<>();\r\n\r\n        for (String print : lines) {\r\n            String[] words = print.trim().split(\"\\\\s+\");\r\n            for (String word : words) {\r\n                InputList.add(word);\r\n            }\r\n        }\r\n\r\n        String[] wordsArray = InputList.toArray(new String[0]);\r\n        for (String word : wordsArray) {\r\n            //System.out.println(word);\r\n        }\r\n\r\n        int startlinenumber=0;\r\n        int endlinenumber=0;\r\n\r\n        for(int i=0;i<wordsArray.length;i++){\r\n            if(wordsArray[i].equals(\"(JOBTYPES\")){\r\n                startlinenumber=i;\r\n            }\r\n        }\r\n        for(int j=0;j<wordsArray.length;j++){\r\n            if(wordsArray[j].equals(\"(STATIONS\")){\r\n                endlinenumber=j;\r\n            }\r\n        }\r\n\r\n        System.out.println(startlinenumber);\r\n        System.out.println(endlinenumber);\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n        //  do{\r\n\r\n        Station stationNN = new Station();\r\n        Station stationNY = new Station();\r\n        Station stationYN = new Station();\r\n        Station stationYY = new Station();\r\n\r\n\r\n        // }while();\r\n\r\n\r\n\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Station_Req7.java b/src/Station_Req7.java
+--- a/src/Station_Req7.java	
++++ b/src/Station_Req7.java	
+@@ -6,21 +6,16 @@
+ 
+ public class Station_Req7 {
+     public static void main(String[] args) {
+-
+         WorkFlow();
+-
+     }
+ 
+     private static void WorkFlow() {
+-
+-        int keepTrack = 0;
+-
+         StringBuilder contentBuilder = new StringBuilder();
+ 
+         try (BufferedReader br = new BufferedReader(new FileReader("InputFile.txt"))) {
+             String line;
+             while ((line = br.readLine()) != null) {
+-                contentBuilder.append(line).append(" ");
++                contentBuilder.append(line).append("\n");
+             }
+         } catch (IOException e) {
+             e.printStackTrace();
+@@ -30,63 +25,124 @@
+             contentBuilder.setLength(contentBuilder.length() - 1);
+         }
+ 
+-        String ElementString = contentBuilder.toString();
++        String elementString = contentBuilder.toString();
+ 
+-        String[] lines = ElementString.split("\n");
+-        List<String> InputList = new ArrayList<>();
++        String[] lines = elementString.split("\n");
++        List<String> inputList = new ArrayList<>();
+ 
+         for (String print : lines) {
+             String[] words = print.trim().split("\\s+");
+             for (String word : words) {
+-                InputList.add(word);
++                // Remove parentheses
++                inputList.add(word.replaceAll("[()]", ""));
+             }
+         }
+ 
+-        String[] wordsArray = InputList.toArray(new String[0]);
++        String[] wordsArray = inputList.toArray(new String[0]);
+         for (String word : wordsArray) {
+-            //System.out.println(word);
++            System.out.println(word);
+         }
+ 
+-        int startlinenumber=0;
+-        int endlinenumber=0;
++        int startLineNumber = 0;
++        int endLineNumber = 0;
+ 
+-        for(int i=0;i<wordsArray.length;i++){
+-            if(wordsArray[i].equals("(JOBTYPES")){
+-                startlinenumber=i;
++        for (int i = 0; i < wordsArray.length; i++) {
++            if (wordsArray[i].equals("JOBTYPES")) {
++                startLineNumber = i;
+             }
+         }
+-        for(int j=0;j<wordsArray.length;j++){
+-            if(wordsArray[j].equals("(STATIONS")){
+-                endlinenumber=j;
++        for (int j = 0; j < wordsArray.length; j++) {
++            if (wordsArray[j].equals("STATIONS")) {
++                endLineNumber = j;
+             }
+         }
+ 
+-        System.out.println(startlinenumber);
+-        System.out.println(endlinenumber);
++        System.out.println(startLineNumber);
++        System.out.println(endLineNumber);
+ 
++        List<String> taskArrayList = new ArrayList<>();
++        List<Double> sizeArray = new ArrayList<>();
++        List<Integer> taskIndices = new ArrayList<>();
++        List<Integer> sizeIndices = new ArrayList<>();
+ 
++        // J1's task list
++        List<Task> j1TaskArrayList = new ArrayList<>();
++        boolean isJ1 = false;
+ 
++        // Extracting T elements and other values
++        for (int i = startLineNumber + 1; i < endLineNumber; i++) {
++            if (wordsArray[i].equals("J1")) {
++                isJ1 = true;
++            } else if (wordsArray[i].startsWith("J") && !wordsArray[i].equals("J1")) {
++                isJ1 = false;
++            }
+ 
++            if (wordsArray[i].startsWith("T")) {
++                taskArrayList.add(wordsArray[i]);
++                taskIndices.add(i);
++                if (isJ1) {
++                    Task task = new Task(wordsArray[i], 0); // Initial size 0, will be set later
++                    j1TaskArrayList.add(task);
++                }
++            } else {
++                try {
++                    double size = Double.parseDouble(wordsArray[i]);
++                    sizeArray.add(size);
++                    sizeIndices.add(i);
++                    if (isJ1 && !j1TaskArrayList.isEmpty()) {
++                        j1TaskArrayList.get(j1TaskArrayList.size() - 1).setTaskSize(size); // Set the size of the last task
++                    }
++                } catch (NumberFormatException e) {
++                    //  System.out.println("Invalid number format: " + wordsArray[i]);
++                }
++            }
++        }
+ 
+-
+-
+-
++        // Check and set sizes to 0 where not specified
++        for (int i = 0; i < j1TaskArrayList.size(); i++) {
++            Task task = j1TaskArrayList.get(i);
++            if (task.getTaskSize() == 0) {
++                if (i + 1 < j1TaskArrayList.size()) {
++                    try {
++                        double size = Double.parseDouble(wordsArray[taskIndices.get(i) + 1]);
++                        task.setTaskSize(size);
++                    } catch (NumberFormatException e) {
++                        task.setTaskSize(0); // Set size to 0 if the next element is not a number
++                    }
++                } else {
++                    task.setTaskSize(0); // Set size to 0 if there is no next element
++                }
++            }
++        }
+ 
++        // Printing J1's task array list
++        System.out.println("J1 Task Array List:");
++        for (Task task : j1TaskArrayList) {
++            System.out.println("Task Type: " + task.getTaskType() + ", Task Size: " + task.getTaskSize());
++        }
+ 
++        // Printing the size array with indices
++        System.out.println("Size Array with Indices:");
++        for (int i = 0; i < sizeArray.size(); i++) {
++            System.out.println("Index: " + sizeIndices.get(i) + ", Size: " + sizeArray.get(i) + ", Task: " + wordsArray[sizeIndices.get(i) - 1]);
++        }
+ 
++        // Printing task and size indices
++        System.out.println("Task Indices:");
++        for (int index : taskIndices) {
++            System.out.println(index);
++        }
+ 
+-        //  do{
++        System.out.println("Size Indices:");
++        for (int index : sizeIndices) {
++            System.out.println(index);
++        }
+ 
++        // Station initialization (example placeholders)
+         Station stationNN = new Station();
+         Station stationNY = new Station();
+         Station stationYN = new Station();
+         Station stationYY = new Station();
+-
+-
+-        // }while();
+-
+-
+-
+-
+     }
+ }
++
+Index: InputFile.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>(TASKTYPES T1 1 T2 2 T3 2.5 T4 T5 4 T_1 5 T21)\r\n(JOBTYPES\r\n(J1 T1 1 T2 T3 3)\r\n(J2 T2 T3 T4 1)\r\n(J3 T2)\r\n(J2 T215T12))\r\n(STATIONS\r\n(S1 1 N N T1 2 T2 3 0.20)\r\n(S2 2 N Y T1 2 T2 4)\r\n(S3 2 N Y T3 1)\r\n(S4 3 Y Y T4 1 T21 2 0.50) )
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/InputFile.txt b/InputFile.txt
+--- a/InputFile.txt	
++++ b/InputFile.txt	
+@@ -3,7 +3,7 @@
+ (J1 T1 1 T2 T3 3)
+ (J2 T2 T3 T4 1)
+ (J3 T2)
+-(J2 T215T12))
++(J2 T21 5 T1 2))
+ (STATIONS
+ (S1 1 N N T1 2 T2 3 0.20)
+ (S2 2 N Y T1 2 T2 4)
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"new classes\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/d2.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_05__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_05__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_05__Changes_1.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_05__Changes_1.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_19__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_19__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_17_41__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_17_41__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/d1.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/d1.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;EmirayDurmaz&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/Yaseminkocar/se116project.git&quot;,\r\n    &quot;accountId&quot;: &quot;f876dfee-e282-4bb3-ac51-b7a06d3e1894&quot;\r\n  }\r\n}</component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;customColor&quot;: &quot;&quot;,\r\n  &quot;associatedIndex&quot;: 4\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2flxulGE1TD1wiPGhb4j94xWvUK\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <OptionsSetting value=\"false\" id=\"Update\" />\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"flattenPackages\" value=\"true\" />\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n    <option name=\"showMembers\" value=\"true\" />\r\n    <option name=\"showVisibilityIcons\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.Main.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\" selected=\"Application.Main\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\r\n      <module name=\"asdfgh\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"WorkFlowParser\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"WorkFlowParser\" />\r\n      <module name=\"asdfgh\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"d1\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"d1\" />\r\n      <module name=\"asdfgh\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Main\" />\r\n        <item itemvalue=\"Application.d1\" />\r\n        <item itemvalue=\"Application.WorkFlowParser\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240\" />\r\n        <option value=\"bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"c6b30def-f593-410b-8ca6-fc914bf6677d\" name=\"Changes\" comment=\"\" />\r\n      <created>1714389694199</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1714389694199</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"commit\">\r\n      <created>1714390906500</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714390906500</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"meltemin commiti\">\r\n      <created>1714461371483</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714461371483</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"meltemin commiti 2\">\r\n      <created>1714461447617</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714461447617</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Classes\">\r\n      <created>1714565742088</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714565742088</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"some bugs fixed\">\r\n      <created>1715370784472</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715370784472</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"changes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1715885718441</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715885718441</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"changes\">\r\n      <created>1715937727609</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715937727609</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"senkronize\">\r\n      <created>1715941589521</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715941589521</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"commit repeat 2\">\r\n      <created>1715953732287</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715953732287</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"Exception addition\">\r\n      <created>1715953869614</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715953869614</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"commit\">\r\n      <created>1715963243663</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715963243663</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"hash and arraylist tries\">\r\n      <created>1715965005880</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715965005880</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"changes\">\r\n      <created>1716029189997</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1716029189998</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"easy to read\">\r\n      <created>1716029847342</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1716029847342</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"15\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"meltemin commiti\" />\r\n    <MESSAGE value=\"meltemin commiti 2\" />\r\n    <MESSAGE value=\"Classes\" />\r\n    <MESSAGE value=\"some bugs fixed\" />\r\n    <MESSAGE value=\"senkronize\" />\r\n    <MESSAGE value=\"commit repeat 2\" />\r\n    <MESSAGE value=\"Exception addition\" />\r\n    <MESSAGE value=\"commit\" />\r\n    <MESSAGE value=\"hash and arraylist tries\" />\r\n    <MESSAGE value=\"changes\" />\r\n    <MESSAGE value=\"easy to read\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"easy to read\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,15 +4,15 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="new classes">
+-      <change afterPath="$PROJECT_DIR$/src/d2.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_05__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_05__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_05__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_05__Changes_1.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_19__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_16_19__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_17_41__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_17_41__Changes_.xml" afterDir="false" />
++    <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="main class has updated">
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_18_00__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_18_00__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_18_07__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_18_07__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_18_08__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2024_18_08__Changes_.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/d1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/d1.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/InputFile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/InputFile.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/JobErrors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JobErrors.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Station_Req7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Station_Req7.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/d2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/d2.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -63,15 +63,22 @@
+   <component name="PropertiesComponent">{
+   &quot;keyToString&quot;: {
+     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
++    &quot;Application.Station_Req7.executor&quot;: &quot;Run&quot;,
++    &quot;Application.WorkflowChecker.executor&quot;: &quot;Run&quot;,
++    &quot;Application.d1.executor&quot;: &quot;Run&quot;,
++    &quot;Application.d2.executor&quot;: &quot;Run&quot;,
+     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+ }</component>
+-  <component name="RunManager" selected="Application.Main">
++  <component name="RunManager" selected="Application.Station_Req7">
+     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="Main" />
+       <module name="asdfgh" />
+@@ -79,8 +86,22 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="WorkFlowParser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="WorkFlowParser" />
++    <configuration name="Station_Req7" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="Station_Req7" />
++      <module name="asdfgh" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="WorkflowChecker" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="WorkflowChecker" />
++      <module name="asdfgh" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="d1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="d1" />
+       <module name="asdfgh" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+@@ -88,6 +109,13 @@
+     </configuration>
+     <configuration name="d1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="d1" />
++      <module name="asdfgh" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="d2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="d2" />
+       <module name="asdfgh" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+@@ -95,9 +123,11 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Application.Main" />
++        <item itemvalue="Application.Station_Req7" />
++        <item itemvalue="Application.d2" />
+         <item itemvalue="Application.d1" />
+-        <item itemvalue="Application.WorkFlowParser" />
++        <item itemvalue="Application.Main" />
++        <item itemvalue="Application.WorkflowChecker" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -117,6 +147,8 @@
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+       <updated>1714389694199</updated>
++      <workItem from="1716084704081" duration="3143000" />
++      <workItem from="1716087877070" duration="34000" />
+     </task>
+     <task id="LOCAL-00001" summary="commit">
+       <created>1714390906500</created>
+@@ -217,7 +249,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1716029847342</updated>
+     </task>
+-    <option name="localTasksCounter" value="15" />
++    <task id="LOCAL-00015" summary="main class has updated">
++      <option name="closed" value="true" />
++      <created>1716044805119</created>
++      <option name="number" value="00015" />
++      <option name="presentableId" value="LOCAL-00015" />
++      <option name="project" value="LOCAL" />
++      <updated>1716044805119</updated>
++    </task>
++    <option name="localTasksCounter" value="16" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -246,6 +286,7 @@
+     <MESSAGE value="hash and arraylist tries" />
+     <MESSAGE value="changes" />
+     <MESSAGE value="easy to read" />
+-    <option name="LAST_COMMIT_MESSAGE" value="easy to read" />
++    <MESSAGE value="main class has updated" />
++    <option name="LAST_COMMIT_MESSAGE" value="main class has updated" />
+   </component>
+ </project>
+\ No newline at end of file
