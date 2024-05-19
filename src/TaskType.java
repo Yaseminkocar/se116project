@@ -5,11 +5,6 @@ public class TaskType {
         this.size = size;
         this.type=type;
     }
-    public void check(){
-        if(type.equals("T1")){
-
-        }
-    }
     public String getType() {
         return type;
     }

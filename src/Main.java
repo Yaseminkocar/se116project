@@ -9,9 +9,24 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
+        if (args.length < 2) {
+            System.out.println("Please enter workflow file and job file names...");
+            return;
+        }
+
+        String workflowFileName;
+        String jobFileName;
+
+        if (args[0].startsWith("job.")) {
+            jobFileName = args[0];
+            workflowFileName = args[1];
+        } else {
+            jobFileName = args[1];
+            workflowFileName = args[0];
+        }
         String input = null;
         try {
-            input = ReadTask("WrongFile.txt");
+            input = ReadTask(args[0]);
             String result = Rename(input);
             System.out.println("Modified task statement: " + result);
         } catch (IOException e) {
@@ -19,7 +34,7 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        String filePath = "WrongFile.txt";
+        String filePath = args[0];
 
         try (BufferedReader bufferReader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -45,7 +60,7 @@ public class Main {
             }
         }
         System.out.println();
-
+        //d3
         Control();
 
         try {
@@ -117,6 +132,13 @@ public class Main {
         try {
             JobErrors parser = new JobErrors();
             List<Job> job = parser.parseJobFile("jobfile.txt");
+            //  JobTracker tracker = new JobTracker(jobs);
+
+        /*    for (int time = 0; time <= 50; time += 1) {
+                System.out.println("Tracking jobs at time: " + time);
+                tracker.trackJobStates(time);
+                System.out.println();
+            } */
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -126,8 +148,8 @@ public class Main {
         WorkFlow();
 
     }
-
-    public static void Control() {
+    //d3
+    private static void Control() {
         StringBuilder stringBuilder = new StringBuilder();
 
         try (BufferedReader br = new BufferedReader(new FileReader("WrongFile.txt"))) {
@@ -146,16 +168,16 @@ public class Main {
         String element = stringBuilder.toString();
 
         String[] lines = element.split("\n");
-        ArrayList<String> list = new ArrayList<>();
+        List<String> inputList = new ArrayList<>();
 
         for (String line : lines) {
             String[] words = line.trim().split("\\s+");
             for (String word : words) {
-                list.add(word.replaceAll("[()]", ""));
+                inputList.add(word.replaceAll("[()]", ""));
             }
         }
 
-        String[] wordsArray = list.toArray(new String[0]);
+        String[] wordsArray = inputList.toArray(new String[0]);
         for (int i=0; i< wordsArray.length; i++){
             System.out.println(wordsArray[i]);
         }
