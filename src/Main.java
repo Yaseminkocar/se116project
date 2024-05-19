@@ -13,7 +13,6 @@ public class Main {
             System.out.println("Please enter workflow file and job file names...");
             return;
         }
-
         String workflowFileName;
         String jobFileName;
 
