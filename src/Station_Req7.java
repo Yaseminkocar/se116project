@@ -2,7 +2,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Station_Req7 {
     public static void main(String[] args) {
@@ -26,7 +28,6 @@ public class Station_Req7 {
         }
 
         String elementString = contentBuilder.toString();
-
         String[] lines = elementString.split("\n");
         List<String> inputList = new ArrayList<>();
 
@@ -60,65 +61,70 @@ public class Station_Req7 {
         System.out.println(startLineNumber);
         System.out.println(endLineNumber);
 
+        Map<String, Double> defaultTaskSizes = new HashMap<>();
+
+        // Extract default sizes from TASKTYPES
+        for (int i = 1; i < startLineNumber; i++) {
+            if (wordsArray[i].startsWith("T")) {
+                try {
+                    double size = Double.parseDouble(wordsArray[i + 1]);
+                    defaultTaskSizes.put(wordsArray[i], size);
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    // Handle invalid or missing size
+                    defaultTaskSizes.put(wordsArray[i], 0.0);
+                }
+            }
+        }
+
         List<String> taskArrayList = new ArrayList<>();
         List<Double> sizeArray = new ArrayList<>();
         List<Integer> taskIndices = new ArrayList<>();
         List<Integer> sizeIndices = new ArrayList<>();
 
-        // J1's task list
-        List<Task> j1TaskArrayList = new ArrayList<>();
-        boolean isJ1 = false;
+        // All jobs and their task lists
+        Map<String, List<Task>> jobTasksMap = new HashMap<>();
+        String currentJob = null;
 
         // Extracting T elements and other values
         for (int i = startLineNumber + 1; i < endLineNumber; i++) {
-            if (wordsArray[i].equals("J1")) {
-                isJ1 = true;
-            } else if (wordsArray[i].startsWith("J") && !wordsArray[i].equals("J1")) {
-                isJ1 = false;
+            if (wordsArray[i].startsWith("J")) {
+                currentJob = wordsArray[i];
+                jobTasksMap.putIfAbsent(currentJob, new ArrayList<>());
             }
 
-            if (wordsArray[i].startsWith("T")) {
+            if (wordsArray[i].startsWith("T") && currentJob != null) {
                 taskArrayList.add(wordsArray[i]);
                 taskIndices.add(i);
-                if (isJ1) {
-                    Task task = new Task(wordsArray[i], 0); // Initial size 0, will be set later
-                    j1TaskArrayList.add(task);
+                double taskSize = defaultTaskSizes.getOrDefault(wordsArray[i], 0.0);
+                if (i + 1 < wordsArray.length && isNumericWorkFile(wordsArray[i + 1])) {
+                    taskSize = Double.parseDouble(wordsArray[i + 1]);
+                    sizeIndices.add(i + 1);
+                    i++; // Skip the next element as it is the size
                 }
+                Task task = new Task(wordsArray[i], taskSize);
+                jobTasksMap.get(currentJob).add(task);
             } else {
                 try {
                     double size = Double.parseDouble(wordsArray[i]);
                     sizeArray.add(size);
-                    sizeIndices.add(i);
-                    if (isJ1 && !j1TaskArrayList.isEmpty()) {
-                        j1TaskArrayList.get(j1TaskArrayList.size() - 1).setTaskSize(size); // Set the size of the last task
-                    }
                 } catch (NumberFormatException e) {
-                    //  System.out.println("Invalid number format: " + wordsArray[i]);
+                    // System.out.println("Invalid number format: " + wordsArray[i]);
                 }
             }
         }
 
-        // Check and set sizes to 0 where not specified
-        for (int i = 0; i < j1TaskArrayList.size(); i++) {
-            Task task = j1TaskArrayList.get(i);
-            if (task.getTaskSize() == 0) {
-                if (i + 1 < j1TaskArrayList.size()) {
-                    try {
-                        double size = Double.parseDouble(wordsArray[taskIndices.get(i) + 1]);
-                        task.setTaskSize(size);
-                    } catch (NumberFormatException e) {
-                        task.setTaskSize(0); // Set size to 0 if the next element is not a number
-                    }
-                } else {
-                    task.setTaskSize(0); // Set size to 0 if there is no next element
-                }
+        // Printing each job's task array list and their total duration
+        for (String job : jobTasksMap.keySet()) {
+            System.out.println(job + " Task Array List:");
+            double totalDuration = 0.0;
+            for (Task task : jobTasksMap.get(job)) {
+                double speed = getStationSpeed(task.getTaskType(), wordsArray, endLineNumber);
+                double duration = task.getTaskSize() / speed;
+                totalDuration += duration;
+                System.out.println("Task Type: " + task.getTaskType() + ", Task Size: " + task.getTaskSize() + ", Duration: " + duration);
             }
-        }
-
-        // Printing J1's task array list
-        System.out.println("J1 Task Array List:");
-        for (Task task : j1TaskArrayList) {
-            System.out.println("Task Type: " + task.getTaskType() + ", Task Size: " + task.getTaskSize());
+            // Print the total duration for the job
+            System.out.println("Total Duration for " + job + ": " + totalDuration);
         }
 
         // Printing the size array with indices
@@ -144,5 +150,30 @@ public class Station_Req7 {
         Station stationYN = new Station();
         Station stationYY = new Station();
     }
-}
 
+    private static boolean isNumericWorkFile(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private static double getStationSpeed(String taskType, String[] wordsArray, int endLineNumber) {
+        for (int i = endLineNumber + 1; i < wordsArray.length; i++) {
+            if (wordsArray[i].startsWith("S")) {
+                for (int j = i + 1; j < wordsArray.length && !wordsArray[j].startsWith("S"); j++) {
+                    if (wordsArray[j].equals(taskType)) {
+                        try {
+                            return Double.parseDouble(wordsArray[j + 1]);
+                        } catch (NumberFormatException e) {
+                            // Ignore invalid number format
+                        }
+                    }
+                }
+            }
+        }
+        return 1.0; // Default speed if not found
+    }
+}
