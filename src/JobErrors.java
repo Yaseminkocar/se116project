@@ -6,8 +6,8 @@ import java.util.List;
 
 public class JobErrors {
     public List<Job> parseJobFile(String filename) throws IOException {
-        List<Job> jobs = new ArrayList<>();
-        List<String> jobIDs = new ArrayList<>();
+        ArrayList<Job> jobs = new ArrayList<>();
+        ArrayList<String> jobIDs = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         String line;
         int lineNumber = 1;
@@ -25,32 +25,32 @@ public class JobErrors {
             int duration;
 
             if (!jobTypeID.matches("[A-Za-z]\\d+")) {
-                System.out.println("Semantic error at line " + lineNumber + ": jobTypeID must start with a letter followed by a number.");
+                System.out.println(" error at line " + lineNumber + ": jobTypeID must start with a letter followed by a number.");
                 lineNumber++;
                 continue;
             }
 
             try {
-                startTime = Integer.parseInt(parts[2]);
-                duration = Integer.parseInt(parts[3]);
+              startTime = Integer.parseInt(parts[2]);
+              duration = Integer.parseInt(parts[3]);
 
                 if (startTime < 0) {
-                    throw new IllegalArgumentException("startTime must be non-negative.");
+                    throw new IllegalArgumentException("start time has to be greater than zero.");
                 }
                 if (duration <= 0) {
                     throw new IllegalArgumentException("duration must be greater than zero.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Semantic error at line " + lineNumber + ": Non-numeric value in startTime or duration.");
+                System.out.println("error at line " + lineNumber + ": Non-numeric value in startTime or duration.");
                 lineNumber++;
                 continue;
             } catch (IllegalArgumentException e) {
-                System.out.println("Semantic error at line " + lineNumber + ": " + e.getMessage());
+                System.out.println(" error at line " + lineNumber + ": " + e.getMessage());
                 lineNumber++;
                 continue;
             }
             if (jobIDs.contains(jobID)) {
-                System.out.println("Semantic error at line " + lineNumber + ": Duplicate jobID " + jobID);
+                System.out.println(" error at line " + lineNumber + ": Duplicate jobID " + jobID);
                 lineNumber++;
                 continue;
             }
