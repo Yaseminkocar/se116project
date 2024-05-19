@@ -59,7 +59,6 @@ public class Main {
             }
         }
         System.out.println();
-        //d3
         Control();
 
         try {
@@ -131,13 +130,7 @@ public class Main {
         try {
             JobErrors parser = new JobErrors();
             List<Job> job = parser.parseJobFile("jobfile.txt");
-            //  JobTracker tracker = new JobTracker(jobs);
 
-        /*    for (int time = 0; time <= 50; time += 1) {
-                System.out.println("Tracking jobs at time: " + time);
-                tracker.trackJobStates(time);
-                System.out.println();
-            } */
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -147,8 +140,7 @@ public class Main {
         WorkFlow();
 
     }
-    //d3
-    private static void Control() {
+    public static void Control() {
         StringBuilder stringBuilder = new StringBuilder();
 
         try (BufferedReader br = new BufferedReader(new FileReader("WrongFile.txt"))) {
@@ -167,16 +159,16 @@ public class Main {
         String element = stringBuilder.toString();
 
         String[] lines = element.split("\n");
-        List<String> inputList = new ArrayList<>();
+        ArrayList<String> List = new ArrayList<>();
 
         for (String line : lines) {
             String[] words = line.trim().split("\\s+");
             for (String word : words) {
-                inputList.add(word.replaceAll("[()]", ""));
+                List.add(word.replaceAll("[()]", ""));
             }
         }
 
-        String[] wordsArray = inputList.toArray(new String[0]);
+        String[] wordsArray = List.toArray(new String[0]);
         for (int i=0; i< wordsArray.length; i++){
             System.out.println(wordsArray[i]);
         }
