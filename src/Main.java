@@ -8,9 +8,8 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         String input = null;
-
         try {
-            input = TaskReading("WrongFile.txt");
+            input = ReadTask("WrongFile.txt");
             String result = Rename(input);
             System.out.println("Modified task statement: " + result);
         } catch (IOException e) {
@@ -18,12 +17,11 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
-
         String filePath = "WrongFile.txt";
 
-        try (BufferedReader bufferreader = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader bufferReader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            while ((line = bufferreader.readLine()) != null) {
+            while ((line = bufferReader.readLine()) != null) {
                 String[] words = line.split("\s+");
                 for (String word : words) {
                     System.out.println(word);
@@ -33,76 +31,90 @@ public class Main {
             e.printStackTrace();
         }
 
-        //parantez sayısı karşılaştırma
-        int sumopen = 0;
-        int sumclose = 0;
+        //Number of parentheses comparison
+        int sumOpen = 0;
+        int sumClose = 0;
         for (int i = 0; i < input.length(); i++) {
 
             if (input.charAt(i) == '(') {
-                sumopen++;
+                sumOpen++;
             } else if (input.charAt(i) == ')') {
-                sumclose++;
+                sumClose++;
             }
-
         }
-        try {
-            if (sumopen < sumclose) {
-                throw new Exception("missing '('");
+        System.out.println();
+        //d3
+        Control();
 
-            } else if (sumclose < sumopen) {
-                throw new Exception("missing ')'");
+        try {
+            if (sumOpen < sumClose) {
+                throw new Exception("Error: Missing '('");
+
+            } else if (sumClose < sumOpen) {
+                throw new Exception("Error: Missing ')'");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
+        System.out.println();
 
-
-        //tasklerin stationda var yok kontrolü
+        //Checking whether tasks are on the station or not
         String line2;
-        ArrayList tasksofjob= new ArrayList();
-        int startlinenumber=0;
-        int endlinenumber=0;
+        ArrayList tasksOfJob= new ArrayList();
+        int startLineNumber=0;
+        int endLineNumber=0;
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
             while ((line2 = bufferedReader.readLine()) != null) {
                 String[] words = line2.split("\s+");
                 for(int i=0;i<words.length;i++){
                     if(words[i].equals("(JOBTYPES")){
-                        startlinenumber=i;
+                        startLineNumber=i;
                     }
                 }
                 for(int j=0;j<words.length;j++){
                     if(words[j].equals("(STATIONS")){
-                        endlinenumber=j;
+                        endLineNumber=j;
                     }
                 }
-                for(int k=startlinenumber;k<endlinenumber;k++){
-                    if(words[k].startsWith("T"));
-                    tasksofjob.add(words[k]);
+                for(int k=startLineNumber;k<endLineNumber;k++){
+                    if(words[k].startsWith("T")) {
+                        tasksOfJob.add(words[k]);
+                    }
                 }
-                ArrayList taskofstation= new ArrayList();
-                for(int a=endlinenumber;a<words.length;a++){
-                    if(words[a].startsWith("T"));
-                    taskofstation.add(words[a]);
+                ArrayList taskOfStation= new ArrayList();
+                for(int a=endLineNumber;a<words.length;a++){
+                    if(words[a].startsWith("T")) {
+                        taskOfStation.add(words[a]);
+                    }
                 }
-                int b=taskofstation.size();
-                int c=tasksofjob.size();
+                int b=taskOfStation.size();
+                int c=tasksOfJob.size();
                 for(int i=0;i<b;i++){
                     for(int j=0;j<c;j++){
-                        if(taskofstation.get(i)!=tasksofjob.get(j)){
-                            throw new Exception("task"+i +"is not executed at any station");
+                        if(taskOfStation.get(i)!=tasksOfJob.get(j)){
+                            throw new Exception("Task"+i +"is not executed at any station");
                         }
                     }
                 }
             }
 
         }catch(Exception e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
+
+        String fileName = "WrongFile.txt";
+        List<Job> jobs = readJobs(fileName);
+
+        // Print all jobs
+        for (Job job : jobs) {
+            System.out.println(job);
+        }
+
         System.out.println();
         try {
             JobErrors parser = new JobErrors();
-         List<Job> jobs = parser.parseJobFile("jobfile.txt");
+            List<Job> job = parser.parseJobFile("jobfile.txt");
             //  JobTracker tracker = new JobTracker(jobs);
 
         /*    for (int time = 0; time <= 50; time += 1) {
@@ -111,26 +123,184 @@ public class Main {
                 System.out.println();
             } */
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println();
+    }
+    //d3
+    private static void Control() {
+        StringBuilder stringBuilder = new StringBuilder();
 
+        try (BufferedReader br = new BufferedReader(new FileReader("WrongFile.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                stringBuilder.append(line).append("\n");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        String fileName = "WrongFile.txt";
-        List<Job> jobs = readJobsFromFile(fileName);
-
-        // Print all jobs
-        for (Job job : jobs) {
-            System.out.println(job);
+        if (stringBuilder.length() > 0) {
+            stringBuilder.setLength(stringBuilder.length() - 1);
         }
 
-        WorkFlow();
+        String element = stringBuilder.toString();
+
+        String[] lines = element.split("\n");
+        List<String> inputList = new ArrayList<>();
+
+        for (String line : lines) {
+            String[] words = line.trim().split("\\s+");
+            for (String word : words) {
+                inputList.add(word.replaceAll("[()]", ""));
+            }
+        }
+
+        String[] wordsArray = inputList.toArray(new String[0]);
+        for (int i=0; i< wordsArray.length; i++){
+            System.out.println(wordsArray[i]);
+        }
+        int jobTypesIndex = 0;
+        int stationsIndex = 0;
+
+        for (int j =0; j < wordsArray.length; j++) {
+            if (wordsArray[j].equals("JOBTYPES")) {
+                jobTypesIndex = j;
+            }
+        }
+        for (int k = 0; k < wordsArray.length; k++) {
+            if (wordsArray[k].equals("STATIONS")) {
+                stationsIndex = k;
+            }
+        }
+
+        System.out.println(jobTypesIndex);
+        System.out.println(stationsIndex);
+
+        List<String> taskTypes = new ArrayList<>();
+        List<Double> defaultSizes = new ArrayList<>();
+        List<String> declaredTaskTypes = new ArrayList<>();
+        List<String> duplicateTaskTypes = new ArrayList<>();
+        List<String> invalidTaskTypes = new ArrayList<>();
+        List<String> negativeSizeTasks = new ArrayList<>();
+
+        // Extracting T elements and default sizes
+        for (int i = 0; i < jobTypesIndex; i++) {
+            String word = wordsArray[i];
+            if (word.startsWith("T")) {
+                if (declaredTaskTypes.contains(word)) {
+                    duplicateTaskTypes.add(word);
+                } else {
+                    declaredTaskTypes.add(word);
+                    taskTypes.add(word);
+                    try {
+                        double size = Double.parseDouble(wordsArray[i + 1]);
+                        if (size < 0) {
+                            negativeSizeTasks.add(word);
+                        }
+                        defaultSizes.add(size);
+                        i++;
+                    } catch (NumberFormatException e) {
+                        defaultSizes.add(null); // No default size
+                    }
+                }
+            } else if (!word.matches("[0-9]+") && !word.equals("TASKTYPES")) {
+                invalidTaskTypes.add(word);
+            }
+        }
+
+        List<String> declaredJobTypes = new ArrayList<>();
+        List<String> jobsWithNegativeSize = new ArrayList<>();
+        List<String> undeclaredTaskTypes = new ArrayList<>();
+        System.out.println();
+
+        for (int i = jobTypesIndex + 1; i < stationsIndex; i++) {
+            String word = wordsArray[i];
+            if (word.startsWith("J")) {
+                if (declaredJobTypes.contains(word)) {
+                    System.out.println("Error: Job type " + word + " already declared.");
+                } else {
+                    declaredJobTypes.add(word);
+                }
+            } else if (word.startsWith("T")) {
+                if (!taskTypes.contains(word)) {
+                    undeclaredTaskTypes.add(word);
+                    System.out.println("Error: Task type " + word + " not declared in TASKTYPES.");
+                }
+                try {
+                    double size = Double.parseDouble(wordsArray[i + 1]);
+                    if (size < 0) {
+                        System.out.println("Error: Negative size for task type " + word + " in job type " + wordsArray[i - 1]);
+                        jobsWithNegativeSize.add(wordsArray[i - 1]);
+                    }
+                    i++;
+                } catch (NumberFormatException e) {
+                    int tIndex = taskTypes.indexOf(word);
+                    if (tIndex >= 0 && defaultSizes.get(tIndex) == null) {
+                        System.out.println("Error: Task type " + word + " has no default size.");
+                    }
+                }
+            }
+        }
+
+        List<String> stationTasks = new ArrayList<>();
+        for (int i = stationsIndex + 1; i < wordsArray.length; i++) {
+            String word = wordsArray[i];
+            if (word.startsWith("T")) {
+                stationTasks.add(word);
+            }
+        }
+        for (int i =0; i< taskTypes.size(); i++){
+            if (!stationTasks.contains(taskTypes.get(i))) {
+                System.out.println("Error: Task type " + taskTypes.get(i) + " is not executed in any station.");
+            }
+        }
+        int openParenthesisCount = 0;
+        int closeParenthesisCount = 0;
+        for (int i =0; i<wordsArray.length; i++){
+            if(wordsArray[i].contains("(")){
+                openParenthesisCount++;
+            } if (wordsArray[i].contains(")")) {
+                closeParenthesisCount++;
+            }
+        }
+        if (openParenthesisCount != closeParenthesisCount) {
+            System.out.println("Error: Unmatched parentheses found.");
+        }
+
+        for (int m =0; m<duplicateTaskTypes.size(); m++) {
+            System.out.println("Error: Duplicate task type " + duplicateTaskTypes.get(m) + " found.");
+        }
+
+        for (int k =0; k<invalidTaskTypes.size(); k++) {
+            System.out.println("Error: Invalid task type ID " + invalidTaskTypes.get(k));
+        }
+
+        for (int l =0; l<negativeSizeTasks.size(); l++){
+            System.out.println("Error: Negative default size for task type " + negativeSizeTasks.get(l));
+        }
     }
 
+    public static String ReadTask(String inputfile) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line).append("\n"); // Append each line with a new line character
+            }
+        }
+        return stringBuilder.toString();
+    }
 
-
+    public static String Rename(String input) {
+        if (Character.isDigit(input.charAt(0))) {
+            throw new IllegalArgumentException("Task statement cannot start with a number!");
+        }
+        return input;
+    }
     // Method to read jobs from file
-    public static List<Job> readJobsFromFile(String fileName) {
+    public static List<Job> readJobs(String fileName) {
         List<Job> jobs = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
@@ -164,169 +334,13 @@ public class Main {
     }
 
     // Method to check if a string is numeric
-    private static boolean isNumeric(String str) {
+    private static boolean isNumeric(String str
+    ) {
         try {
             Integer.parseInt(str);
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
-    }
-    public static String TaskReading(String inputfile) throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(inputfile))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line).append("\n"); // Append each line with a new line character
-            }
-        }
-        return stringBuilder.toString();
-    }
-
-    public static String Rename(String input) {
-        if (Character.isDigit(input.charAt(0))) {
-            throw new IllegalArgumentException("Task statement cannot start with a number!");
-        }
-        return input;
-    }
-
-    public static void WorkFlow() {
-
-        int keepTrack = 0;
-
-        StringBuilder contentBuilder = new StringBuilder();
-
-        try (BufferedReader br = new BufferedReader(new FileReader("InputFile.txt"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                contentBuilder.append(line).append(" ");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (contentBuilder.length() > 0) {
-            contentBuilder.setLength(contentBuilder.length() - 1);
-        }
-
-        String ElementString = contentBuilder.toString();
-
-        String[] lines = ElementString.split("\n");
-        List<String> InputList = new ArrayList<>();
-
-        for (String print : lines) {
-            String[] words = print.trim().split("\\s+");
-            for (String word : words) {
-                InputList.add(word.replaceAll("[()]",""));
-            }
-        }
-
-        String[] wordsArray = InputList.toArray(new String[0]);
-        for (String word : wordsArray) {
-            System.out.println(word);
-        }
-
-        int startlinenumber=0;
-        int endlinenumber=0;
-
-
-
-        for(int i=0;i<wordsArray.length;i++){
-            if(wordsArray[i].equals("JOBTYPES")){
-                startlinenumber=i;
-            }
-        }
-        for(int j=0;j<wordsArray.length;j++){
-            if(wordsArray[j].equals("STATIONS")){
-                endlinenumber=j;
-            }
-        }
-        int lineS=startlinenumber;
-        int lineE=endlinenumber;
-
-        System.out.println("Line number of where 'JobTypes' is "+startlinenumber);
-        System.out.println("Line number of where 'Station' is "+endlinenumber);
-
-        // Task array list and size array
-        List<String> taskArrayList = new ArrayList<>();
-        List<Integer> sizeArray = new ArrayList<>();
-        List<Integer> taskIndices = new ArrayList<>();
-        List<Integer> sizeIndices = new ArrayList<>();
-
-        // J1's task list
-        List<String> j1TaskArrayList = new ArrayList<>();
-        boolean isJ1 = false;
-
-        // Extracting T elements and other values
-        for (int i = lineS + 1; i < lineE; i++) {
-            if (wordsArray[i].equals("J1")) {
-                isJ1 = true;
-            } else if (wordsArray[i].startsWith("J") && !wordsArray[i].equals("J1")) {
-                isJ1 = false;
-            }
-
-            if (wordsArray[i].startsWith("T")) {
-                taskArrayList.add(wordsArray[i]);
-                taskIndices.add(i);
-                if (isJ1) {
-                    j1TaskArrayList.add(wordsArray[i]);
-                }
-            } else {
-                try {
-                    int size = Integer.parseInt(wordsArray[i]);
-                    sizeArray.add(size);
-                    sizeIndices.add(i);
-                } catch (NumberFormatException e) {
-                    //  System.out.println("Invalid number format: " + wordsArray[i]);
-                }
-            }
-        }
-
-        // Printing J1's task array list
-        System.out.println("J1 Task Array List:");
-        for (String task : j1TaskArrayList) {
-            System.out.print(task + " ");
-        }
-        System.out.println();
-
-        // Printing the size array with indices
-        System.out.println("Size Array with Indices:");
-        for (int i = 0; i < sizeArray.size(); i++) {
-            System.out.println("Index: " + sizeIndices.get(i) + ", Size: " + sizeArray.get(i) + ", Task: " + wordsArray[sizeIndices.get(i) - 1]);
-        }
-
-        // Printing task and size indices
-        System.out.println("Task Indices:");
-        for (int index : taskIndices) {
-            System.out.println(index);
-        }
-
-        System.out.println("Size Indices:");
-        for (int index : sizeIndices) {
-            System.out.println(index);
-        }
-
-
-
-
-
-
-
-
-
-
-        //  do{
-
-        Station stationNN = new Station();
-        Station stationNY = new Station();
-        Station stationYN = new Station();
-        Station stationYY = new Station();
-
-
-        // }while();
-
-
-
-
     }
 }
