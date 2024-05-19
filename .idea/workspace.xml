@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6b30def-f593-410b-8ca6-fc914bf6677d" name="Changes" comment="arrangements">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,6 +75,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="asdfgh" />
+      <option name="PROGRAM_PARAMETERS" value="WrongFile.txt jobfile.txt" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -101,6 +101,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.d1" />
+      <item itemvalue="Application.Job_Req5" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Station_Req7" />
+      <item itemvalue="Application.WorkFlowParser" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -262,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1716136453181</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="arrangements">
+      <created>1716137733317</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1716137733317</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
