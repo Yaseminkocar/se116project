@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Station_Req7 {
-    public static void main(String[] args) {
-        WorkFlow();
-    }
 
     private static void WorkFlow() {
         StringBuilder contentBuilder = new StringBuilder();

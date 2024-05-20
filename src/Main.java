@@ -13,7 +13,6 @@ public class Main {
             System.out.println("Please enter workflow file and job file names...");
             return;
         }
-
         String workflowFileName;
         String jobFileName;
 
@@ -60,8 +59,7 @@ public class Main {
             }
         }
         System.out.println();
-        //d3
-        Control();
+        Control(args[0]);
 
         try {
             if (sumOpen < sumClose) {
@@ -119,8 +117,7 @@ public class Main {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
-
-        String fileName = "WrongFile.txt";
+        String fileName = args[0];
         List<Job> jobs = readJobs(fileName);
 
         // Print all jobs
@@ -131,7 +128,8 @@ public class Main {
         System.out.println();
         try {
             JobErrors parser = new JobErrors();
-            List<Job> job = parser.parseJobFile("jobfile.txt");
+            List<Job> job = parser.parseJobFile(args[1]);
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -141,10 +139,9 @@ public class Main {
         WorkFlow();
 
     }
-    //d3
-    private static void Control() {
+    public static void Control(String filename) {
         StringBuilder stringBuilder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader("WrongFile.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
                 stringBuilder.append(line).append("\n");
@@ -160,16 +157,16 @@ public class Main {
         String element = stringBuilder.toString();
 
         String[] lines = element.split("\n");
-        List<String> inputList = new ArrayList<>();
+        ArrayList<String> List = new ArrayList<>();
 
         for (String line : lines) {
             String[] words = line.trim().split("\\s+");
             for (String word : words) {
-                inputList.add(word.replaceAll("[()]", ""));
+                List.add(word.replaceAll("[()]", ""));
             }
         }
 
-        String[] wordsArray = inputList.toArray(new String[0]);
+        String[] wordsArray = List.toArray(new String[0]);
         for (int i=0; i< wordsArray.length; i++){
             System.out.println(wordsArray[i]);
         }
@@ -457,6 +454,7 @@ public class Main {
             }
         }
 
+
         for (String job : jobTasksMap.keySet()) {
             System.out.println(job + " Task Array List:");
             double totalDuration = 0.0;
@@ -469,6 +467,7 @@ public class Main {
 
             System.out.println("Total Duration for " + job + ": " + totalDuration);
         }
+
         System.out.println("Size Array with Indices:");
         for (int i = 0; i < sizeArray.size(); i++) {
             System.out.println("Index: " + sizeIndices.get(i) + ", Size: " + sizeArray.get(i) + ", Task: " + wordsArray[sizeIndices.get(i) - 1]);
@@ -478,6 +477,7 @@ public class Main {
         for (int index : taskIndices) {
             System.out.println(index);
         }
+
         System.out.println("Size Indices:");
         for (int index : sizeIndices) {
             System.out.println(index);
@@ -488,6 +488,7 @@ public class Main {
         Station stationYN = new Station();
         Station stationYY = new Station();
     }
+
     private static boolean isNumericWorkFile(String str) {
         try {
             Double.parseDouble(str);
