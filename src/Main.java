@@ -457,7 +457,6 @@ public class Main {
             }
         }
 
-
         for (String job : jobTasksMap.keySet()) {
             System.out.println(job + " Task Array List:");
             double totalDuration = 0.0;
@@ -470,7 +469,6 @@ public class Main {
 
             System.out.println("Total Duration for " + job + ": " + totalDuration);
         }
-
         System.out.println("Size Array with Indices:");
         for (int i = 0; i < sizeArray.size(); i++) {
             System.out.println("Index: " + sizeIndices.get(i) + ", Size: " + sizeArray.get(i) + ", Task: " + wordsArray[sizeIndices.get(i) - 1]);
@@ -480,7 +478,6 @@ public class Main {
         for (int index : taskIndices) {
             System.out.println(index);
         }
-
         System.out.println("Size Indices:");
         for (int index : sizeIndices) {
             System.out.println(index);
@@ -491,7 +488,6 @@ public class Main {
         Station stationYN = new Station();
         Station stationYY = new Station();
     }
-
     private static boolean isNumericWorkFile(String str) {
         try {
             Double.parseDouble(str);
